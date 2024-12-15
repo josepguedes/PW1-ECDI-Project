@@ -1,7 +1,9 @@
 <script setup>
+
 </script>
 
 <template>
-  <div>
-  </div>
+  <main>
+    
+  </main>
 </template>

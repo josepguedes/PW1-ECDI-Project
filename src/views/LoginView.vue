@@ -1,15 +1,9 @@
-<template>
-    <div>
-
-    </div>
-</template>
-
-<script>
-    export default {
-        
-    }
+<script setup>
+import Login from '../components/Login.vue'
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<template>
+  <main>
+    <TheWelcome />
+  </main>
+</template>

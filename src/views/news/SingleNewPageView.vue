@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h1>Single New</h1>
 
     </div>
 </template>

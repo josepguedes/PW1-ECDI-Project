@@ -1,6 +1,6 @@
 <template>
     <div>
-
+        <h1>Where to Stay</h1>
     </div>
 </template>
 

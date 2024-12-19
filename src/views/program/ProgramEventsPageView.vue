@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h1>Events Venue</h1>
 
     </div>
 </template>

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h1>Artists Venue</h1>
 
     </div>
 </template>

@@ -1,11 +1,13 @@
 <template>
     <div>
+        <h1>PAssword</h1>
 
     </div>
 </template>
 
 <script>
     export default {
+        
         
     }
 </script>

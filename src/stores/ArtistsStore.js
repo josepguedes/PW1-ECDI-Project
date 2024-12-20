@@ -2,7 +2,10 @@ import { defineStore } from 'pinia';
 
 export const useArtistsStore = defineStore('artists', {
   state: () => ({
-    artists: [] 
+    artists: [{
+      id: "1",
+      name: "Jorge",
+    }] 
   }),
 
   getters: {

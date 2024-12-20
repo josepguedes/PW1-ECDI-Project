@@ -3,23 +3,21 @@
       <h2>Register</h2>
       <form @submit.prevent="handleSubmit">
         <div>
-          <label for="username">Username</label>
-          <input type="text" v-model="username" id="username" required />
+          <input type="text" v-model="username" id="username" placeholder="Username" required />
         </div>
         
         <div>
-          <label for="email">Email</label>
-          <input type="email" v-model="email" id="email" required />
+          <input type="email" v-model="email" id="email" placeholder="Email" required />
         </div>
         
         <div>
-          <label for="password">Password</label>
-          <input type="password" v-model="password" id="password" required />
-        </div>
+          <input type="password" v-model="password" id="password" placeholder="password" required />
+        </div><br>
         
         <div>
           <button type="submit">Register</button>
         </div>
+        <router-link to="/login">Already have an account?</router-link>
       </form>
     </div>
   </template>

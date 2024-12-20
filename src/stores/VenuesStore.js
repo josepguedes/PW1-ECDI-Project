@@ -2,7 +2,12 @@ import { defineStore } from 'pinia';
 
 export const useVenuesStore = defineStore('venues', {
   state: () => ({
-    venues: [] 
+    venues: [{
+      id: "",
+      name:"",
+      desc:"",
+      date:""
+    }] 
   }),
 
   getters: {

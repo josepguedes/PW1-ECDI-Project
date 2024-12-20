@@ -1,30 +1,29 @@
 import { defineStore } from 'pinia';
 
 export const useUsersStore = defineStore('users', {
-  state: () => ({
-    users: [], 
-    authenticatedUser: null 
-  }),
+  
+  state: () => JSON.parse(localStorage.getItem('usersState') || '{"users": [], "authenticatedUser": null}'),
+
 
   getters: {
-    // Retorna um utilizador pelo nome
+    
     getUserByName: (state) => (name) => {
       return state.users.find(user => user.name === name);
     },
 
-    // Verifica se há um utilizador autenticado
+    
     isAuthenticated: (state) => {
       return state.authenticatedUser !== null;
     },
 
-    // Retorna o utilizador autenticado
+    
     getAuthenticatedUser: (state) => {
       return state.authenticatedUser;
     }
   },
 
   actions: {
-    // Adiciona um novo utilizador
+    
     addUser(newUser) {
       const userExists = this.users.some(
         user => user.email === newUser.email || user.name === newUser.name
@@ -35,9 +34,10 @@ export const useUsersStore = defineStore('users', {
       }
 
       this.users.push(newUser);
+      this.saveToLocalStorage(); 
     },
 
-    // Remove um utilizador pelo email
+    // Remove um utilizador pelo email ADMIN
     removeUser(email) {
       const userIndex = this.users.findIndex(user => user.email === email);
 
@@ -46,6 +46,7 @@ export const useUsersStore = defineStore('users', {
       }
 
       this.users.splice(userIndex, 1);
+      this.saveToLocalStorage(); // Salva no localStorage após remover
     },
 
     // Atualiza as informações de um utilizador
@@ -57,6 +58,7 @@ export const useUsersStore = defineStore('users', {
       }
 
       this.users[userIndex] = { ...this.users[userIndex], ...updatedUser };
+      this.saveToLocalStorage(); // Salva no localStorage após atualizar
     },
 
     // Autentica um utilizador
@@ -70,11 +72,22 @@ export const useUsersStore = defineStore('users', {
       }
 
       this.authenticatedUser = user; 
+      this.saveToLocalStorage(); // Salva no localStorage após autenticar
     },
 
     // Faz logout do utilizador
     logoutUser() {
       this.authenticatedUser = null;
+      this.saveToLocalStorage(); // Salva no localStorage após logout
+    },
+
+    // Salva o estado da store no localStorage
+    saveToLocalStorage() {
+      const state = {
+        users: this.users,
+        authenticatedUser: this.authenticatedUser
+      };
+      localStorage.setItem('usersState', JSON.stringify(state));
     }
   }
 });

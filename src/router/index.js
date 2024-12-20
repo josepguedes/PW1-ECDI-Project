@@ -125,32 +125,38 @@ const routes = [
   {
     path: '/account/dashboard',
     name: 'AccountDashboardPage',
-    component: AccountDashboardPage
+    component: AccountDashboardPage,
+    meta: { requiresAuth: true }
   },
   {
     path: '/account/tickets', 
     name: 'AccountTicketsPage', 
-    component: AccountTicketsPage
+    component: AccountTicketsPage,
+    meta: { requiresAuth: true }
   },
   { 
     path: '/account/calendar', 
     name: 'AccountCalendarPage', 
-    component: AccountCalendarPage 
+    component: AccountCalendarPage,
+    meta: { requiresAuth: true }
   },
   { 
     path: '/account/volunteer', 
     name: 'AccountVolunteerDashboardPage', 
-    component: AccountVolunteerDashboardPage 
+    component: AccountVolunteerDashboardPage,
+    meta: { requiresAuth: true }
   },
   { 
     path: '/account/notifications', 
     name: 'AccountNotificationsPage', 
-    component: AccountNotificationsPage 
+    component: AccountNotificationsPage,
+    meta: { requiresAuth: true }
   },
   { 
     path: '/account/password', 
     name: 'AccountPasswordPage', 
-    component: AccountPasswordPage 
+    component: AccountPasswordPage,
+    meta: { requiresAuth: true }
   },
   { 
     path: '/map', 
@@ -170,7 +176,8 @@ const routes = [
   { 
     path: '/favorites', 
     name: 'AccountFavoritesArtistsPage', 
-    component: AccountFavoritesArtistsPage 
+    component: AccountFavoritesArtistsPage,
+    meta: { requiresAuth: true }
   },
 ];
 
@@ -178,6 +185,17 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+// Verificação global de autenticação
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = localStorage.getItem("isAuthenticated");
+
+  if (to.meta.requiresAuth && !isAuthenticated) {
+    next({ path: "/login", query: { from: to.path } });
+  } else {
+    next();
+  }
 });
 
 export default router;

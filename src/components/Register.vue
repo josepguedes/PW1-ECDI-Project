@@ -24,7 +24,7 @@
   
   <script setup>
   import { ref } from 'vue';
-  import { useUsersStore } from '@/stores/UserStore'; // Importando corretamente a store do Pinia
+  import { useUsersStore } from '@/stores/user'; // Importando corretamente a store do Pinia
   
   // Definindo variáveis reativas para os campos do formulário
   const username = ref('');

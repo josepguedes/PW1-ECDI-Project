@@ -19,7 +19,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useUsersStore } from '@/stores/UserStore';
+import { useUsersStore } from '@/stores/user';
 
 const email = ref('');
 const password = ref('');

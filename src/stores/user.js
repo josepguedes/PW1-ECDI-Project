@@ -34,7 +34,6 @@ export const useUsersStore = defineStore('users', {
       }
 
       this.users.push(newUser);
-      this.saveToLocalStorage(); 
     },
 
     // Remove um utilizador pelo email ADMIN
@@ -78,16 +77,7 @@ export const useUsersStore = defineStore('users', {
     // Faz logout do utilizador
     logoutUser() {
       this.authenticatedUser = null;
-      this.saveToLocalStorage(); // Salva no localStorage após logout
-    },
-
-    // Salva o estado da store no localStorage
-    saveToLocalStorage() {
-      const state = {
-        users: this.users,
-        authenticatedUser: this.authenticatedUser
-      };
-      localStorage.setItem('usersState', JSON.stringify(state));
     }
-  }
+  },
+  persist: true,
 });

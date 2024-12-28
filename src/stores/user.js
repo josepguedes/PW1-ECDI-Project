@@ -2,8 +2,13 @@ import { defineStore } from 'pinia';
 
 export const useUsersStore = defineStore('users', {
 
-  state: () => JSON.parse(localStorage.getItem('usersState') || '{"users": [], "authenticatedUser": null}'),
-
+  state: () => ({
+    authenticatedUser: null,
+    users: [
+      { name: "admin", password: "123"},
+      { name: "xavi", email: "example@gmail.com", password: "321", tickets: [], favoriteArtists: [], favoriteVenues: [], calendar: [], notificationPref: []},
+    ],
+  }),
 
   getters: {
     
@@ -11,12 +16,10 @@ export const useUsersStore = defineStore('users', {
       return state.users.find(user => user.name === name);
     },
 
-    
     isAuthenticated: (state) => {
       return state.authenticatedUser !== null;
     },
 
-    
     getAuthenticatedUser: (state) => {
       return state.authenticatedUser;
     }
@@ -24,40 +27,37 @@ export const useUsersStore = defineStore('users', {
 
   actions: {
     
-    addUser(newUser) {
+    addUser(name, email, password) {
       const userExists = this.users.some(
-        user => user.email === newUser.email || user.name === newUser.name
+        user => user.email === email || user.name === name
       );
 
       if (userExists) {
         throw new Error('Já existe um utilizador com esse nome ou email');
       }
 
+      const newUser = {
+        name: name,
+        email: email,
+        password: password,
+        tickets: [],
+        favoriteArtists: [],
+        favoriteVenues: [],
+        calendar: [],
+        notificationPref: [] 
+      };
+
       this.users.push(newUser);
     },
 
-    // Remove um utilizador pelo email ADMIN
-    removeUser(email) {
-      const userIndex = this.users.findIndex(user => user.email === email);
+    removeUser(name) {
+      const userIndex = this.users.findIndex(user => user.name === name);
 
       if (userIndex === -1) {
         throw new Error('Utilizador não encontrado');
       }
 
       this.users.splice(userIndex, 1);
-      this.saveToLocalStorage(); // Salva no localStorage após remover
-    },
-
-    // Atualiza as informações de um utilizador
-    updateUser(updatedUser) {
-      const userIndex = this.users.findIndex(user => user.email === updatedUser.email);
-
-      if (userIndex === -1) {
-        throw new Error('Utilizador não encontrado');
-      }
-
-      this.users[userIndex] = { ...this.users[userIndex], ...updatedUser };
-      this.saveToLocalStorage(); // Salva no localStorage após atualizar
     },
 
     // Autentica um utilizador
@@ -71,7 +71,6 @@ export const useUsersStore = defineStore('users', {
       }
 
       this.authenticatedUser = user; 
-      this.saveToLocalStorage(); // Salva no localStorage após autenticar
     },
 
     // Faz logout do utilizador

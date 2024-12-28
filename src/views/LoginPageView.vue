@@ -13,5 +13,4 @@ export default {
 </script>
 
 <style scoped>
-/* Mantém o mesmo estilo */
 </style>

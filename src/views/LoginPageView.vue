@@ -1,16 +1,29 @@
 <template>
-  <Login />
 </template>
 
 <script>
-import Login from '@/components/Login.vue';
-
+import { useUserStore } from "@/stores/user";
 export default {
-  components: {
-    Login
-  }
+  data() {
+    return {
+      store: useUserStore(),
+      email: "",
+      password: "",
+    };
+  },
+  methods: {
+    login() {
+      try {
+        this.store.login(this.email, this.password)
+        this.$router.push({ name: "AccountDashboardPage" });
+      } catch (error) {
+         alert(`Error: ${error.message}`); 
+      }
+    },
+  },
 };
 </script>
+
 
 <style scoped>
 </style>

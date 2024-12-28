@@ -60,8 +60,7 @@ export const useUsersStore = defineStore('users', {
       this.users.splice(userIndex, 1);
     },
 
-    // Autentica um utilizador
-    authenticateUser(email, password) {
+    login(email, password) {
       const user = this.users.find(
         user => user.email === email && user.password === password
       );
@@ -73,8 +72,7 @@ export const useUsersStore = defineStore('users', {
       this.authenticatedUser = user; 
     },
 
-    // Faz logout do utilizador
-    logoutUser() {
+    logout() {
       this.authenticatedUser = null;
     }
   },

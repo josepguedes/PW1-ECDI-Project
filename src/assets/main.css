@@ -1,3 +1,7 @@
+/*import local font*/
+
+@import '@/assets/fonts/aspekta/font-face.css';
+
 /*css reset*/
 
 *{
@@ -28,4 +32,10 @@ a{
 
 .container{
   width: 100%;
+}
+
+/*inputs*/
+
+.input-text{
+  font-family: Aspekta;
 }

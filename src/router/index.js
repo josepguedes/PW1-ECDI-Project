@@ -30,6 +30,8 @@ import AccountNotificationsPage from '@/views/account/NotificationsPageView.vue'
 import AccountPasswordPage from '@/views/account/PasswordPageView.vue';
 import AccountFavoritesArtistsPage from '@/views/account/FavoritesArtistsPageView.vue';
 
+import { useUserStore } from "@/stores/user.js";
+
 // Definição de rotas
 const routes = [
   {
@@ -188,13 +190,12 @@ const router = createRouter({
 });
 
 // Verificação global de autenticação
-router.beforeEach((to, from, next) => {
-  const isAuthenticated = localStorage.getItem("isAuthenticated");
-
-  if (to.meta.requiresAuth && !isAuthenticated) {
-    next({ path: "/login", query: { from: to.path } });
-  } else {
-    next();
+router.beforeEach((to, from) => {
+  if (to.meta.requiresAuth && !useUserStore().authenticatedUser) {
+    return {
+      path: "/login",
+      query: { redirect: to.fullPath },
+    };
   }
 });
 

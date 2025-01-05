@@ -1,36 +1,62 @@
-@import './base.css';
+/*import local font*/
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+@import '@/assets/fonts/aspekta/font-face.css';
+
+/*set colors*/
+
+:root{
+  --mainBlack: #010306;
+  --mainWhite: #FAFAFA;
+  --gray100: #BEC7CE;
+  --gray200: #A2AAB1;
+  --gray300: #868E95;
+  --gray400: #6B737A;
+  --gray500: #52595F;
+  --gray600: #3A4146;
+  --gray700: #23292F;
+  --gray800: #0E1419;
+  --blue100: #0198FF;
+  --blue200: #007FE4;
+  --blue300: #0067CA;
 }
 
-a,
-.green {
+/*css reset*/
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+li{
+  list-style: none;
+}
+
+a{
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+/*spacing and sizing*/
+
+.px-container{
+  padding-left: clamp(1rem, 5vw, 3rem);
+  padding-right: clamp(1rem, 5vw, 3rem);
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
+.mx-auto{
+  margin-left: auto;
+  margin-right: auto;
+}
 
-  #app {
-    /* Altera o display para 'block' ou 'flex', e não 'grid' */
-    display: block;
-    /* Centraliza o conteúdo se necessário */
-    padding: 0 2rem;
-  }
+.container{
+  width: 100%;
+}
+
+/*inputs*/
+
+.input-text{
+  font-family: Aspekta;
+  font-weight: 400;
+
+
 }

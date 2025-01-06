@@ -10,7 +10,7 @@
 
     <!-- Botão de comprar bilhetes centralizado entre as secções -->
     <div class="tickets-button-wrapper">
-      <button @click="getTickets" class="tickets-button">Comprar Bilhetes</button>
+      <button @click="navigateToTickets" class="tickets-button">Comprar Bilhetes</button>
     </div>
 
     <!-- Seção com texto e imagem (descrição do evento) -->
@@ -30,22 +30,37 @@
       <h2>Event Photos</h2>
     </div>
 
-    <!-- Substituindo o carrossel antigo pelo componente Carousel.vue -->
-    <carousel></carousel>
+    <!-- Componente do carrossel -->
+    <div class="carousel-wrapper">
+      <carousel :images="carouselImages" />
+    </div>
   </div>
 </template>
 
 <script>
 // Importando o componente Carousel
-import Carousel from '../components/Carousel.vue';
+import Carousel from "../components/Carousel.vue";
+
+import image1 from "../assets/images/1.jpg";
+import image2 from "../assets/images/2.jpg";
+import image3 from "../assets/images/3.jpg";
+import image4 from "../assets/images/4.jpg";
+import image5 from "../assets/images/5.jpg";
 
 export default {
   components: {
     Carousel, // Registrando o componente Carousel
   },
+  data() {
+    return {
+      // Lista de imagens para o carrossel
+      carouselImages: [image1, image2, image3, image4, image5],
+    };
+  },
   methods: {
-    getTickets() {
-      alert("Redirecting to ticket page...");
+    // Método para redirecionar para a página de bilhetes
+    navigateToTickets() {
+      this.$router.push("/tickets"); // Navegar para a rota /tickets
     },
   },
 };
@@ -95,15 +110,20 @@ export default {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
-  background-color: #ff6347; /* Cor laranja */
+  background-color: transparent; /* Fundo transparente por padrão */
   color: white;
-  border: none;
+  border: 1px solid white; /* Borda branca */
   border-radius: 5px;
+  outline: none; /* Remove borda de foco padrão */
+  transition: background-color 0.3s, border-color 0.3s; /* Transições suaves */
 }
 
 .tickets-button:hover {
-  background-color: #e5533b; /* Cor mais escura ao passar o mouse */
+  background-color: var(--Gray-400, #6b737a); /* Fundo ao passar o mouse */
+  border-color: var(--Gray-400, #6b737a); /* Cor da borda ao passar o mouse */
+  outline: none; /* Garante que não haja destaque de foco */
 }
+
 
 /* Seção com texto e imagem (descrição do evento) */
 .content-section {
@@ -136,5 +156,13 @@ export default {
 .carousel-title h2 {
   font-size: 48px;
   color: #ffffff;
+}
+
+/* Wrapper para centralizar o carrossel */
+.carousel-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -200px; /* Espaço entre o título e o carrossel */
 }
 </style>

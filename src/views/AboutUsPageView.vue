@@ -36,63 +36,40 @@
     </section>
 
     <section class="banner-section" aria-label="Festival Banner">
-  <div class="carousel-container">
-    <div class="carousel-row">
-      <!-- Carrossel com as imagens do festival -->
-      <img
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/87a31c850f6ee75ff58724a94ce9202932aaa20626a066552abca9caeec1eced?placeholderIfAbsent=true&apiKey=f7dd8e77dcfe4504b1da5d2d682eab2f"
-        alt="Festival image 1" class="carousel-image" />
-      <img
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/87a31c850f6ee75ff58724a94ce9202932aaa20626a066552abca9caeec1eced?placeholderIfAbsent=true&apiKey=f7dd8e77dcfe4504b1da5d2d682eab2f"
-        alt="Festival image 2" class="carousel-image" />
-      <img
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/87a31c850f6ee75ff58724a94ce9202932aaa20626a066552abca9caeec1eced?placeholderIfAbsent=true&apiKey=f7dd8e77dcfe4504b1da5d2d682eab2f"
-        alt="Festival image 3" class="carousel-image" />
-      <img
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/87a31c850f6ee75ff58724a94ce9202932aaa20626a066552abca9caeec1eced?placeholderIfAbsent=true&apiKey=f7dd8e77dcfe4504b1da5d2d682eab2f"
-        alt="Festival image 4" class="carousel-image" />
-      <img
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/87a31c850f6ee75ff58724a94ce9202932aaa20626a066552abca9caeec1eced?placeholderIfAbsent=true&apiKey=f7dd8e77dcfe4504b1da5d2d682eab2f"
-        alt="Festival image 5" class="carousel-image" />
-      <img
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/87a31c850f6ee75ff58724a94ce9202932aaa20626a066552abca9caeec1eced?placeholderIfAbsent=true&apiKey=f7dd8e77dcfe4504b1da5d2d682eab2f"
-        alt="Festival image 6" class="carousel-image" />
-    </div>
-  </div>
-</section>
+      <div class="carousel-container">
+        <div class="carousel-row">
+          <!-- Carrossel com as imagens do festival -->
+          <img src="../assets/images/4.jpg" alt="Festival image 1" class="carousel-image" />
+          <img src="../assets/images/4.jpg" alt="Festival image 2" class="carousel-image" />
+          <img src="../assets/images/4.jpg" alt="Festival image 3" class="carousel-image" />
+          <img src="../assets/images/4.jpg" alt="Festival image 4" class="carousel-image" />
+          <img src="../assets/images/4.jpg" alt="Festival image 5" class="carousel-image" />
+          <img src="../assets/images/4.jpg" alt="Festival image 6" class="carousel-image" />
+        </div>
+      </div>
+    </section>
 
-<section class="banner-section-right" aria-label="Festival Banner Right">
-  <div class="carousel-container">
-    <div class="carousel-row">
-      <!-- Carrossel do lado direito com as mesmas imagens -->
-      <img
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/87a31c850f6ee75ff58724a94ce9202932aaa20626a066552abca9caeec1eced?placeholderIfAbsent=true&apiKey=f7dd8e77dcfe4504b1da5d2d682eab2f"
-        alt="Festival image 1" class="carousel-image" />
-      <img
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/87a31c850f6ee75ff58724a94ce9202932aaa20626a066552abca9caeec1eced?placeholderIfAbsent=true&apiKey=f7dd8e77dcfe4504b1da5d2d682eab2f"
-        alt="Festival image 2" class="carousel-image" />
-      <img
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/87a31c850f6ee75ff58724a94ce9202932aaa20626a066552abca9caeec1eced?placeholderIfAbsent=true&apiKey=f7dd8e77dcfe4504b1da5d2d682eab2f"
-        alt="Festival image 3" class="carousel-image" />
-      <img
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/87a31c850f6ee75ff58724a94ce9202932aaa20626a066552abca9caeec1eced?placeholderIfAbsent=true&apiKey=f7dd8e77dcfe4504b1da5d2d682eab2f"
-        alt="Festival image 4" class="carousel-image" />
-      <img
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/87a31c850f6ee75ff58724a94ce9202932aaa20626a066552abca9caeec1eced?placeholderIfAbsent=true&apiKey=f7dd8e77dcfe4504b1da5d2d682eab2f"
-        alt="Festival image 5" class="carousel-image" />
-      <img
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/87a31c850f6ee75ff58724a94ce9202932aaa20626a066552abca9caeec1eced?placeholderIfAbsent=true&apiKey=f7dd8e77dcfe4504b1da5d2d682eab2f"
-        alt="Festival image 6" class="carousel-image" />
-    </div>
-  </div>
-</section>
-
-
+    <section class="banner-section-right" aria-label="Festival Banner Right">
+      <div class="carousel-container">
+        <div class="carousel-row">
+          <!-- Carrossel do lado direito com as mesmas imagens -->
+          <img src="../assets/images/4.jpg" alt="Festival image 1" class="carousel-image" />
+          <img src="../assets/images/4.jpg" alt="Festival image 2" class="carousel-image" />
+          <img src="../assets/images/4.jpg" alt="Festival image 3" class="carousel-image" />
+          <img src="../assets/images/4.jpg" alt="Festival image 4" class="carousel-image" />
+          <img src="../assets/images/4.jpg" alt="Festival image 5" class="carousel-image" />
+          <img src="../assets/images/4.jpg" alt="Festival image 6" class="carousel-image" />
+        </div>
+      </div>
+    </section>
 
     <section class="content-section" aria-label="Festival Details">
       <img
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/87a31c850f6ee75ff58724a94ce9202932aaa20626a066552abca9caeec1eced?placeholderIfAbsent=true&apiKey=f7dd8e77dcfe4504b1da5d2d682eab2f"
-        alt="Festival experience" class="content-image" loading="lazy" />
+        src="../assets/images/5.jpg"
+        alt="Festival experience"
+        class="content-image"
+        loading="lazy"
+      />
       <div class="content-wrapper">
         <p class="content-description">
           Hypnøtica is envisioned as an immersive and transformative festival
@@ -101,22 +78,32 @@
           Spanning three electrifying days and nights, the festival is hosted
           across Berlin's iconic venues, featuring over 100 performances.
         </p>
-        <button class="explore-button" aria-label="Explore the Hypnøtica Program" tabindex="0">
-          Explore the Hypnøtica Program
-        </button>
+        <button 
+  class="explore-button" 
+  aria-label="Explore the Hypnøtica Program" 
+  tabindex="0"
+  @click="navigateToProgram">
+  Explore the Hypnøtica Program
+</button>
       </div>
     </section>
   </main>
 </template>
 
 <script>
-
 export default {
   mounted() {
     this.startCountdown();
     this.startCarousels();
   },
   methods: {
+    goToProgram() {
+      // Redireciona para o link do programa
+      this.$router.push('/program');
+    },
+    navigateToProgram() {
+      this.$router.push('/program');
+    },
     startCountdown() {
       const counters = document.querySelectorAll('.stat-number');
       counters.forEach(counter => {
@@ -138,20 +125,35 @@ export default {
         }, 30);
       });
     },
-    
+
     startCarousels() {
-      // Carrossel Superior (movimento para a esquerda)
+      // Carrossel Superior (movimento para a direita)
       const rowLeft = document.querySelector('.banner-section .carousel-row');
+      const imagesLeft = rowLeft.querySelectorAll('.carousel-image');
+
+      // Função para duplicar as imagens para efeito infinito
+      const duplicateImagesForInfiniteLoopLeft = () => {
+        const images = Array.from(imagesLeft); // Converte NodeList em Array
+        images.forEach(image => {
+          const clone = image.cloneNode(true);
+          rowLeft.appendChild(clone); // Adiciona as imagens clonadas no final
+        });
+      };
+
+      // Inicializa as imagens duplicadas antes do movimento
+      duplicateImagesForInfiniteLoopLeft();
+
       const totalWidthLeft = rowLeft.scrollWidth;
       let currentMarginLeft = 0;
-      
+
+      // Função que move o carrossel para a direita
       const moveCarouselLeft = () => {
-        currentMarginLeft -= 1; // Movimentação para a esquerda
+        currentMarginLeft += 1; // Movimentação suave para a direita
         rowLeft.style.transform = `translateX(${currentMarginLeft}px)`;
 
-        // Quando o carrossel chegar ao final, reinicia
-        if (Math.abs(currentMarginLeft) >= totalWidthLeft) {
-          currentMarginLeft = 0;
+        // Quando o carrossel chegar ao fim, reposiciona as imagens invisivelmente
+        if (currentMarginLeft >= totalWidthLeft / 2) {
+          currentMarginLeft = 0; // Reinicia o carrossel no início
         }
 
         // Solicita a próxima animação de forma suave
@@ -161,12 +163,12 @@ export default {
       // Inicia o movimento do carrossel
       requestAnimationFrame(moveCarouselLeft);
 
-      // Carrossel Inferior (movimento para a direita)
+      // Carrossel Inferior (movimento para a esquerda)
       const rowRight = document.querySelector('.banner-section-right .carousel-row');
       const imagesRight = rowRight.querySelectorAll('.carousel-image');
 
-      // Função para duplicar as imagens
-      const duplicateImagesForInfiniteLoop = () => {
+      // Função para duplicar as imagens para efeito infinito
+      const duplicateImagesForInfiniteLoopRight = () => {
         const images = Array.from(imagesRight); // Converte NodeList em Array
         images.forEach(image => {
           const clone = image.cloneNode(true);
@@ -175,19 +177,19 @@ export default {
       };
 
       // Inicializa as imagens duplicadas antes do movimento
-      duplicateImagesForInfiniteLoop();
+      duplicateImagesForInfiniteLoopRight();
 
       const totalWidthRight = rowRight.scrollWidth;
       let currentMarginRight = 0;
 
-      // Função que move o carrossel para a direita
+      // Função que move o carrossel para a esquerda
       const moveCarouselRight = () => {
-        currentMarginRight += 1; // Movimentação suave para a direita
+        currentMarginRight -= 1; // Movimentação suave para a esquerda
         rowRight.style.transform = `translateX(${currentMarginRight}px)`;
 
-        // Quando o carrossel chegar ao fim, reinicia
-        if (currentMarginRight >= totalWidthRight) {
-          currentMarginRight = 0;
+        // Quando o carrossel chegar ao fim, reposiciona as imagens invisivelmente
+        if (Math.abs(currentMarginRight) >= totalWidthRight / 2) {
+          currentMarginRight = 0; // Reinicia o carrossel no início
         }
 
         // Solicita a próxima animação de forma suave
@@ -196,11 +198,12 @@ export default {
 
       // Inicia o movimento do carrossel
       requestAnimationFrame(moveCarouselRight);
-    }
-  }
+    },
+  },
 }
 
 </script>
+
 
 <style scoped>
 .about-us-page {

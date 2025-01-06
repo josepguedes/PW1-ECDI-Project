@@ -1,74 +1,87 @@
 <template>
-    <div class="container">
-      <!-- Contém o carrossel e os controles -->
-      <div class="cards">
-        <label v-for="(image, index) in images" :key="'card-' + index" class="card" :class="{
-          'active': selectedIndex === index,
-          'previous': isPrevious(index),
-          'next': isNext(index),
-          'previous-previous': isPreviousPrevious(index),
-          'next-next': isNextNext(index)
-        }" :for="'item-' + (index + 1)">
-          <img :src="`/src/assets/images/${image}`" alt="song" />
+  <div class="container">
+    <!-- Contém o carrossel e os controles -->
+    <div class="cards">
+      <slot name="images">
+        <label
+          v-for="(image, index) in images"
+          :key="'card-' + index"
+          class="card"
+          :class="{
+            'active': selectedIndex === index,
+            'previous': isPrevious(index),
+            'next': isNext(index),
+            'previous-previous': isPreviousPrevious(index),
+            'next-next': isNextNext(index),
+          }"
+        >
+          <img :src="image" alt="song" />
         </label>
-      </div>
-  
-      <div class="controls">
-        <button @click="moveToPrevious" class="control-button left">
-          <i class="icon">←</i>
-        </button>
-        <div class="dots">
-          <div v-for="(image, index) in images" :key="'dot-' + index" :class="['dot', { 'active': selectedIndex === index }]" @click="selectImage(index)"></div>
-        </div>
-        <button @click="moveToNext" class="control-button right">
-          <i class="icon">→</i>
-        </button>
-      </div>
+      </slot>
     </div>
-  </template>
+
+    <div class="controls">
+      <button @click="moveToPrevious" class="control-button left">
+        <i class="icon">←</i>
+      </button>
+      <div class="dots">
+        <div
+          v-for="(_, index) in images"
+          :key="'dot-' + index"
+          :class="['dot', { active: selectedIndex === index }]"
+          @click="selectImage(index)"
+        ></div>
+      </div>
+      <button @click="moveToNext" class="control-button right">
+        <i class="icon">→</i>
+      </button>
+    </div>
+  </div>
+</template>
+
   
-  <script>
-  export default {
-    data() {
-      return {
-        selectedIndex: 0,
-        images: [
-          "1.jpg",
-          "2.jpg",
-          "3.jpg",
-          "4.jpg",
-          "5.jpg",
-        ],
-      };
+<script>
+export default {
+  props: {
+    images: {
+      type: Array,
+      required: true,
     },
-    methods: {
-      isPrevious(index) {
-        return index === (this.selectedIndex - 1 + this.images.length) % this.images.length;
-      },
-      isNext(index) {
-        return index === (this.selectedIndex + 1) % this.images.length;
-      },
-      isPreviousPrevious(index) {
-        return index === (this.selectedIndex - 2 + this.images.length) % this.images.length;
-      },
-      isNextNext(index) {
-        return index === (this.selectedIndex + 2) % this.images.length;
-      },
-      moveToPrevious() {
-        this.selectedIndex = (this.selectedIndex - 1 + this.images.length) % this.images.length;
-      },
-      moveToNext() {
-        this.selectedIndex = (this.selectedIndex + 1) % this.images.length;
-      },
-      selectImage(index) {
-        this.selectedIndex = index;
-      }
+  },
+  data() {
+    return {
+      selectedIndex: 0,
+    };
+  },
+  methods: {
+    isPrevious(index) {
+      return index === (this.selectedIndex - 1 + this.images.length) % this.images.length;
     },
-    mounted() {
-      this.selectedIndex = 0;
+    isNext(index) {
+      return index === (this.selectedIndex + 1) % this.images.length;
     },
-  };
-  </script>
+    isPreviousPrevious(index) {
+      return index === (this.selectedIndex - 2 + this.images.length) % this.images.length;
+    },
+    isNextNext(index) {
+      return index === (this.selectedIndex + 2) % this.images.length;
+    },
+    moveToPrevious() {
+      this.selectedIndex = (this.selectedIndex - 1 + this.images.length) % this.images.length;
+    },
+    moveToNext() {
+      this.selectedIndex = (this.selectedIndex + 1) % this.images.length;
+    },
+    selectImage(index) {
+      this.selectedIndex = index;
+    },
+  },
+  mounted() {
+    this.selectedIndex = 0;
+  },
+};
+</script>
+
 
 <style scoped>
 

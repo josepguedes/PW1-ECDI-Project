@@ -11,12 +11,12 @@
           class="verified-badge" alt="Verified artist badge" />
       </div>
       <div class="social-links" role="navigation" aria-label="Social Media Links">
-        <a href="https://www.facebook.com/charlottedewitte" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.youtube.com/channel/UC-yOW3e6zBSo1JwLXq46Suw" target="_blank" rel="noopener noreferrer">
           <img loading="lazy"
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/831c81c938349091e2146876e0645d3586d86fb03def6537bb794ee0ff7a7b94?placeholderIfAbsent=true&apiKey=f7dd8e77dcfe4504b1da5d2d682eab2f"
             class="social-icon" alt="Facebook" />
         </a>
-        <a href="https://twitter.com/charlottedewitte" target="_blank" rel="noopener noreferrer">
+        <a href="https://open.spotify.com/intl-pt/artist/1lJhME1ZpzsEa5M0wW6Mso" target="_blank" rel="noopener noreferrer">
           <img loading="lazy"
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/6525e131582c27018aa27e0cb734a4bbe48a79f1ce846092f2a8538a755ee030?placeholderIfAbsent=true&apiKey=f7dd8e77dcfe4504b1da5d2d682eab2f"
             class="social-icon" alt="Twitter" />

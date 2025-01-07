@@ -30,8 +30,6 @@ import AccountNotificationsPage from '@/views/account/NotificationsPageView.vue'
 import AccountPasswordPage from '@/views/account/PasswordPageView.vue';
 import AccountFavoritesArtistsPage from '@/views/account/FavoritesArtistsPageView.vue';
 
-import { useUserStore } from "@/stores/user.js";
-
 // Definição de rotas
 const routes = [
   {

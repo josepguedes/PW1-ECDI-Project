@@ -20,6 +20,12 @@
   --blue300: #0067CA;
 }
 
+body {
+  background-color: var(--mainBlack); /* Define a cor de fundo como mainBlack */
+  color: var(--mainWhite); /* Define a cor do texto como mainWhite para contraste */
+  font-family: Aspekta, sans-serif; /* Garante que a fonte seja consistente */
+}
+
 /*css reset*/
 
 *{
@@ -57,6 +63,4 @@ a{
 .input-text{
   font-family: Aspekta;
   font-weight: 400;
-
-
 }

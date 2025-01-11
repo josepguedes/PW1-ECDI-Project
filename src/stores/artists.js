@@ -3,8 +3,11 @@ import { defineStore } from 'pinia';
 export const useArtistsStore = defineStore('artists', {
   state: () => ({
     artists: [{
-      id: "1",
-      name: "Jorge",
+      id: "",
+      name: "",
+      desc: "",
+      img: "",
+      social: ""
     }] 
   }),
 
@@ -17,11 +20,19 @@ export const useArtistsStore = defineStore('artists', {
 
   actions: {
     // Adiciona um novo artista
-    addArtist(newArtist) {
-      const artistExists = this.artists.some(artist => artist.id === newArtist.id);
+    addArtist(id, name, desc, img, social) {
+      const artistExists = this.artists.some(artist => artist === artist.name);
 
       if (artistExists) {
-        throw new Error('Já existe um artista com esse ID');
+        throw new Error('Já existe um artista com esse nome');
+      }
+
+      const newArtist = {
+        id: id,
+        name: name,
+        desc: desc, 
+        img: img,
+        social: social
       }
 
       this.artists.push(newArtist);

@@ -40,6 +40,7 @@ export const useUsersStore = defineStore('users', {
         name: name,
         email: email,
         password: password,
+        profImg: profImg,
         tickets: [],
         favoriteArtists: [],
         favoriteVenues: [],

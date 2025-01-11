@@ -170,7 +170,7 @@ import { getTop3Tracks } from "../api/spotify.js";
   color: var(--Main-White, #fafafa);
   text-transform: uppercase;
   letter-spacing: 2.56px;
-  font: 800 64px Aspekta, sans-serif;
+  font: 64px Aspekta800, sans-serif;
   text-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -206,7 +206,7 @@ import { getTop3Tracks } from "../api/spotify.js";
   max-width: 515px; /* Limita a largura máxima do texto */
   color: var(--Gray-100, #bec7ce);
   letter-spacing: 1.5px;
-  font: 300 30px Aspekta, sans-serif;
+  font: 30px Aspekta300, sans-serif;
 }
 
 .artist-image {
@@ -223,7 +223,7 @@ import { getTop3Tracks } from "../api/spotify.js";
 
 .section-title {
   color: var(--Main-White, #fafafa);
-  font: 600 64px Aspekta, sans-serif;
+  font: 64px Aspekta600, sans-serif;
 }
 
 .music-grid {
@@ -247,7 +247,7 @@ import { getTop3Tracks } from "../api/spotify.js";
 
 .track-title {
   color: var(--Main-White, #fafafa);
-  font: 600 32px Aspekta, sans-serif;
+  font: 32px Aspekta600, sans-serif;
   margin: 15px 0 17px;
 }
 
@@ -267,7 +267,7 @@ import { getTop3Tracks } from "../api/spotify.js";
 
 .day-title {
   color: var(--Main-White, #fafafa);
-  font: 400 48px Aspekta, sans-serif;
+  font: 48px Aspekta400, sans-serif;
 }
 
 .events-list {
@@ -285,7 +285,7 @@ import { getTop3Tracks } from "../api/spotify.js";
   justify-content: space-between;
   align-items: center;
   color: var(--Main-White, #fafafa);
-  font: 400 24px Aspekta, sans-serif;
+  font: 24px Aspekta400, sans-serif;
 }
 
 .time-wrapper {
@@ -302,7 +302,7 @@ import { getTop3Tracks } from "../api/spotify.js";
 
 .lineup {
   color: var(--Gray-100, #bec7ce);
-  font: 350 20px Aspekta, sans-serif;
+  font: 20px Aspekta350, sans-serif;
   margin-top: 12px;
 }
 
@@ -313,7 +313,7 @@ import { getTop3Tracks } from "../api/spotify.js";
 
 .section-title {
   color: var(--Main-White, #fafafa);
-  font: 600 64px Aspekta, sans-serif;
+  font: 64px Aspekta600, sans-serif;
 }
 
 .music-grid {
@@ -337,7 +337,7 @@ import { getTop3Tracks } from "../api/spotify.js";
 
 .track-title {
   color: var(--Main-White, #fafafa);
-  font: 600 32px Aspekta, sans-serif;
+  font: 32px Aspekta600, sans-serif;
   margin: 36px 0 17px;
 }
 

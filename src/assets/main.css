@@ -64,8 +64,8 @@ a{
   display: inline-block;
   position: relative;
   color: var(--mainWhite);
-  font-family: Aspekta500;
-  font-size: 1.3rem;
+  font-family: Aspekta400;
+  font-size: 1.25rem;
 }
 
 .hover-underline-animation::after{

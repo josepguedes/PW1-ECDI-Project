@@ -1,16 +1,35 @@
 <script>
 import { RouterLink } from "vue-router";
+
+export default {
+  data(){
+    return{
+      open: false,
+    }
+  },
+  methods: {
+    navbarAnimation() {
+      if(this.open == true){
+        this.open = false
+      }
+      else{
+        this.open = true
+      }
+      console.log(this.open)
+    }
+  }
+}
 </script>
 
 <template>
-  <div class="navbar">
+  <div class="navbar" :class="{changePadding: open}">
     <div class="navbar-menuLinks">
-      <div class="navbar-menu">
+      <div class="navbar-menu" @click="navbarAnimation()">
         <div class="menu-btn">
           <img src="/src/assets/Icons/MenuIcon.svg" alt="">
           <p class="menu-text">Menu</p>
         </div>
-        <img class="crossIcon" src="/src/assets/Icons/CrossXIcon.svg" alt="">
+        <img class="display" :class="{flex: open}" src="/src/assets/Icons/CrossXIcon.svg" alt="">
       </div>
       <div class="navbar-links">
         <RouterLink class="link" :to="{ name: 'TicketsPage' }">Tickets</RouterLink>
@@ -19,8 +38,8 @@ import { RouterLink } from "vue-router";
         <RouterLink class="link" :to="{ name: 'AboutUsPage' }">About us</RouterLink>
       </div>
     </div>
-    <div class="hidden-container">
-      <div class="hidden-section">
+    <div class="hidden-container" :class="{flex: open}">
+      <div class="hidden-section" :class="{flex: open}">
         <p class="hidden-title">Festival</p>
         <div class="hidden-links">
           <RouterLink class="hover-underline-animation" :to="{ name: 'TicketsPage' }">Tickets</RouterLink>
@@ -29,7 +48,7 @@ import { RouterLink } from "vue-router";
           <RouterLink class="hover-underline-animation" :to="{ name: 'ProgramVenuePage' }">Venues</RouterLink>
         </div>
       </div>
-            <div class="hidden-section">
+            <div class="hidden-section" :class="{flex: open}">
         <p class="hidden-title">Practical</p>
         <div class="hidden-links">
           <RouterLink class="hover-underline-animation" :to="{ name: 'LocationsMapPage' }">Locations map</RouterLink>
@@ -38,7 +57,7 @@ import { RouterLink } from "vue-router";
           <RouterLink class="hover-underline-animation" :to="{ name: 'FAQPage' }">FAQ</RouterLink>
         </div>
       </div>
-      <div class="hidden-section">
+      <div class="hidden-section" :class="{flex: open}">
         <p class="hidden-title">More</p>
         <div class="hidden-links">
           <RouterLink class="hover-underline-animation" :to="{ name: 'NewsPage' }">News</RouterLink>
@@ -53,6 +72,14 @@ import { RouterLink } from "vue-router";
 </template>
 
 <style scoped>
+
+.flex{
+  display: flex !important;
+}
+
+.changePadding{
+  padding: 6px !important;
+}
 
 .navbar{
   display: flex;
@@ -80,7 +107,7 @@ import { RouterLink } from "vue-router";
   gap: 48px;
 }
 
-.crossIcon{
+.display{
   display: none;
 }
 
@@ -92,6 +119,7 @@ import { RouterLink } from "vue-router";
   background: rgba(250, 250, 250, 0.06);
   backdrop-filter: blur(100px);
   padding: 12px;
+  cursor: pointer;
 }
 
 .menu-btn{
@@ -129,13 +157,13 @@ import { RouterLink } from "vue-router";
 }
 
 .hidden-section{
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 16px;
 }
 
 .hidden-container{
-  display: flex;
+  display: none;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;

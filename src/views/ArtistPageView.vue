@@ -130,7 +130,7 @@ export default {
       try {
         this.loading = true;
         this.error = null;
-        const artistId = this.$route.params.artistId.replace(':', ''); // Remove o ":" do artistId
+        const artistId = this.$route.params.artistId; // Remove o ":" do artistId
         // Obter as informações completas do artista com o getter
         this.artistInfo = artistsStore.getArtistById(artistId);
         this.topTracks = await artistsStore.getTop3Tracks(this.artistInfo.name);

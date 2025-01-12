@@ -41,7 +41,7 @@ export default {
       </div>
     </div>
     <div class="hidden-container" :class="{subnav: open}">
-      <div class="hidden-section">
+      <div class="hidden-section" :class="{vShow: open}">
         <p class="hidden-title">Festival</p>
         <div class="hidden-links">
           <RouterLink class="hover-underline-animation w-fit" :to="{ name: 'TicketsPage' }">Tickets</RouterLink>
@@ -50,7 +50,7 @@ export default {
           <RouterLink class="hover-underline-animation w-fit" :to="{ name: 'ProgramVenuePage' }">Venues</RouterLink>
         </div>
       </div>
-            <div class="hidden-section">
+            <div class="hidden-section" :class="{vShow: open}">
         <p class="hidden-title">Practical</p>
         <div class="hidden-links">
           <RouterLink class="hover-underline-animation w-fit" :to="{ name: 'LocationsMapPage' }">Locations map</RouterLink>
@@ -59,7 +59,7 @@ export default {
           <RouterLink class="hover-underline-animation w-fit" :to="{ name: 'FAQPage' }">FAQ</RouterLink>
         </div>
       </div>
-      <div class="hidden-section">
+      <div class="hidden-section" :class="{vShow: open}">
         <p class="hidden-title">More</p>
         <div class="hidden-links">
           <RouterLink class="hover-underline-animation w-fit" :to="{ name: 'NewsPage' }">News</RouterLink>
@@ -83,6 +83,8 @@ export default {
   padding: 48px;
   justify-content: space-between;
   align-items: center;
+  top: 0;
+  z-index: 1000;
 }
 
 .logo{
@@ -137,7 +139,7 @@ export default {
 }
 
 .vShow{
-  visibility: visible;
+  visibility: visible !important;
   transition-delay: 0.3s;
 }
 

@@ -60,7 +60,7 @@ export default {
             const store = useUsersStore();
             try {
                 store.updateUser(updatedUserData);
-                this.$router.go(); 
+                alert("Alterações feitas com sucesso!")
             } catch (error) {
                 console.error(error);
             }

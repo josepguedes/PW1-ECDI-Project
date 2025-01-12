@@ -74,10 +74,6 @@ export const useUsersStore = defineStore('users', {
       }
     
       if (email) {
-        const emailExists = this.users.some(user => user.email === email);
-        if (emailExists) {
-          throw new Error('Este email já está em uso');
-        }
         this.authenticatedUser.email = email;
       }
 

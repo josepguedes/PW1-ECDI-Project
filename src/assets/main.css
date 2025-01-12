@@ -58,9 +58,52 @@ a{
   width: 100%;
 }
 
-/*inputs*/
+/*link hover animation*/
 
-.input-text{
-  font-family: Aspekta;
-  font-weight: 400;
+.hover-underline-animation{
+  display: inline-block;
+  position: relative;
+  color: var(--mainWhite);
+  font-family: Aspekta350;
+  font-size: 1.25rem;
 }
+
+.hover-underline-animation::after{
+  content: '';
+  position: absolute;
+  border-bottom: 1.5px solid var(--mainWhite);
+  width: 100%;
+  transform: scaleX(0);
+  bottom: 0;
+  left: 0;
+  background-color: var(--mainWhite);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+  transition-delay: 0.2s;
+}
+
+.hover-underline-animation:hover::after{
+  transform: scaleX(1);
+  transform-origin: bottom left;
+  transition-delay: 0.2s;
+}
+
+/*buttons*/
+
+.btn-secondary{
+  display: flex;
+  padding: 12px 24px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  border: 1px solid var(--gray400);
+  color: var(--mainWhite);
+  font-family: Aspekta500;
+  font-size: 1.25rem;
+  transition: 150ms ease-out;
+}
+
+.btn-secondary:hover{
+  background: var(--gray700);
+}
+

@@ -22,14 +22,16 @@ export default {
 </script>
 
 <template>
-  <div class="navbar" :class="{changePadding: open}">
+  <div class="header">
+    <RouterLink class="logo" :to="{ name: 'HomePage' }">Hypnøtica</RouterLink>
+    <div class="navbar" :class="{changePadding: open}">
     <div class="navbar-menuLinks">
       <div :class="{w100: open}" class="navbar-menu" @click="navbarAnimation()">
         <div class="menu-btn">
           <img src="/src/assets/Icons/MenuIcon.svg" alt="">
           <p class="menu-text">Menu</p>
         </div>
-        <img class="display" :class="{flex: open}" src="/src/assets/Icons/CrossXIcon.svg" alt="">
+        <img class="vHidden" :class="{vShow: open}" src="/src/assets/Icons/CrossXIcon.svg" alt="">
       </div>
       <div class="navbar-links" :class="{display: open}">
         <RouterLink class="link" :to="{ name: 'TicketsPage' }">Tickets</RouterLink>
@@ -39,7 +41,7 @@ export default {
       </div>
     </div>
     <div class="hidden-container" :class="{subnav: open}">
-      <div class="hidden-section" :class="{vShow: open}">
+      <div class="hidden-section">
         <p class="hidden-title">Festival</p>
         <div class="hidden-links">
           <RouterLink class="hover-underline-animation w-fit" :to="{ name: 'TicketsPage' }">Tickets</RouterLink>
@@ -48,7 +50,7 @@ export default {
           <RouterLink class="hover-underline-animation w-fit" :to="{ name: 'ProgramVenuePage' }">Venues</RouterLink>
         </div>
       </div>
-            <div class="hidden-section" :class="{vShow: open}">
+            <div class="hidden-section">
         <p class="hidden-title">Practical</p>
         <div class="hidden-links">
           <RouterLink class="hover-underline-animation w-fit" :to="{ name: 'LocationsMapPage' }">Locations map</RouterLink>
@@ -57,7 +59,7 @@ export default {
           <RouterLink class="hover-underline-animation w-fit" :to="{ name: 'FAQPage' }">FAQ</RouterLink>
         </div>
       </div>
-      <div class="hidden-section" :class="{vShow: open}">
+      <div class="hidden-section">
         <p class="hidden-title">More</p>
         <div class="hidden-links">
           <RouterLink class="hover-underline-animation w-fit" :to="{ name: 'NewsPage' }">News</RouterLink>
@@ -69,27 +71,37 @@ export default {
       </div>
     </div>
   </div>
+  <RouterLink class="btn-secondary" :to="{ name: 'LoginPage' }">Login</RouterLink>
+  </div>
 </template>
 
 <style scoped>
+
+.header{
+  position: sticky;
+  display: flex;
+  padding: 48px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo{
+  font-family: Aspekta500;
+  font-size: 2rem;
+  color: var(--mainWhite);
+}
 
 .w-fit{
   width: fit-content;
 }
 
 .w100{
-  width: 100%;
-  transition: all 1s linear allow-discrete;
+  width: 100% !important;
 }
 
 .flex{
   display: flex !important;
 }
-
-.vShow{
-  visibility: visible !important;
-}
-
 
 .changePadding{
   padding: 6px !important;
@@ -120,6 +132,15 @@ export default {
   gap: 48px;
 }
 
+.vHidden{
+  visibility: hidden;
+}
+
+.vShow{
+  visibility: visible;
+  transition-delay: 0.3s;
+}
+
 .display{
   display: none;
 }
@@ -134,7 +155,8 @@ export default {
   backdrop-filter: blur(100px);
   padding: 12px;
   cursor: pointer;
-  transition: all 1s linear allow-discrete;
+  transition: all 0.3s linear;
+  width: 100px;
 }
 
 .menu-btn{
@@ -144,13 +166,13 @@ export default {
 }
 
 .menu-text{
-  font-family: Aspekta400;
+  font-family: Aspekta350;
   font-size: 1.25rem;
 }
 
 .link{
   color: var(--gray200);
-  font-family: Aspekta400;
+  font-family: Aspekta350;
   font-size: 1.25rem;
 }
 
@@ -166,7 +188,7 @@ export default {
 }
 
 .hidden-title{
-  font-family: Aspekta400;
+  font-family: Aspekta300;
   font-size: 1.125rem;
   color: var(--gray100);
 }
@@ -179,22 +201,21 @@ export default {
 }
 
 .hidden-container{
-  display: none;
+  overflow: hidden;
   max-height: 0;
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  padding: 24px;
   border-radius: 8px;
   background: rgba(250, 250, 250, 0.02);
   backdrop-filter: blur(100px);
-  transition: all 1s linear allow-discrete;
+  transition: all 0.3s linear;
 }
 
 .subnav{
-  display: flex;
-  max-height: fit-content;
-  padding: 24px;
-  transition: all 1s linear allow-discrete;
+  max-height: 272px;
 }
 
 </style>

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import {useUsersStore} from '@/stores/user';
 
 // Importação de componentes das páginas
 import HomePage from '@/views/HomePageView.vue';
@@ -189,7 +190,7 @@ const router = createRouter({
 
 // Verificação global de autenticação
 router.beforeEach((to, from) => {
-  if (to.meta.requiresAuth && !useUserStore().authenticatedUser) {
+  if (to.meta.requiresAuth && !useUsersStore().authenticatedUser) {
     return {
       path: "/login",
       query: { redirect: to.fullPath },

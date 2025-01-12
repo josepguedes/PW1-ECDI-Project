@@ -63,12 +63,15 @@ a{
 .hover-underline-animation{
   display: inline-block;
   position: relative;
+  color: var(--mainWhite);
+  font-family: Aspekta500;
+  font-size: 1.3rem;
 }
 
 .hover-underline-animation::after{
   content: '';
   position: absolute;
-  border-bottom: 2px solid var(--mainWhite);
+  border-bottom: 1.5px solid var(--mainWhite);
   width: 100%;
   transform: scaleX(0);
   bottom: 0;

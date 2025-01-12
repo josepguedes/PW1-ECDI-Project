@@ -1,13 +1,16 @@
 <template>
     <div>
         <h1>Volunteer Dashboard</h1>
-
+        <Sidebar/>
     </div>
 </template>
 
 <script>
+import Sidebar from '@/components/Sidebar.vue';
     export default {
-        
+        components: {
+            Sidebar,
+        },
     }
 </script>
 

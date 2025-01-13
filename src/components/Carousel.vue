@@ -14,6 +14,7 @@
             'previous-previous': isPreviousPrevious(index),
             'next-next': isNextNext(index),
           }"
+          @click="selectImage(index)"
         >
           <img :src="image" alt="song" />
         </label>
@@ -39,7 +40,6 @@
   </div>
 </template>
 
-  
 <script>
 export default {
   props: {
@@ -73,6 +73,7 @@ export default {
       this.selectedIndex = (this.selectedIndex + 1) % this.images.length;
     },
     selectImage(index) {
+      // Atualiza o índice da imagem selecionada ao clicar
       this.selectedIndex = index;
     },
   },
@@ -82,16 +83,13 @@ export default {
 };
 </script>
 
-
 <style scoped>
-
 input[type="radio"] {
   display: none;
 }
 
 .container {
-  width: 100%;
-  height: 600px;
+  height: 700px;
   position: relative;
   margin-top: 0; /* Remover margem superior excessiva */
   display: flex;
@@ -104,7 +102,7 @@ input[type="radio"] {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 90%;
   height: 100%;
   transition: transform 0.5s ease;
 }
@@ -152,7 +150,7 @@ input[type="radio"] {
 
 .controls {
   position: absolute;
-  bottom: 15px; /* Distância reduzida entre carrossel e pontos */
+  bottom: 80px; /* Distância reduzida entre carrossel e pontos */
   left: 50%;
   transform: translateX(-50%);
   display: flex;

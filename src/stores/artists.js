@@ -6,7 +6,7 @@ export const useArtistsStore = defineStore('artists', {
     artists: [{
       id: "1",  // ID do artista
       name: "Charlotte de Witte",  // Nome do artista
-      desc: "Charlotte de Witte is a globally renowned DJ and producer hailing from Belgium, celebrated for her dark, powerful, and hypnotic approach to techno. Rising to fame in the mid-2010s, she quickly established herself as one of the most influential figures in the electronic music scene. Known for her relentless energy behind the decks, Charlotte has become a headliner at major festivals such as Tomorrowland, Awakenings, and Ultra Music Festival.",
+      bio: "Charlotte de Witte is a globally renowned DJ and producer hailing from Belgium, celebrated for her dark, powerful, and hypnotic approach to techno. Rising to fame in the mid-2010s, she quickly established herself as one of the most influential figures in the electronic music scene. Known for her relentless energy behind the decks, Charlotte has become a headliner at major festivals such as Tomorrowland, Awakenings, and Ultra Music Festival.",
       mainImg: "https://xlr8r.com/wp-content/uploads/2019/06/screen-shot-2018-02-15-at-95724-am.png",  // URL da imagem principal
       secondaryImg: "https://cdn.wegow.com/media/artists/charlotte-de-witte/charlotte-de-witte-1674054503.5452025.1242x2208.jpg",  // URL da imagem secundária
       socials: {  // Redes sociais
@@ -94,7 +94,7 @@ export const useArtistsStore = defineStore('artists', {
     },
 
     // Adiciona um novo artista
-    addArtist(id, name, desc, mainImg, secondaryImg, youtube, spotify, instagram) {
+    addArtist(id, name, bio, mainImg, secondaryImg, youtube, spotify, instagram) {
       const artistExists = this.artists.some(artist => artist.name === name);
 
       if (artistExists) {
@@ -104,7 +104,7 @@ export const useArtistsStore = defineStore('artists', {
       const newArtist = {
         id: id,
         name: name,
-        desc: desc, 
+        bio: bio, 
         mainImg: mainImg,
         secondaryImg: secondaryImg,
         socials: {

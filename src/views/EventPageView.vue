@@ -33,6 +33,12 @@
       <h2 class="section-title">Event Photos</h2>
       <Carousel :images="event.carouselImages" />
     </section>
+
+    <!-- Artists Slider Section -->
+    <section class="artists-slide">
+      <h2 class="artists-title">Event Artists</h2>
+      <Slider :artists="event.artists" />
+    </section>
   </main>
 
   <!-- Loader or error message -->
@@ -40,11 +46,6 @@
     <p v-if="loading">Loading event...</p>
     <p v-else-if="error">{{ error }}</p>
   </div>
-
-  <section class="artists-slide">
-    <h2 class="artists-title">Event Photos</h2>
-    <Slider />
-  </section>
 </template>
 
 <script>
@@ -148,17 +149,22 @@ export default {
 /* Biography Section */
 .event-bio {
   display: flex;
-  gap: 75px;
+  gap: 128px;
   justify-content: space-between;
   align-items: center;
+  /* Centraliza verticalmente os elementos */
   flex-wrap: nowrap;
-  margin: 0px 48px 48px 48px;
-  padding: 0;
+  /* Impede que os itens quebrem para uma nova linha */
+  margin: 0 48px;
+  /* Margem lateral de 48px */
+  padding: 0 96px;
 }
 
 .bio-text {
   flex: 1;
-  max-width: 800px;
+  /* Garante que o texto ocupe espaço proporcional */
+  max-width: 900px;
+  /* Aumenta a largura máxima do texto */
   color: var(--Gray-100, #bec7ce);
   letter-spacing: 1.5px;
   font: 30px Aspekta300, sans-serif;
@@ -166,12 +172,18 @@ export default {
 
 .event-image {
   flex: 1;
-  max-width: 100%;
-  max-height: 600px;
+  /* Garante que a imagem ocupe espaço proporcional */
+  max-width: 40%;
+  /* A largura se adapta ao contêiner */
+  max-height: 700px;
+  /* Define uma altura máxima reduzida */
   width: auto;
+  /* Ajusta a largura proporcional à altura */
   height: auto;
+  /* Mantém as proporções */
   border-radius: 12px;
   object-fit: cover;
+  /* Garante que a imagem preencha o espaço disponível sem distorção */
 }
 
 /* Tickets Section */
@@ -203,6 +215,7 @@ export default {
   color: var(--Main-White);
   font: 64px Aspekta600, sans-serif;
   margin-bottom: 24px;
+  margin-top: 96px;
 }
 
 </style>

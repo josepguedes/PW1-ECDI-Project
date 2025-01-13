@@ -307,7 +307,7 @@ export default {
 
 .artist-bio {
   display: flex;
-  gap: 75px;
+  gap: 128px;
   justify-content: space-between;
   align-items: center;
   /* Centraliza verticalmente os elementos */
@@ -315,13 +315,13 @@ export default {
   /* Impede que os itens quebrem para uma nova linha */
   margin: 128px 48px;
   /* Margem lateral de 48px */
-  padding: 0;
+  padding: 0 96px;
 }
 
 .bio-text {
   flex: 1;
   /* Garante que o texto ocupe espaço proporcional */
-  max-width: 800px;
+  max-width: 900px;
   /* Aumenta a largura máxima do texto */
   color: var(--Gray-100, #bec7ce);
   letter-spacing: 1.5px;
@@ -331,9 +331,9 @@ export default {
 .artist-image {
   flex: 1;
   /* Garante que a imagem ocupe espaço proporcional */
-  max-width: 100%;
+  max-width: 40%;
   /* A largura se adapta ao contêiner */
-  max-height: 600px;
+  max-height: 700px;
   /* Define uma altura máxima reduzida */
   width: auto;
   /* Ajusta a largura proporcional à altura */

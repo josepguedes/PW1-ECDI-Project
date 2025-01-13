@@ -37,7 +37,7 @@
     </section>
 
     <section class="artist-bio" aria-label="Artist Biography">
-      <p class="bio-text">{{ artistInfo.desc }}</p>
+      <p class="bio-text">{{ artistInfo.bio }}</p>
       <img loading="lazy"
         :src="artistInfo.secondaryImg"
         class="artist-image" alt="Portrait of Charlotte de Witte" />
@@ -194,7 +194,6 @@ export default {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  margin-top: 100px;
   margin-bottom: 100px;
 }
 
@@ -322,7 +321,7 @@ export default {
 .bio-text {
   flex: 1;
   /* Garante que o texto ocupe espaço proporcional */
-  max-width: 900px;
+  max-width: 800px;
   /* Aumenta a largura máxima do texto */
   color: var(--Gray-100, #bec7ce);
   letter-spacing: 1.5px;
@@ -332,13 +331,17 @@ export default {
 .artist-image {
   flex: 1;
   /* Garante que a imagem ocupe espaço proporcional */
-  max-width: 700px;
-  /* Aumenta a largura máxima da imagem */
+  max-width: 100%;
+  /* A largura se adapta ao contêiner */
+  max-height: 600px;
+  /* Define uma altura máxima reduzida */
+  width: auto;
+  /* Ajusta a largura proporcional à altura */
   height: auto;
   /* Mantém as proporções */
-  border-radius: 16px;
+  border-radius: 12px;
   object-fit: cover;
-  /* Garante que a imagem preencha o espaço disponível */
+  /* Garante que a imagem preencha o espaço disponível sem distorção */
 }
 
 .featured-music {
@@ -348,7 +351,7 @@ export default {
 
 .section-title {
   color: var(--Main-White);
-  font: 600 64px Aspekta, sans-serif;
+  font: 64px Aspekta600, sans-serif;
 }
 
 .music-grid {

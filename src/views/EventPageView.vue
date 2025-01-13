@@ -1,168 +1,208 @@
 <template>
-  <div class="container">
-    <!-- Imagem de cabeçalho com título e subtítulo -->
-    <div class="header-image">
-      <div class="header-text">
-        <h1>A Night of Electrifying Beats</h1>
-        <p>January 01-03 2025 | KitKatClub | Berlin</p>
+  <main class="event-profile" v-if="event && !loading">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <img
+        :src="event.mainImg"
+        alt="Main Event Image"
+        class="hero-background"
+      />
+      <div class="text-overlay">
+        <h1 class="event-name">{{ event.name }}</h1>
+        <h2 class="event-subtitle">{{ event.desc }}</h2>
       </div>
-    </div>
+    </section>
 
-    <!-- Botão de comprar bilhetes centralizado entre as secções -->
-    <div class="tickets-button-wrapper">
-      <button @click="navigateToTickets" class="tickets-button">Comprar Bilhetes</button>
-    </div>
+    <!-- Tickets Section -->
+    <section class="buy-tickets">
+      <button class="btn-primary">Get Tickets</button>
+    </section>
 
-    <!-- Seção com texto e imagem (descrição do evento) -->
-    <div class="content-section">
-      <div class="text-part">
-        <p>
-          Step into the pulsating heart of electronic music at Neon Reverie, an unforgettable event that merges cutting-edge soundscapes with immersive visuals. Taking place at the iconic KitKatClub in Berlin from January 1st to 3rd, 2025, this night promises an unparalleled fusion of innovation and rhythm. Featuring world-renowned DJs and live acts, Neon Reverie celebrates the diversity of electronic music across genres like techno, trance, and deep house. Get ready to dance, connect, and lose yourself in a sensory journey like no other.
-        </p>
-      </div>
-      <div class="image-part">
-        <img src="../assets/images/1.jpg" alt="Event Image" />
-      </div>
-    </div>
+    <!-- Biography Section -->
+    <section class="event-bio">
+      <p class="bio-text">{{ event.bio }}</p>
+      <img
+        :src="event.bioImg"
+        alt="Event Image"
+        class="event-image"
+      />
+    </section>
 
-    <!-- Título para a seção de carrossel -->
-    <div class="carousel-title">
-      <h2>Event Photos</h2>
-    </div>
+    <!-- Event Photos Section -->
+    <section class="event-photos">
+      <h2 class="section-title">Event Photos</h2>
+      <Carousel :images="event.carouselImages" />
+    </section>
+  </main>
 
-    <!-- Componente do carrossel -->
-    <div class="carousel-wrapper">
-      <carousel :images="carouselImages" />
-    </div>
+  <!-- Loader or error message -->
+  <div v-else>
+    <p v-if="loading">Loading event...</p>
+    <p v-else-if="error">{{ error }}</p>
   </div>
+
+  <section class="artists-slide">
+    <h2 class="artists-title">Event Photos</h2>
+    <Slider />
+  </section>
 </template>
 
 <script>
-// Importando o componente Carousel
+import { useEventStore } from "@/stores/event";
 import Carousel from "../components/Carousel.vue";
-
-import image1 from "../assets/images/1.jpg";
-import image2 from "../assets/images/2.jpg";
-import image3 from "../assets/images/3.jpg";
-import image4 from "../assets/images/4.jpg";
-import image5 from "../assets/images/5.jpg";
+import Slider from "../components/EventArtistSlider.vue";
 
 export default {
+  name: "EventProfile",
+
   components: {
-    Carousel, // Registrando o componente Carousel
+    Carousel,
+    Slider,
   },
+
   data() {
     return {
-      // Lista de imagens para o carrossel
-      carouselImages: [image1, image2, image3, image4, image5],
+      event: null, // Evento será armazenado aqui após ser carregado
+      loading: true,
+      error: null,
     };
   },
+
   methods: {
-    // Método para redirecionar para a página de bilhetes
-    navigateToTickets() {
-      this.$router.push("/tickets"); // Navegar para a rota /tickets
+    async fetchEvent() {
+      const eventStore = useEventStore();
+      try {
+        this.loading = true;
+        this.error = null;
+        const eventId = this.$route.params.eventId; // Pega o ID do evento da URL
+
+        // Buscar o evento com o ID na store
+        const fetchedEvent = eventStore.getEventById(eventId);
+
+        if (!fetchedEvent) {
+          this.error = "Evento não encontrado!";
+        } else {
+          // Se o evento for encontrado, armazene na variável `event`
+          this.event = fetchedEvent;
+        }
+      } catch (err) {
+        this.error = "Falha ao carregar evento: " + err.message;
+      } finally {
+        this.loading = false;
+      }
     },
+  },
+
+  mounted() {
+    // Carregar o evento assim que o componente for montado
+    this.fetchEvent();
   },
 };
 </script>
 
+
 <style scoped>
-/* Container principal com margens laterais */
-.container {
-  margin: 100px 48px 0 48px;
+.event-profile {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin-bottom: 100px;
 }
 
-/* Estilos para a imagem de cabeçalho */
-.header-image {
-  width: 100%;
-  height: 450px;
-  background-image: url('../assets/images/1.jpg');
-  background-size: cover;
-  background-position: center;
+/* Hero Section */
+.hero-section {
   position: relative;
+  height: 700px;
+  display: flex;
+  align-items: flex-end;
 }
 
-.header-text {
+.hero-background {
   position: absolute;
-  bottom: 20px;
-  left: 32px;
-  color: white;
-}
-
-.header-text h1 {
-  font-size: 36px;
-  margin: 0;
-}
-
-.header-text p {
-  font-size: 18px;
-}
-
-/* Botão de comprar bilhetes centralizado entre as secções */
-.tickets-button-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-top: 30px; /* Espaço entre a imagem de cabeçalho e o botão */
-  margin-bottom: 30px; /* Espaço entre o botão e a secção de descrição */
-}
-
-.tickets-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  background-color: transparent; /* Fundo transparente por padrão */
-  color: white;
-  border: 1px solid white; /* Borda branca */
-  border-radius: 5px;
-  outline: none; /* Remove borda de foco padrão */
-  transition: background-color 0.3s, border-color 0.3s; /* Transições suaves */
-}
-
-.tickets-button:hover {
-  background-color: var(--Gray-400, #6b737a); /* Fundo ao passar o mouse */
-  border-color: var(--Gray-400, #6b737a); /* Cor da borda ao passar o mouse */
-  outline: none; /* Garante que não haja destaque de foco */
-}
-
-
-/* Seção com texto e imagem (descrição do evento) */
-.content-section {
-  display: flex;
-  margin-top: 20px;
-}
-
-.text-part {
-  flex: 1;
-  padding-right: 20px;
-}
-
-.image-part {
-  flex: 1;
-}
-
-.image-part img {
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 650px; /* Altura fixa */
+  height: 100%;
   object-fit: cover;
+  z-index: -1;
+}
+
+.text-overlay {
+  padding: 20px;
+  margin: 20px;
   border-radius: 8px;
 }
 
-/* Título da seção de carrossel */
-.carousel-title {
-  text-align: center;
-  margin-top: 50px; /* Espaço entre o conteúdo do evento e o título */
+.event-name {
+  color: var(--Main-White);
+  font: 64px Aspekta800, sans-serif;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
 }
 
-.carousel-title h2 {
-  font-size: 48px;
-  color: #ffffff;
+.event-subtitle {
+  color: var(--gray100);
+  font: 24px Aspekta400, sans-serif;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Wrapper para centralizar o carrossel */
-.carousel-wrapper {
+/* Biography Section */
+.event-bio {
+  display: flex;
+  gap: 75px;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin: 0px 48px 48px 48px;
+  padding: 0;
+}
+
+.bio-text {
+  flex: 1;
+  max-width: 800px;
+  color: var(--Gray-100, #bec7ce);
+  letter-spacing: 1.5px;
+  font: 30px Aspekta300, sans-serif;
+}
+
+.event-image {
+  flex: 1;
+  max-width: 100%;
+  max-height: 600px;
+  width: auto;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* Tickets Section */
+.buy-tickets {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: -200px; /* Espaço entre o título e o carrossel */
+  margin: 64px 0;
 }
+
+/* Event Photos Section */
+.event-photos {
+  margin: 48px;
+  text-align: center;
+  margin-bottom: -120px;
+}
+
+.section-title {
+  color: var(--Main-White);
+  font: 64px Aspekta600, sans-serif;
+  margin-bottom: -100px;
+}
+
+.artists-slide {
+  text-align: center;
+}
+
+.artists-title {
+  color: var(--Main-White);
+  font: 64px Aspekta600, sans-serif;
+  margin-bottom: 24px;
+}
+
 </style>

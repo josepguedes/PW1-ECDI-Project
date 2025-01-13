@@ -88,6 +88,35 @@ a{
   transition-delay: 0.2s;
 }
 
+
+.hover-underline-animation-gray{
+  display: inline-block;
+  position: relative;
+  color: var(--gray200);
+  font-family: Aspekta400;
+  font-size: 1rem;
+}
+
+.hover-underline-animation-gray::after{
+  content: '';
+  position: absolute;
+  border-bottom: 1.5px solid var(--gray200);
+  width: 100%;
+  transform: scaleX(0);
+  bottom: 0;
+  left: 0;
+  background-color: var(--gray200);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+  transition-delay: 0.2s;
+}
+
+.hover-underline-animation-gray:hover::after{
+  transform: scaleX(1);
+  transform-origin: bottom left;
+  transition-delay: 0.2s;
+}
+
 /*buttons*/
 
 .btn-primary{

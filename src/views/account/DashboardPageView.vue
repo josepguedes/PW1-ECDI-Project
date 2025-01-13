@@ -120,7 +120,7 @@ export default {
 
 .profile-settings-title {
     color: var(--Gray-100, #bec7ce);
-    font: 400 36px Aspekta, sans-serif;
+    font: 36px Aspekta400;
 }
 
 .profile-settings-content {
@@ -194,7 +194,7 @@ export default {
     border-bottom: 1px solid var(--Gray-400, #6b737a);
     margin-top: 32px;
     color: var(--Gray-400, #6b737a);
-    font: 400 16px Aspekta, sans-serif;
+    font: 16px Aspekta400;
     background: transparent;
 }
 
@@ -205,7 +205,7 @@ export default {
     margin-top: 64px;
     padding: 12px 24px;
     color: var(--Main-Black, #010306);
-    font: 500 20px Aspekta, sans-serif;
+    font: 16px Aspekta500;
     border: 1px solid transparent;
     cursor: pointer;
 }

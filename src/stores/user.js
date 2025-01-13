@@ -6,7 +6,7 @@ export const useUsersStore = defineStore('users', {
     authenticatedUser: null,
     users: [
       { name: "admin", password: "123"},
-      { name: "xavi", email: "example@gmail.com", password: "321", tickets: [], favoriteArtists: [], favoriteVenues: [], calendar: [], notificationPref: []},
+      { name: "xavi", email: "example@gmail.com", password: "321",profImg: '/src/assets/images/1.jpg' , tickets: [], favoriteArtists: [], favoriteVenues: [], calendar: [], notificationPref: []},
     ],
   }),
 
@@ -27,11 +27,18 @@ export const useUsersStore = defineStore('users', {
 
   actions: {
     
-    validateImage(file) {
+    validateImage1(file) {
       const fileExtension = file.name.split('.').pop().toLowerCase();
       if (fileExtension !== 'jpg') {
         throw new Error('A imagem deve ser do tipo .jpg');
       }
+    },
+
+    validateImage2(file, callback) {
+      const fr = new FileReader()
+      fr.onload = () => callback(null, fr.result)
+      fr.onerror = (err) => callback(err)
+      fr.readAsDataURL(file)
     },
 
 
@@ -49,7 +56,7 @@ export const useUsersStore = defineStore('users', {
         name: name,
         email: email,
         password: password,
-        profImg: profImg ? profImg : 'https://www.vetsobrerodas.pt/uploads/submenus/chegada-novo-cao-a-casa[1].jpg',
+        profImg: '/src/assets/images/1.jpg',
         tickets: [],
         favoriteArtists: [],
         favoriteVenues: [],

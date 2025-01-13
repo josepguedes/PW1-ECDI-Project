@@ -6,13 +6,13 @@
                 <div class="form-fields">
                     <div class="input-group">
                         <label for="email" class="visually-hidden">Email</label>
-                        <input type="email" id="email" v-model="email" class="form-input" placeholder="Email"
+                        <input type="email" id="email" v-model="email" class="form-input pbottom-12" placeholder="Email"
                             required />
                     </div>
                     <div class="input-group password-group">
                         <label for="password" class="visually-hidden">Password</label>
                         <input :type="showPassword ? 'text' : 'password'" id="password" v-model="password"
-                            class="form-input" placeholder="Password" required />
+                            class="form-input pbottom-12" placeholder="Password" required />
 
                     </div>
                 </div>

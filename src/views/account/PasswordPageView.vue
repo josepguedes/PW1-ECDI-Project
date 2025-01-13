@@ -6,9 +6,7 @@
                 <form class="profile-settings-form" @submit.prevent="handleSubmit">
                     <h1 class="profile-settings-title">Change Password</h1>
                     <div class="profile-settings-content">
-
-                        <div class="form-group">
-                            <label for="currentpassword" class="visually-hidden">Current Password</label>
+                        <div>
                             <div class="input-container">
                                 <input :type="showCurrentPassword ? 'text' : 'password'" id="currentpassword"
                                     class="form-input" placeholder="Current Password" v-model="currentPassword" />
@@ -18,9 +16,7 @@
                                 </span>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="newpassword" class="visually-hidden">New Password</label>
+                        <div>
                             <div class="input-container">
                                 <input :type="showNewPassword ? 'text' : 'password'" id="newpassword" class="form-input"
                                     placeholder="New Password" v-model="newPassword" />
@@ -34,7 +30,7 @@
 
 
                     </div>
-                    <button type="submit" class="save-button">Save changes</button>
+                    <button type="submit" class="save-button btn-primary">Save changes</button>
                 </form>
             </div>
         </div>
@@ -88,27 +84,12 @@ export default {
 </script>
 
 <style scoped>
-.visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-}
 
 .input-container {
     position: relative;
     display: flex;
     align-items: center;
     width: 100%;
-}
-
-.form-input {
-    flex: 1;
-    padding-right: 40px;
 }
 
 .input-icon {
@@ -139,19 +120,20 @@ export default {
     min-width: 240px;
     flex-direction: column;
     width: 301px;
+    gap: 64px;
 }
 
 .profile-settings-title {
     color: var(--Gray-100, #bec7ce);
-    font: 400 36px Aspekta, sans-serif;
+    font-size: 36px;
+    font-family: Aspekta200;
 }
 
 .profile-settings-content {
     display: flex;
-    margin-top: 64px;
     width: 100%;
     flex-direction: column;
-    overflow: hidden;
+    gap: 32px;
 }
 
 .avatar-container {
@@ -180,33 +162,8 @@ export default {
     border-color: transparent;
 }
 
-.form-input {
-    width: 100%;
-    padding: 0 0 12px;
-    border: none;
-    border-bottom: 1px solid var(--Gray-400, #6b737a);
-    margin-top: 32px;
-    color: var(--Gray-400, #6b737a);
-    font: 400 16px Aspekta, sans-serif;
-    background: transparent;
-}
-
 .save-button {
     align-self: flex-start;
-    border-radius: 12px;
-    background: var(--Main-White, #fafafa);
-    margin-top: 64px;
-    padding: 12px 24px;
-    color: var(--Main-Black, #010306);
-    font: 500 20px Aspekta, sans-serif;
-    border: 1px solid transparent;
-    cursor: pointer;
-}
-
-.save-button:hover {
-    background-color: transparent;
-    border-color: #fafafa;
-    color: #fafafa;
 }
 
 @media (max-width: 991px) {

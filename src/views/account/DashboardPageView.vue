@@ -23,7 +23,7 @@
                             <input type="email" id="email" class="form-input" placeholder="Email" v-model="email" />
                         </div>
                     </div>
-                    <button type="submit" class="save-button">Save changes</button>
+                    <button type="submit" class="save-button btn-primary">Save changes</button>
                 </form>
             </div>
         </div>
@@ -116,6 +116,7 @@ export default {
     min-width: 240px;
     flex-direction: column;
     width: 301px;
+    gap: 64px;
 }
 
 .profile-settings-title {
@@ -129,6 +130,7 @@ export default {
     width: 100%;
     flex-direction: column;
     overflow: hidden;
+    gap: 32px;
 }
 
 .avatar-container {
@@ -167,9 +169,6 @@ export default {
     filter: brightness(0.7);
 }
 
-
-
-
 .avatar-container:hover .edit-icon{
     opacity: 1;
     pointer-events: auto;
@@ -187,33 +186,8 @@ export default {
     padding: 20px;
 }
 
-.form-input {
-    width: 100%;
-    padding: 0 0 12px;
-    border: none;
-    border-bottom: 1px solid var(--Gray-400, #6b737a);
-    margin-top: 32px;
-    color: var(--Gray-400, #6b737a);
-    font: 16px Aspekta400;
-    background: transparent;
-}
-
 .save-button {
     align-self: flex-start;
-    border-radius: 12px;
-    background: var(--Main-White, #fafafa);
-    margin-top: 64px;
-    padding: 12px 24px;
-    color: var(--Main-Black, #010306);
-    font: 16px Aspekta500;
-    border: 1px solid transparent;
-    cursor: pointer;
-}
-
-.save-button:hover {
-    background-color: transparent;
-    border-color: #fafafa;
-    color: #fafafa;
 }
 
 @media (max-width: 991px) {

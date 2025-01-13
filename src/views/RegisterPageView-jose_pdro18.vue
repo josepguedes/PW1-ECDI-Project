@@ -23,7 +23,7 @@
         </div>
         <div class="action-section">
           <button type="submit" class="btn-primary">Register</button>
-          <router-link to="/login" class="hover-underline-animation-gray login-link">Already have an account?</router-link>
+          <router-link to="/login" class="hover-underline-animation-gray">Already have an account?</router-link>
         </div>
       </div>
     </div>
@@ -160,12 +160,21 @@ export default {
   width: 100%;
   flex-direction: column;
   gap: 12px;
-  justify-content: center;
 }
 
 
 .login-link {
   align-self: center;
+  margin-top: 12px;
+  color: var(--Gray-200, #a2aab1);
+  text-decoration: none;
+  font: 16px Aspekta400;
+}
+
+.link-underline {
+  display: block;
+  min-height: 1px;
+  width: 100%;
 }
 
 @media (max-width: 991px) {

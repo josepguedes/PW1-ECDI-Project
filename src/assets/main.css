@@ -95,6 +95,7 @@ a{
   color: var(--gray200);
   font-family: Aspekta400;
   font-size: 1rem;
+  width: fit-content;
 }
 
 .hover-underline-animation-gray::after{
@@ -170,6 +171,7 @@ a{
   font-size: 1rem;
   outline: none;
   transition: 300ms ease-out;
+  padding-bottom: 12px;
 }
 
 .form-input:hover{
@@ -179,5 +181,6 @@ a{
 .form-input:focus{
   border-bottom: 1px solid var(--mainWhite); 
 }
+
 
 

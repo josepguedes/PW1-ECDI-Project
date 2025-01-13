@@ -85,6 +85,7 @@ export default {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
+  font: 16px Aspekta400;
 }
 
 .register-container {
@@ -108,8 +109,7 @@ export default {
 .register-title {
   color: var(--Main-White, #fafafa);
   text-align: center;
-  font-size: 48px;
-  font-weight: 500;
+  font: 48px Aspekta500;
   margin: 0;
 }
 
@@ -180,9 +180,8 @@ export default {
   background: var(--Main-White, #fafafa);
   width: 100%;
   padding: 12px 24px;
-  font-size: 20px;
-  color: var(--Main-Black, #010306);
-  font-weight: 500;
+  font: 20px Aspekta500;
+  color: var(--Main-Black, #010306);;
   border: none;
   cursor: pointer;
 }
@@ -192,7 +191,7 @@ export default {
   margin-top: 12px;
   color: var(--Gray-200, #a2aab1);
   text-decoration: none;
-  font-size: 16px;
+  font: 16px Aspekta400;
 }
 
 .link-underline {

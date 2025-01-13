@@ -134,6 +134,7 @@ export default {
 
 .profile-name {
     flex: 1;
+    font: 20px Aspekta400;
 }
 
 .nav-menu {
@@ -156,7 +157,7 @@ export default {
     min-width: 240px;
     flex: 1;
     padding: 6px 8px;
-    font: 400 20px Aspekta, sans-serif;
+    font: 20px Aspekta400;
     color: var(--Gray-100, #bec7ce);
     cursor: pointer;
 }

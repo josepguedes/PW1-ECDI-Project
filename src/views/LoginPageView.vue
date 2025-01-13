@@ -16,11 +16,11 @@
 
                     </div>
                 </div>
-                <a href="#" class="forgot-password" tabindex="0">Forgot your password?</a>
+                <a href="#" class="hover-underline-animation-gray forgot-password" tabindex="0">Forgot your password?</a>
             </div>
             <div class="action-section">
-                <button type="submit" class="login-button">Log in</button>
-                <router-link to="/register" class="signup-link" tabindex="0">Don't have an account?</router-link>
+                <button type="submit" class="btn-primary login-button">Log in</button>
+                <router-link to="/register" class="hover-underline-animation-gray" tabindex="0">Don't have an account?</router-link>
             </div>
         </div>
     </form>
@@ -65,6 +65,8 @@ export default {
 </script>
 
 <style scoped>
+
+
 .visually-hidden {
     position: absolute;
     width: 1px;
@@ -97,13 +99,13 @@ export default {
 .login-title {
     color: var(--Main-White, #fafafa);
     text-align: center;
-    font-size: 48px;
-    font-weight: 500;
+    font: 48px Aspekta500;
     margin: 0;
 }
 
 .form-content {
     display: flex;
+    gap: 12px;
     margin-top: 64px;
     width: 100%;
     flex-direction: column;
@@ -122,17 +124,6 @@ export default {
     width: 100%;
     flex-direction: column;
     color: var(--Gray-400, #6b737a);
-}
-
-.form-input {
-    width: 100%;
-    padding: 0 0 12px;
-    border: none;
-    border-bottom: 1px solid var(--Gray-400, #6b737a);
-    background: transparent;
-    color: var(--Gray-400, #6b737a);
-    font-size: 16px;
-    outline: none;
 }
 
 .password-group {
@@ -158,37 +149,27 @@ export default {
 
 .forgot-password {
     align-self: flex-end;
-    color: var(--Gray-200, #a2aab1);
-    text-decoration: none;
-    margin-top: 12px;
-    font-size: 16px;
 }
 
 .action-section {
     display: flex;
     margin-top: 64px;
     width: 100%;
+    gap: 12px;
     flex-direction: column;
     align-items: center;
 }
 
 .login-button {
     width: 100%;
-    border-radius: 12px;
-    background: var(--Main-White, #fafafa);
-    color: var(--Main-Black, #010306);
-    font-size: 20px;
-    font-weight: 500;
-    padding: 12px 24px;
-    border: none;
-    cursor: pointer;
 }
 
 .signup-link {
     color: var(--Gray-200, #a2aab1);
     text-decoration: none;
     margin-top: 12px;
-    font-size: 16px;
+    font-family: Aspekta400;
+    font-size: 1rem;
 }
 
 @media (max-width: 991px) {

@@ -64,8 +64,7 @@ import { RouterLink } from "vue-router";
 }
 
 .footer{
-  position: fixed;
-  bottom: 0;
+  position: static;
   width: 100%;
   display: flex;
   flex-direction: row;

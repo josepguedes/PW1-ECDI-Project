@@ -8,7 +8,7 @@ import { RouterLink } from "vue-router";
     <div class="newsletter-container">
       <p class="newsletterForm-title">Sign up to our newsletter</p>
       <div class="newsletter-form">
-        <input class="form-input" type="email" placeholder="Email">
+        <input class="form-input w-300" type="email" placeholder="Email">
         <button class="btn-primary">Sign up</button>
       </div>
     </div>
@@ -57,6 +57,42 @@ import { RouterLink } from "vue-router";
 
 .w-fit{
   width: fit-content;
+}
+
+.w-300{
+  width: 300px;
+}
+
+.footer{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 96px 48px;
+  border-top: 1px solid var(--gray500);
+  background-image: url(/src/assets/images/footerBlur.svg);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.newsletter-container{
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.newsletter-form{
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+}
+
+.newsletterForm-title{
+  font-family: Aspekta400;
+  font-size: 1.25rem;
+  color: var(--gray100);
 }
 
 .footer-links{

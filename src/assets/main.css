@@ -90,6 +90,27 @@ a{
 
 /*buttons*/
 
+.btn-primary{
+  display: flex;
+  padding: 12px 24px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  background: var(--mainWhite);
+  border: 1px solid var(--mainWhite);
+  color: var(--mainBlack);
+  font-family: Aspekta500;
+  font-size: 1.25rem;
+  transition: 150ms ease-out;
+  cursor: pointer;
+}
+
+.btn-primary:hover{
+  background: var(--mainBlack);
+  border: 1px solid var(--gray400);
+  color: var(--mainWhite);
+}
+
 .btn-secondary{
   display: flex;
   padding: 12px 24px;
@@ -101,9 +122,33 @@ a{
   font-family: Aspekta500;
   font-size: 1.25rem;
   transition: 150ms ease-out;
+  cursor: pointer;
 }
 
 .btn-secondary:hover{
   background: var(--gray700);
 }
+
+/*form inputs*/
+
+.form-input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--gray400);
+  background: transparent;
+  color: var(--gray400);
+  font-family: Aspekta400;
+  font-size: 1rem;
+  outline: none;
+  transition: 300ms ease-out;
+}
+
+.form-input:hover{
+  border-bottom: 1px solid var(--gray100); 
+}
+
+.form-input:focus{
+  border-bottom: 1px solid var(--mainWhite); 
+}
+
 

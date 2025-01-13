@@ -24,7 +24,7 @@ export default {
 <template>
   <div class="header">
     <RouterLink class="logo" :to="{ name: 'HomePage' }">Hypnøtica</RouterLink>
-    <div class="navbar" :class="{changePadding: open}">
+    <div class="navbar">
     <div class="navbar-menuLinks">
       <div :class="{w100: open}" class="navbar-menu" @click="navbarAnimation()">
         <div class="menu-btn">
@@ -105,14 +105,10 @@ export default {
   display: flex !important;
 }
 
-.changePadding{
-  padding: 6px !important;
-}
-
 .navbar{
   display: flex;
   width: 588px;
-  padding: 6px 16px 6px 6px;
+  padding: 6px;
   flex-direction: column;
   gap: 12px;
   border-radius: 10px;

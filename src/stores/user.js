@@ -6,12 +6,11 @@ export const useUsersStore = defineStore('users', {
     authenticatedUser: null,
     users: [
       { name: "admin", password: "123"},
-      { name: "xavi", email: "example@gmail.com", password: "321",profImg: '/src/assets/images/1.jpg' , tickets: [], favoriteArtists: [], favoriteVenues: [], calendar: [], notificationPref: []},
+      { name: "xavi", email: "example@gmail.com", password: "321", profImg: '/src/assets/images/1.jpg', tickets: [], favoriteArtists: [], favoriteVenues: [], calendar: [], notificationPref: [] },
     ],
   }),
 
   getters: {
-    
     getUserByName: (state) => (name) => {
       return state.users.find(user => user.name === name);
     },
@@ -26,7 +25,35 @@ export const useUsersStore = defineStore('users', {
   },
 
   actions: {
-    
+
+    // Adiciona evento ao calendário do usuário
+    addEventToCalendar(eventId) {
+      if (!this.authenticatedUser) {
+        throw new Error('Nenhum utilizador autenticado');
+      }
+
+      const alreadyInCalendar = this.authenticatedUser.calendar.includes(eventId);
+      if (!alreadyInCalendar) {
+        this.authenticatedUser.calendar.push(eventId);
+        this.$patch(); // Persistir a alteração
+        console.log(`Evento ${eventId} adicionado ao calendário.`);
+      }
+    },
+
+    // Remove evento do calendário do usuário
+    removeEventFromCalendar(eventId) {
+      if (!this.authenticatedUser) {
+        throw new Error('Nenhum utilizador autenticado');
+      }
+
+      const index = this.authenticatedUser.calendar.indexOf(eventId);
+      if (index !== -1) {
+        this.authenticatedUser.calendar.splice(index, 1);
+        this.$patch(); // Persistir a alteração
+        console.log(`Evento ${eventId} removido do calendário.`);
+      }
+    },
+
     validateImage1(file) {
       const fileExtension = file.name.split('.').pop().toLowerCase();
       if (fileExtension !== 'jpg') {
@@ -41,7 +68,6 @@ export const useUsersStore = defineStore('users', {
       fr.readAsDataURL(file)
     },
 
-
     addUser(name, email, password, profImg) {
       const userExists = this.users.some(
         user => user.email === email || user.name === name
@@ -51,7 +77,6 @@ export const useUsersStore = defineStore('users', {
         throw new Error('Já existe um utilizador com esse nome ou email');
       }
 
-      
       const newUser = {
         name: name,
         email: email,
@@ -67,7 +92,6 @@ export const useUsersStore = defineStore('users', {
       this.users.push(newUser);
     },
 
-
     updateUser(updatedUserData) {
       if (!this.authenticatedUser) {
         throw new Error('Nenhum utilizador autenticado');
@@ -75,7 +99,6 @@ export const useUsersStore = defineStore('users', {
     
       const { username, email, newPassword, newProfImg } = updatedUserData;
     
-      
       if (username) {
         this.authenticatedUser.name = username;
       }
@@ -96,7 +119,6 @@ export const useUsersStore = defineStore('users', {
       }
     },
 
-
     removeUser(name) {
       const userIndex = this.users.findIndex(user => user.name === name);
 
@@ -106,7 +128,6 @@ export const useUsersStore = defineStore('users', {
 
       this.users.splice(userIndex, 1);
     },
-
 
     login(email, password) {
       const user = this.users.find(
@@ -124,7 +145,6 @@ export const useUsersStore = defineStore('users', {
       this.authenticatedUser = null;
     },
 
-
     updateProfileImage(newProfImg) {
       if (this.authenticatedUser) {
         this.validateImage(newProfImg);
@@ -134,5 +154,5 @@ export const useUsersStore = defineStore('users', {
       }
     }
   },
-  persist: true,
+  persist: true, // Persistir os dados
 });

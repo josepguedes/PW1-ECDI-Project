@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { useEventStore } from "@/stores/event";
+import { useEventStore } from "@/stores/events";
 import Carousel from "../components/Carousel.vue";
 import Slider from "../components/EventArtistSlider.vue";
 

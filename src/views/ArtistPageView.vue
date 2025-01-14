@@ -1,18 +1,14 @@
 <template>
   <main class="artist-profile">
     <section class="hero-section" aria-label="Artist Hero Section">
-      <img loading="lazy"
-        :src="artistInfo.mainImg"
-        class="hero-background" alt="Charlotte de Witte performing live" />
+      <img loading="lazy" :src="artistInfo.mainImg" class="hero-background" alt="Charlotte de Witte performing live" />
       <div class="artist-header">
         <h1 class="artist-name">{{ artistInfo.name }}</h1>
-
 
         <!-- Botão de Like com ícone Heart (Agora alinhado ao título) -->
         <button @click="toggleLike" aria-label="Like/Dislike" class="like-button">
           <Heart :class="{ liked: isLiked }" class="heart-icon" />
         </button>
-
       </div>
 
       <!-- Redes sociais no fundo da imagem -->
@@ -22,11 +18,10 @@
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/831c81c938349091e2146876e0645d3586d86fb03def6537bb794ee0ff7a7b94?placeholderIfAbsent=true&apiKey=f7dd8e77dcfe4504b1da5d2d682eab2f"
             class="social-icon" alt="YouTube" />
         </a>
-        <a :href="artistInfo?.socials?.spotify"
-          target="_blank" rel="noopener noreferrer">
+        <a :href="artistInfo?.socials?.spotify" target="_blank" rel="noopener noreferrer">
           <img loading="lazy"
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/6525e131582c27018aa27e0cb734a4bbe48a79f1ce846092f2a8538a755ee030?placeholderIfAbsent=true&apiKey=f7dd8e77dcfe4504b1da5d2d682eab2f"
-            class="social-icon" alt="Twitter" />
+            class="social-icon" alt="Spotify" />
         </a>
         <a :href="artistInfo?.socials?.instagram" target="_blank" rel="noopener noreferrer">
           <img loading="lazy"
@@ -38,9 +33,7 @@
 
     <section class="artist-bio" aria-label="Artist Biography">
       <p class="bio-text">{{ artistInfo.bio }}</p>
-      <img loading="lazy"
-        :src="artistInfo.secondaryImg"
-        class="artist-image" alt="Portrait of Charlotte de Witte" />
+      <img loading="lazy" :src="artistInfo.secondaryImg" class="artist-image" alt="Portrait of Charlotte de Witte" />
     </section>
 
     <!-- Seção de Top Tracks -->
@@ -62,132 +55,115 @@
 
     <section class="event-schedule" aria-label="Event Schedule">
       <h2 class="section-title">Artist Schedule</h2>
-
-      <div class="schedule-day">
-        <h3 class="day-title">Friday, 24th of January</h3>
-        <div class="events-list">
-          <article class="event-card">
-            <div class="event-header">
-              <h4 class="event-title">Hypnøtica opening party</h4>
-              <p class="venue-name">KitKatClub</p>
-              <div class="time-wrapper">
-                <time class="event-time">20:00-05:00</time>
-                <img loading="lazy"
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/6d0b34416923d87154f70ea7e47dc585fab3d734647cc224d24dfd1438c350d9?placeholderIfAbsent=true&apiKey=f7dd8e77dcfe4504b1da5d2d682eab2f"
-                  class="event-icon" alt="Event icon" />
-              </div>
-            </div>
-            <p class="lineup">Mischluft, Charlotte de Witte, 6ejou, Ace Ventura</p>
-          </article>
-        </div>
+      <div v-if="artistEvents.length === 0">
+        <p class="no-events-message">No upcoming events found for this artist.</p>
       </div>
-
-      <div class="schedule-day">
-        <h3 class="day-title">Saturday, 25th of January</h3>
+      <div v-for="(day, index) in artistEvents" :key="index" class="schedule-day">
+        <h3 class="day-title">{{ day.date }}</h3>
         <div class="events-list">
-          <article class="event-card">
-            <div class="event-header">
-              <h4 class="event-title">Hypnøtica opening party</h4>
-              <p class="venue-name">KitKatClub</p>
-              <div class="time-wrapper">
-                <time class="event-time">20:00-05:00</time>
-                <img loading="lazy"
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/6d0b34416923d87154f70ea7e47dc585fab3d734647cc224d24dfd1438c350d9?placeholderIfAbsent=true&apiKey=f7dd8e77dcfe4504b1da5d2d682eab2f"
-                  class="event-icon" alt="Event icon" />
-              </div>
-            </div>
-            <p class="lineup">Mischluft, Charlotte de Witte, 6ejou, Ace Ventura</p>
-          </article>
+          <Program 
+            v-for="(event, eventIndex) in day.events" 
+            :key="eventIndex"
+            :eventTitle="event.title" 
+            :venue="event.venue" 
+            :eventTime="event.time" 
+            :lineup="event.lineup" 
+            :eventId="event.id" 
+          />
         </div>
       </div>
     </section>
-
   </main>
 </template>
 
 <script>
-import { useUsersStore } from '../stores/user'; // Importando a store de usuários
-import { useArtistsStore } from '../stores/artists'; // Se necessário para outras interações
-import { Heart } from 'lucide-vue-next';
+import { useUsersStore } from "../stores/user";
+import { useArtistsStore } from "../stores/artists";
+import { useProgramStore } from "../stores/program";
+
+import { Heart } from "lucide-vue-next";
+import Program from "../components/ProgramSection.vue";
 
 export default {
   components: {
     Heart,
+    Program,
   },
   data() {
     return {
       topTracks: null,
       loading: true,
       error: null,
-      isLiked: false,  // Estado inicial do botão "Curtir"
-      artistInfo: {}, // Informações do artista
+      isLiked: false,
+      artistInfo: {},
+      artistEvents: [],  // Agora é um array de eventos do artista
     };
   },
   methods: {
-    // Função para buscar as faixas principais do artista
-    async fetchTopTracks() {
-      const artistsStore = useArtistsStore();
+  async fetchTopTracks() {
+    const artistsStore = useArtistsStore();
+    try {
+      this.loading = true;
+      this.error = null;
+
+      const artistId = this.$route.params.artistId;
+      this.artistInfo = artistsStore.getArtistById(artistId);
+      this.topTracks = await artistsStore.getTop3Tracks(this.artistInfo.name);
+
+      const usersStore = useUsersStore();
+      const currentUser = usersStore.getAuthenticatedUser;
+      if (currentUser) {
+        this.isLiked = currentUser.favoriteArtists.includes(this.artistInfo.id);
+      }
+    } catch (err) {
+      this.error = "Failed to load top tracks: " + err.message;
+    } finally {
+      this.loading = false;
+    }
+  },
+
+  async fetchArtistEvents() {
+      const programStore = useProgramStore();
       try {
-        this.loading = true;
-        this.error = null;
-        const artistId = this.$route.params.artistId; // Remove o ":" do artistId
-        // Obter as informações completas do artista com o getter
-        this.artistInfo = artistsStore.getArtistById(artistId);
-        this.topTracks = await artistsStore.getTop3Tracks(this.artistInfo.name);
-        console.log('Artist Info:', this.artistInfo);
-        console.log('Top Tracks:', this.topTracks);
-
-        // Verificar se o artista está nos favoritos ao carregar a página
-        const usersStore = useUsersStore();
-        const currentUser = usersStore.getAuthenticatedUser;
-        if (currentUser) {
-          this.isLiked = currentUser.favoriteArtists.some(artist => artist.name === this.artistInfo.name);
-        }
-
+        // Chama o método para obter os eventos do artista
+        const artistId = this.artistInfo.id;
+        this.artistEvents = await programStore.fetchArtistEvents(artistId);
       } catch (err) {
-        this.error = "Failed to load top tracks: " + err.message;
-      } finally {
-        this.loading = false;
+        console.error("Failed to load artist events", err);
       }
     },
 
-    // Função para alternar o "like" no artista
-    toggleLike() {
-      const usersStore = useUsersStore();
-      const currentUser = usersStore.getAuthenticatedUser;
+  toggleLike() {
+    const usersStore = useUsersStore();
+    const currentUser = usersStore.getAuthenticatedUser;
 
-      if (!currentUser) {
-        // Caso não haja usuário autenticado, talvez mostrar uma mensagem ou redirecionar
-        alert('You need to be logged in to like artists!');
-        return;
-      }
-
-      // Alternar o estado de "like" do artista
-      if (this.isLiked) {
-        // Se o artista já estiver nos favoritos, removemos
-        const index = currentUser.favoriteArtists.findIndex(artist => artist.name === this.artistInfo.name);
-        if (index !== -1) {
-          currentUser.favoriteArtists.splice(index, 1);
-        }
-      } else {
-        // Caso contrário, adicionamos ao favorito
-        currentUser.favoriteArtists.push(this.artistInfo);
-      }
-
-      // Alterar o estado do botão
-      this.isLiked = !this.isLiked;
-
-      // Persistir as mudanças
-      usersStore.$patch();
+    if (!currentUser) {
+      alert("You need to be logged in to like artists!");
+      return;
     }
+
+    // Verifica se o artista já está na lista de favoritos usando apenas o ID
+    if (this.isLiked) {
+      // Remove o ID do artista da lista de favoritos
+      const index = currentUser.favoriteArtists.indexOf(this.artistInfo.id);
+      if (index !== -1) {
+        currentUser.favoriteArtists.splice(index, 1);
+      }
+    } else {
+      // Adiciona o ID do artista à lista de favoritos
+      currentUser.favoriteArtists.push(this.artistInfo.id);
+    }
+
+    this.isLiked = !this.isLiked;
+    usersStore.$patch();
   },
+},
   mounted() {
     this.fetchTopTracks();
-  },
+    this.fetchArtistEvents();  // Correção aqui: certifique-se de que está chamando corretamente
+  }
 };
-
 </script>
-
 
 <style scoped>
 .artist-profile {

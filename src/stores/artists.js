@@ -3,7 +3,8 @@ import { getSpotifyAccessToken, searchArtist, fetchTopTracks } from '../api/spot
 
 export const useArtistsStore = defineStore('artists', {
   state: () => ({
-    artists: [{
+    artists: [
+      {
       id: "1",  // ID do artista
       name: "Charlotte de Witte",  // Nome do artista
       bio: "Charlotte de Witte is a globally renowned DJ and producer hailing from Belgium, celebrated for her dark, powerful, and hypnotic approach to techno. Rising to fame in the mid-2010s, she quickly established herself as one of the most influential figures in the electronic music scene. Known for her relentless energy behind the decks, Charlotte has become a headliner at major festivals such as Tomorrowland, Awakenings, and Ultra Music Festival.",
@@ -14,7 +15,21 @@ export const useArtistsStore = defineStore('artists', {
         spotify: "https://open.spotify.com/intl-pt/artist/1lJhME1ZpzsEa5M0wW6Mso?si=aD3d2UhkREubmruGyM_Qlw",
         instagram: "https://www.instagram.com/charlottedewittemusic"
       }
-    }],
+    },
+
+    {
+      id: "2",  // ID do artista
+      name: "Eduardo Sousa",  // Nome do artista
+      bio: "Teste teste",
+      mainImg: "https://xlr8r.com/wp-content/uploads/2019/06/screen-shot-2018-02-15-at-95724-am.png",  // URL da imagem principal
+      secondaryImg: "https://cdn.wegow.com/media/artists/charlotte-de-witte/charlotte-de-witte-1674054503.5452025.1242x2208.jpg",  // URL da imagem secundária
+      socials: {  // Redes sociais
+        youtube: "https://youtube.com/@charlottedewittemusic",
+        spotify: "https://open.spotify.com/intl-pt/artist/1lJhME1ZpzsEa5M0wW6Mso?si=aD3d2UhkREubmruGyM_Qlw",
+        instagram: "https://www.instagram.com/charlottedewittemusic"
+      }
+    }
+  ],
     accessToken: "",  // Armazenar o token de acesso aqui
   }),
 

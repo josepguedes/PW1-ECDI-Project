@@ -2,12 +2,19 @@ import { defineStore } from 'pinia';
 
 export const useVenuesStore = defineStore('venues', {
   state: () => ({
-    venues: [{
-      id: "",
-      name:"",
-      desc:"",
-      date:""
-    }] 
+    venues: [
+      {
+      id: "1",
+      name:"KitKatClub",
+      desc:"dededededede",
+    },
+
+    {
+      id: "2",
+      name:"Eskada",
+      desc:"ehhhhhhhhhhhhhhh",
+    }
+  ] 
   }),
 
   getters: {

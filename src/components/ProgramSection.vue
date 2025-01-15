@@ -5,9 +5,11 @@
       <p class="venue-name">{{ venue }}</p>
       <div class="time-wrapper">
         <time class="event-time">{{ eventTime }}</time>
-        <button @click.stop="toggleIcon" class="icon-button">
-          <CalendarPlus v-if="!clicked" class="event-icon" />
-          <CalendarCheck v-if="clicked" class="event-icon" />
+        <button @click.stop="toggleIcon" class="icon-button" :disabled="!isLoggedIn">
+          <CalendarPlus v-if="!clicked && isLoggedIn" class="event-icon" />
+          <CalendarCheck v-if="clicked && isLoggedIn" class="event-icon" />
+          <!-- Sempre mostra o ícone de adicionar, mas ele não muda se não estiver logado -->
+          <CalendarPlus v-if="!isLoggedIn" class="event-icon" />
         </button>
       </div>
     </div>
@@ -50,6 +52,11 @@ export default {
       const usersStore = useUsersStore();
       const currentUser = usersStore.authenticatedUser;
       return currentUser ? currentUser.calendar.includes(this.eventId) : false;
+    },
+    // Computa se o usuário está logado
+    isLoggedIn() {
+      const usersStore = useUsersStore();
+      return usersStore.authenticatedUser !== null;
     }
   },
   watch: {
@@ -67,6 +74,12 @@ export default {
       this.router.push(`/event/${this.eventId}`);
     },
     toggleIcon() {
+      if (!this.isLoggedIn) {
+        // Alerta só aparece no clique, não no carregamento do componente
+        alert("Você precisa estar logado para adicionar eventos ao calendário!");
+        return; // Não faz nada se o usuário não estiver logado
+      }
+
       this.clicked = !this.clicked; // Alterna entre adicionar e remover
       if (this.clicked) {
         this.addToCalendar();
@@ -79,8 +92,6 @@ export default {
       const currentUser = usersStore.authenticatedUser;
       if (currentUser) {
         usersStore.addEventToCalendar(this.eventId);
-      } else {
-        alert("Você precisa estar logado para adicionar eventos ao calendário!");
       }
     },
     removeFromCalendar() {
@@ -88,8 +99,6 @@ export default {
       const currentUser = usersStore.authenticatedUser;
       if (currentUser) {
         usersStore.removeEventFromCalendar(this.eventId);
-      } else {
-        alert("Você precisa estar logado para remover eventos do calendário!");
       }
     },
   }

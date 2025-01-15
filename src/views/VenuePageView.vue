@@ -1,362 +1,299 @@
 <template>
-  <main class="venue-page">
-    <section class="venue-hero" aria-labelledby="venue-name">
-      <img src="https://cdn.builder.io/api/v1/image/assets/f7dd8e77dcfe4504b1da5d2d682eab2f/a19112baa017021230f23563371010f9af6cdea0c04eb5ea9ee82e855e9df376?apiKey=f7dd8e77dcfe4504b1da5d2d682eab2f&" alt="KitKatClub venue interior" class="hero-image" />
-      <h2 id="venue-name" class="venue-title">KitKatClub</h2>
-      <p class="venue-subtitle">Köpenicker Straße 76, 10179 Berlin</p>
-    </section>
-
-    <section class="venue-description" aria-label="Venue description">
-      <p class="description-text">
-        The KitKatClub is a legendary Berlin venue celebrated for its bold,
-        open-minded atmosphere and unforgettable electronic music events. Known
-        for embracing individuality and freedom, it has become an iconic hotspot
-        in the city's vibrant nightlife scene.
-      </p>
-    </section>
-
-    <section class="venue-gallery" aria-labelledby="gallery-title">
-      <h2 id="gallery-title" class="section-title">Venue Photos</h2>
-      <carousel :images="carouselImages" class="carrousel" />
-    </section>
-
-    <section class="related-events" aria-labelledby="events-title">
-      <h2 id="events-title" class="section-title">Related Events</h2>
-      <div class="events-group">
-        <h3 class="date-heading">Friday, 24th of January</h3>
-        <ul class="events-list">
-          <li class="event-item">
-            <div class="event-header">
-              <h4 class="event-title">Hypnøtica opening party</h4>
-              <p class="event-venue">KitKatClub</p>
-              <div class="event-time">
-                <time datetime="20:00-05:00">20:00-05:00</time>
-                <img src="https://cdn.builder.io/api/v1/image/assets/f7dd8e77dcfe4504b1da5d2d682eab2f/4fa684cc3e9979ecb53ee6a94fcea9476ea97b4527e5a5606e4d9ab59dca7840?apiKey=f7dd8e77dcfe4504b1da5d2d682eab2f&" alt="" class="event-icon" />
-              </div>
-            </div>
-            <p class="event-artists">Mischluft, Charlotte de Witte, 6ejou, Ace Ventura</p>
-          </li>
-        </ul>
-      </div>
-
-      <div class="events-group">
-        <h3 class="date-heading">Saturday, 25th of January</h3>
-        <ul class="events-list">
-          <li class="event-item">
-            <div class="event-header">
-              <h4 class="event-title">Hypnøtica opening party</h4>
-              <p class="event-venue">KitKatClub</p>
-              <div class="event-time">
-                <time datetime="20:00-05:00">20:00-05:00</time>
-                <img src="https://cdn.builder.io/api/v1/image/assets/f7dd8e77dcfe4504b1da5d2d682eab2f/4fa684cc3e9979ecb53ee6a94fcea9476ea97b4527e5a5606e4d9ab59dca7840?apiKey=f7dd8e77dcfe4504b1da5d2d682eab2f&" alt="" class="event-icon" />
-              </div>
-            </div>
-            <p class="event-artists">Mischluft, Charlotte de Witte, 6ejou, Ace Ventura</p>
-          </li>
-        </ul>
+  <main class="venue-profile" v-if="venue && !loading">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <img :src="venue.mainImg" alt="Venue Image" class="hero-background" />
+      <div class="text-overlay">
+        <h1 class="venue-name">{{ venue.name }}</h1>
+        <h2 class="venue-desc">{{ venue.desc }}</h2>
       </div>
     </section>
 
-    <section class="venue-location" aria-labelledby="location-title">
-      <h2 id="location-title" class="section-title">Location</h2>
-      <div class="map-container">
-        <img src="https://cdn.builder.io/api/v1/image/assets/f7dd8e77dcfe4504b1da5d2d682eab2f/8c74c3cd95083f89bcac7e18329a678c2845100ce3ab503e0175074afd7c3f21?apiKey=f7dd8e77dcfe4504b1da5d2d682eab2f&" alt="Map showing venue location" class="map-image" />
+    <!-- Biography Section -->
+    <section class="venue-bio">
+      <p class="bio-text">{{ venue.bio }}</p>
+    </section>
+
+    <!-- Venue Photos Section -->
+    <section class="venue-photos">
+      <h2 class="section-title">Venue Photos</h2>
+      <Carousel :images="venue.carouselImages" />
+    </section>
+
+    <!-- Program Section -->
+    <section class="event-schedule" aria-label="Event Schedule">
+      <h2 class="program-title">Artist Schedule</h2>
+      <div v-if="venueEvents.length === 0">
+        <p class="no-events-message">No upcoming events at this venue.</p>
+      </div>
+      
+      <!-- Exibição dos eventos -->
+      <div v-for="(event, index) in venueEvents" :key="index" class="schedule-day">
+        <div class="events-list">
+          <Program
+            :key="event.id"
+            :eventTitle="event.title"
+            :venue="event.venue"
+            :eventTime="event.time"
+            :lineup="event.lineup"
+            :eventId="event.id"
+          />
+        </div>
       </div>
     </section>
   </main>
+  
+  <!-- Loader or error message -->
+  <div v-else>
+    <p v-if="loading">Loading venue...</p>
+    <p v-else-if="error">{{ error }}</p>
+  </div>
 </template>
 
-<script>
-import Carousel from "../components/Carousel.vue";
 
-import image1 from "../assets/images/1.jpg";
-import image2 from "../assets/images/2.jpg";
-import image3 from "../assets/images/3.jpg";
-import image4 from "../assets/images/4.jpg";
-import image5 from "../assets/images/5.jpg";
+<script>
+import { useVenuesStore } from "@/stores/venues";
+import { useProgramStore } from "@/stores/program";
+import Carousel from "../components/Carousel.vue";
+import Program from "../components/ProgramSection.vue";
 
 export default {
+  name: "VenueProfile",
+
   components: {
-    Carousel, // Registrando o componente Carousel
+    Carousel,
+    Program,
   },
+
   data() {
     return {
-      // Lista de imagens para o carrossel
-      carouselImages: [image1, image2, image3, image4, image5],
+      venue: null, // Venue será armazenado aqui após ser carregado
+      venueEvents: [], // Lista de eventos do venue
+      loading: true,
+      error: null,
     };
   },
-}
+
+  methods: {
+    async fetchVenue() {
+      const venuesStore = useVenuesStore();
+      const programStore = useProgramStore();
+
+      try {
+        this.loading = true;
+        this.error = null;
+        const venueId = this.$route.params.venueId; // Pega o ID do venue da URL
+
+        // Buscar o venue com o ID na store
+        const fetchedVenue = venuesStore.getVenueById(venueId);
+
+        if (!fetchedVenue) {
+          this.error = "Venue não encontrado!";
+        } else {
+          // Se o venue for encontrado, armazene na variável `venue`
+          this.venue = fetchedVenue;
+
+          // Buscar os eventos para este venue através do program store
+          this.fetchVenueEvents(venueId);
+        }
+      } catch (err) {
+        this.error = "Falha ao carregar venue: " + err.message;
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async fetchVenueEvents(venueId) {
+      const programStore = useProgramStore();
+      
+      try {
+        const events = await programStore.fetchAllPrograms(); // Buscando todos os programas
+
+        // Filtra os eventos que pertencem a este venue
+        const venueEvents = events.flatMap(eventGroup => 
+          eventGroup.events.filter(event => event.venue === this.venue.name)
+        );
+
+        this.venueEvents = venueEvents;
+      } catch (error) {
+        this.error = "Falha ao carregar eventos: " + error.message;
+      }
+    },
+  },
+
+  mounted() {
+    // Carregar o venue assim que o componente for montado
+    this.fetchVenue();
+  },
+};
 </script>
-  
-  <style scoped>
-  /* Original styles preserved and organized */
-  .venue-page {
-    display: flex;
+
+<style scoped>
+.venue-profile {
+  display: flex;
   flex-direction: column;
   overflow: hidden;
-  margin-top: 100px;
   margin-bottom: 100px;
 }
 
-.venue-hero {
+/* Hero Section */
+.hero-section {
   position: relative;
-  min-height: 587px;
-  padding: 396px 64px 54px;
+  height: 700px;
+  display: flex;
+  align-items: flex-end;
 }
 
-.hero-image {
+.hero-background {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  z-index: -1;
 }
 
-.venue-title {
-  position: relative;
-  color: var(--Main-White, #fafafa);
-  font: 700 96px Aspekta, sans-serif;
+.text-overlay {
+  padding: 20px;
+  margin: 20px;
+  border-radius: 8px;
 }
 
-.venue-subtitle {
-  position: relative;
+.venue-name {
+  color: var(--Main-White);
+  font: 64px Aspekta800, sans-serif;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
+}
+
+.venue-desc {
+  color: var(--gray100);
+  font: 24px Aspekta400, sans-serif;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Biography Section */
+.venue-bio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 48px 0;
+  padding: 20px 96px;
+}
+
+.bio-text {
+  flex: 1;
+  max-width: 900px;
+  text-align: center;
   color: var(--Gray-100, #bec7ce);
-  font: 400 24px Aspekta, sans-serif;
-  margin-top: 8px;
+  letter-spacing: 1.5px;
+  font: 30px Aspekta300, sans-serif;
 }
-  
-  .venue-description {
-    padding: 64px;
-    text-align: center;
-  }
-  
-  .description-text {
-    color: var(--Gray-100, #bec7ce);
-    font: 300 30px Aspekta, sans-serif;
-    letter-spacing: 1.5px;
-    max-width: 914px;
-    margin: 0 auto;
-  }
-  
-  .section-title {
-    color: var(--Main-White, #fafafa);
-    font: 600 64px Aspekta, sans-serif;
-    margin: 64px 0 32px 48px;
-  }
 
-  .carrousel{
-    margin-top: -150px;
-  }
-  
-  .events-group {
-    margin: 35px 42px;
-  }
-  
-  .date-heading {
-    color: var(--Main-White, #fafafa);
-    font: 400 48px Aspekta, sans-serif;
-  }
-  
-  .events-list {
-    list-style: none;
-    padding: 0;
-    margin: 32px 0;
-  }
-  
-  .event-item {
-    border-top: 1px solid var(--Gray-500, #52595f);
-    border-bottom: 1px solid var(--Gray-500, #52595f);
-    padding: 32px 0;
-  }
-  
-  .event-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: var(--Main-White, #fafafa);
-    font: 400 24px Aspekta, sans-serif;
-  }
-  
-  .event-time {
-    display: flex;
-    align-items: center;
-    gap: 48px;
-  }
-  
-  .event-icon {
-    width: 28px;
-    aspect-ratio: 0.93;
-  }
-  
-  .event-artists {
-    color: var(--Gray-100, #bec7ce);
-    font: 350 20px Aspekta, sans-serif;
-    margin-top: 12px;
-  }
-  
-  .map-container {
-    position: relative;
-    border-radius: 20px;
-    min-height: 700px;
-    margin: 64px 42px;
-  }
-  
-  .map-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    inset: 0;
-    border-radius: 20px;
-  }
-  
-  .map-marker {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 39px;
-    height: 39px;
-    border-radius: 8px;
-    background: var(--Main-Black, #010306);
-    border: 1px solid var(--Main-White, #fafafa);
-    color: transparent;
-    -webkit-text-stroke: 1px var(--Main-White, #fafafa);
-    font: 500 24px Aspekta, sans-serif;
-    text-transform: uppercase;
-  }
-  
-  .site-footer {
-    border-top: 1px solid var(--Gray-500, #52595f);
-    padding: 96px 48px;
-    margin-top: 115px;
-  }
-  
-  .footer-content {
-    display: flex;
-    justify-content: space-between;
-    gap: 100px;
-    flex-wrap: wrap;
-  }
-  
-  .newsletter-section {
-    flex: 0 1 427px;
-  }
-  
-  .footer-heading {
-    color: var(--Gray-100, #bec7ce);
-    font: 500 20px Aspekta, sans-serif;
-  }
-  
-  .newsletter-form {
-    display: flex;
-    gap: 24px;
-    margin-top: 32px;
-  }
-  
-  .email-input {
-    flex: 1;
-    min-width: 240px;
-    border: none;
-    border-bottom: 1px solid var(--Gray-400, #6b737a);
-    background: transparent;
-    color: var(--Gray-400, #6b737a);
-    padding-bottom: 12px;
-    font: 400 16px Aspekta, sans-serif;
-  }
-  
-  .submit-button {
-    border-radius: 12px;
-    background: var(--Main-White, #fafafa);
-    color: var(--Main-Black, #010306);
-    padding: 12px 24px;
-    font: 500 16px Aspekta, sans-serif;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .footer-nav {
-    display: flex;
-    gap: 96px;
-    flex-wrap: wrap;
-  }
-  
-  .nav-section {
-    min-width: 81px;
-  }
-  
-  .nav-title {
-    color: var(--Gray-100, #bec7ce);
-    font: 400 18px Aspekta, sans-serif;
-    margin-bottom: 16px;
-  }
-  
-  .footer-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .footer-links a {
-    color: var(--Main-White, #fafafa);
-    text-decoration: none;
-    font: 500 20px Aspekta, sans-serif;
-    display: block;
-    margin-bottom: 8px;
-  }
-  
-  .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-  }
-  
-  @media (max-width: 991px) {
-    .header {
-      padding: 20px;
-    }
-  
-    .venue-hero {
-      padding: 100px 20px 0;
-    }
-  
-    .venue-title {
-      font-size: 40px;
-    }
-  
-    .section-title {
-      font-size: 40px;
-      margin: 40px 10px;
-    }
-  
-    .gallery-slider {
-      padding: 20px;
-    }
-  
-    .date-heading {
-      font-size: 40px;
-    }
-  
-    .events-group {
-      margin: 40px 10px;
-    }
-  
-    .map-container {
-      margin: 40px 10px;
-    }
-  
-    .site-footer {
-      padding: 40px 20px;
-      margin-top: 40px;
-    }
-  
-    .footer-content {
-      gap: 40px;
-    }
-  }
-  </style>
+/* Venue Photos Section */
+.venue-photos {
+  margin: 48px;
+  text-align: center;
+  margin-bottom: -120px;
+  margin-top: -120px;
+}
+
+.section-title {
+  color: var(--Main-White);
+  font: 64px Aspekta600, sans-serif;
+  margin-top: 96px; /* Corrige sobreposição com Program */
+  margin-bottom: -120px;
+}
+
+.program-title {
+  color: var(--Main-White);
+  font: 64px Aspekta600, sans-serif;
+  text-align: center;
+}
+
+/* Program Section */
+.event-schedule {
+  margin-top: 137px;
+  padding: 0 48px;
+}
+
+.schedule-day {
+  margin-top: 69px;
+}
+
+.day-title {
+  color: var(--Main-White, #fafafa);
+  font: 48px Aspekta400, sans-serif;
+}
+
+.events-list {
+  margin-top: 32px;
+}
+
+.event-card {
+  border-top: 1px solid var(--Gray-500, #52595f);
+  border-bottom: 1px solid var(--Gray-500, #52595f);
+  padding: 32px 0;
+}
+
+.event-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--Main-White, #fafafa);
+  font: 24px Aspekta400, sans-serif;
+}
+
+.time-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+
+.event-icon {
+  width: 28px;
+  aspect-ratio: 0.97;
+  object-fit: contain;
+}
+
+.lineup {
+  color: var(--Gray-100, #bec7ce);
+  font: 20px Aspekta350, sans-serif;
+  margin-top: 12px;
+}
+
+.featured-music {
+  padding: 0 48px;
+}
+
+.music-grid {
+  display: flex;
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.track-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.track-artwork {
+  width: 100%;
+  border-radius: 12px;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.track-title {
+  color: var(--Main-White, #fafafa);
+  font: 32px Aspekta600, sans-serif;
+  margin: 36px 0 17px;
+}
+
+.platform-icon {
+  width: 32px;
+  aspect-ratio: 0.97;
+  object-fit: contain;
+}
+</style>

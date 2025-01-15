@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import {useUsersStore} from '@/stores/user';
+import { useUsersStore } from '@/stores/user';
 
 // Importação de componentes das páginas
 import HomePage from '@/views/HomePageView.vue';
@@ -186,6 +186,12 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    }
+    return { top: 0 };
+  }
 });
 
 // Verificação global de autenticação

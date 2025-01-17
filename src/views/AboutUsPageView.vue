@@ -12,7 +12,7 @@
     </section>
 
     <section class="stats-section" aria-label="Festival Statistics">
-      <div class="stat-container">
+      <div class="stats-container">
         <div class="stat-group">
           <div class="stat-number" data-target="100">0</div>
           <div class="stat-label">Artists</div>
@@ -37,39 +37,43 @@
 
     <section class="banner-section" aria-label="Festival Banner">
       <div class="carousel-container">
-        <div class="carousel-row">
-          <!-- Carrossel com as imagens do festival -->
-          <img src="../assets/images/4.jpg" alt="Festival image 1" class="carousel-image" />
-          <img src="../assets/images/4.jpg" alt="Festival image 2" class="carousel-image" />
-          <img src="../assets/images/4.jpg" alt="Festival image 3" class="carousel-image" />
-          <img src="../assets/images/4.jpg" alt="Festival image 4" class="carousel-image" />
-          <img src="../assets/images/4.jpg" alt="Festival image 5" class="carousel-image" />
-          <img src="../assets/images/4.jpg" alt="Festival image 6" class="carousel-image" />
+        <div class="carousel-track">
+          <!-- First set -->
+          <img src="../assets/images/1.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/2.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/3.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/4.jpg" alt="Festival image" class="carousel-image" />
+          <!-- Duplicate set for seamless loop -->
+          <img src="../assets/images/1.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/2.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/3.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/4.jpg" alt="Festival image" class="carousel-image" />
+          <!-- Third set for safety -->
         </div>
       </div>
     </section>
 
-    <section class="banner-section-right" aria-label="Festival Banner Right">
+    <section class="banner-section-reverse" aria-label="Festival Banner Reverse">
       <div class="carousel-container">
-        <div class="carousel-row">
-          <!-- Carrossel do lado direito com as mesmas imagens -->
-          <img src="../assets/images/4.jpg" alt="Festival image 1" class="carousel-image" />
-          <img src="../assets/images/4.jpg" alt="Festival image 2" class="carousel-image" />
-          <img src="../assets/images/4.jpg" alt="Festival image 3" class="carousel-image" />
-          <img src="../assets/images/4.jpg" alt="Festival image 4" class="carousel-image" />
-          <img src="../assets/images/4.jpg" alt="Festival image 5" class="carousel-image" />
-          <img src="../assets/images/4.jpg" alt="Festival image 6" class="carousel-image" />
+        <div class="carousel-track">
+          <!-- First set -->
+          <img src="../assets/images/1.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/2.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/3.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/4.jpg" alt="Festival image" class="carousel-image" />
+          <!-- Duplicate set for seamless loop -->
+          <img src="../assets/images/1.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/2.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/3.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/4.jpg" alt="Festival image" class="carousel-image" />
+          <!-- Third set for safety -->
         </div>
       </div>
     </section>
+
 
     <section class="content-section" aria-label="Festival Details">
-      <img
-        src="../assets/images/5.jpg"
-        alt="Festival experience"
-        class="content-image"
-        loading="lazy"
-      />
+      <img src="../assets/images/5.jpg" alt="Festival experience" class="content-image" loading="lazy" />
       <div class="content-wrapper">
         <p class="content-description">
           Hypnøtica is envisioned as an immersive and transformative festival
@@ -78,13 +82,10 @@
           Spanning three electrifying days and nights, the festival is hosted
           across Berlin's iconic venues, featuring over 100 performances.
         </p>
-        <button 
-  class="explore-button" 
-  aria-label="Explore the Hypnøtica Program" 
-  tabindex="0"
-  @click="navigateToProgram">
-  Explore the Hypnøtica Program
-</button>
+        <button class="explore-button" aria-label="Explore the Hypnøtica Program" tabindex="0"
+          @click="navigateToProgram">
+          Explore the Hypnøtica Program
+        </button>
       </div>
     </section>
   </main>
@@ -204,112 +205,120 @@ export default {
 
 </script>
 
-
 <style scoped>
+/* Page Layout */
 .about-us-page {
   display: flex;
   flex-direction: column;
   overflow: hidden;
   margin-top: 100px;
+  background: var(--mainBlack);
 }
 
+/* Hero Section */
 .about-us-title {
-  font-size: 120px;
+  color: var(--mainWhite);
   text-align: center;
-  color: var(--Main-White, #fafafa);
+  font: 120px Aspekta800, sans-serif;
   letter-spacing: 2px;
-  font-weight: 800;
   margin: 0;
   padding-top: 50px;
 }
 
 .festival-description {
-  color: var(--Gray-100, #bec7ce);
+  color: var(--gray100);
   text-align: center;
   letter-spacing: 1.6px;
   margin: 24px auto 0;
-  width: 948px;
-  font: 300 32px Aspekta, sans-serif;
+  max-width: 948px;
+  font: 32px Aspekta300, sans-serif;
 }
 
-.stats-section {
-  margin: 128px auto 0;
-  width: 100%;
-  max-width: 1312px;
-}
-
-.stat-container {
+/* Stats Section */
+.stats-container {
   display: flex;
-  justify-content: space-between;
-  padding: 2px 1px;
-  font-family: Aspekta, sans-serif;
-  text-align: center;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  padding: 32px;
 }
 
 .stat-group {
   display: flex;
   flex-direction: column;
-  color: var(--Main-White, #fafafa);
-}
-
-.stat-number {
-  font: 500 90px Aspekta, sans-serif;
-  letter-spacing: 3.6px;
-}
-
-.stat-label {
-  font: 400 32px Aspekta, sans-serif;
-  letter-spacing: 1.6px;
-  padding: 7px 0;
+  align-items: center;
+  gap: 8px;
 }
 
 .stat-divider {
-  width: 1px;
-  height: 161px;
-  background-color: #fafafa;
-  border: 1px solid #fafafa;
+  width: 2px;
+  height: 64px;
+  background-color: var(--gray400);
 }
 
-.banner-section {
-  margin-top: 192px;
-  display: flex;
-  justify-content: center;
+.stat-number {
+  font: 64px Aspekta600, sans-serif;
+  color: var(--mainWhite);
 }
 
-.banner-section-right {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
+.stat-label {
+  font: 24px Aspekta400, sans-serif;
+  color: var(--gray100);
 }
 
-.carousel-container {
-  display: flex;
+.stat-divider {
+  width: 2px;
+  height: 64px;
+  background: var(--gray500);
+}
+
+/* Carousel Sections */
+.banner-section,
+.banner-section-reverse {
+  margin-top: 96px;
   overflow: hidden;
-  width: 100%; /* Ajusta para o tamanho da tela */
+  position: relative;
 }
 
-.carousel-row {
+.carousel-track {
   display: flex;
-  transition: transform 0.1s ease-in-out; /* Animação suave */
-  will-change: transform; /* Para otimização de performance */
+  gap: 16px;
+  animation: scroll 20s linear infinite;
+  width: fit-content;
 }
 
+.banner-section-reverse .carousel-track {
+  animation: scroll-reverse 20s linear infinite;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes scroll-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+/* Make sure the carousel container has overflow hidden */
+.carousel-container {
+  overflow: hidden;
+  width: 100%;
+}
 
 .carousel-image {
-  width: 275px; /* Largura reduzida para deixar a imagem mais alta */
-  height: 375px; /* Altura maior, para que as imagens fiquem mais altas do que largas */
-  margin-right: 32px; /* Espaçamento de 32px entre as imagens */
+  width: 275px;
+  height: 375px;
   border-radius: 10px;
-  object-fit: cover; /* Faz com que a imagem cubra o espaço sem distorcer */
+  object-fit: cover;
 }
 
-.carousel-row img:last-child {
-  margin-right: 0; /* Remove o espaçamento do último item */
-}
-
+/* Content Section */
 .content-section {
   display: flex;
-  gap: 48px;
+  align-items: center;
+  gap: 128px;
   margin: 192px 48px 98px;
 }
 
@@ -317,7 +326,7 @@ export default {
   width: 541px;
   border-radius: 10px;
   aspect-ratio: 0.86;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .content-wrapper {
@@ -327,8 +336,8 @@ export default {
 }
 
 .content-description {
-  color: var(--Gray-100, #bec7ce);
-  font: 300 32px Aspekta, sans-serif;
+  color: var(--gray100);
+  font: 32px Aspekta300, sans-serif;
   letter-spacing: 1.6px;
 }
 
@@ -337,24 +346,17 @@ export default {
   margin-top: 48px;
   padding: 12px 24px;
   border-radius: 12px;
-  border: 1px solid var(--Main-White, #fafafa); /* Borda branca */
-  background-color: transparent; /* Sem cor de fundo inicialmente */
-  color: var(--Main-White, #fafafa);
-  font: 500 20px Aspekta, sans-serif;
+  border: 1px solid var(--mainWhite);
+  background: transparent;
+  color: var(--mainWhite);
+  font: 20px Aspekta500, sans-serif;
   cursor: pointer;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-.explore-button:hover,
-.explore-button:focus {
-  background-color: var(--Gray-400, #6b737a); /* Fundo ao passar o mouse */
-  border-color: var(--Gray-400, #6b737a); /* Mudar a borda também ao passar o mouse */
-  outline: none;
-}
-
-.explore-button:focus-visible {
-  outline: 2px solid var(--Main-White, #fafafa); /* Borda branca ao focar */
-  outline-offset: 2px;
+.explore-button:hover {
+  background: var(--gray400);
+  border-color: var(--gray400);
 }
 
 </style>

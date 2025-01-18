@@ -43,12 +43,16 @@
           <img src="../assets/images/2.jpg" alt="Festival image" class="carousel-image" />
           <img src="../assets/images/3.jpg" alt="Festival image" class="carousel-image" />
           <img src="../assets/images/4.jpg" alt="Festival image" class="carousel-image" />
-          <!-- Duplicate set for seamless loop -->
+          <!-- Second set -->
           <img src="../assets/images/1.jpg" alt="Festival image" class="carousel-image" />
           <img src="../assets/images/2.jpg" alt="Festival image" class="carousel-image" />
           <img src="../assets/images/3.jpg" alt="Festival image" class="carousel-image" />
           <img src="../assets/images/4.jpg" alt="Festival image" class="carousel-image" />
-          <!-- Third set for safety -->
+          <!-- Third set for smoother transition -->
+          <img src="../assets/images/1.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/2.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/3.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/4.jpg" alt="Festival image" class="carousel-image" />
         </div>
       </div>
     </section>
@@ -61,12 +65,16 @@
           <img src="../assets/images/2.jpg" alt="Festival image" class="carousel-image" />
           <img src="../assets/images/3.jpg" alt="Festival image" class="carousel-image" />
           <img src="../assets/images/4.jpg" alt="Festival image" class="carousel-image" />
-          <!-- Duplicate set for seamless loop -->
+          <!-- Second set -->
           <img src="../assets/images/1.jpg" alt="Festival image" class="carousel-image" />
           <img src="../assets/images/2.jpg" alt="Festival image" class="carousel-image" />
           <img src="../assets/images/3.jpg" alt="Festival image" class="carousel-image" />
           <img src="../assets/images/4.jpg" alt="Festival image" class="carousel-image" />
-          <!-- Third set for safety -->
+          <!-- Third set for smoother transition -->
+          <img src="../assets/images/1.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/2.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/3.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/4.jpg" alt="Festival image" class="carousel-image" />
         </div>
       </div>
     </section>
@@ -92,117 +100,48 @@
 </template>
 
 <script>
+import { ref, onMounted } from 'vue'
+
 export default {
-  mounted() {
-    this.startCountdown();
-    this.startCarousels();
-  },
-  methods: {
-    goToProgram() {
-      // Redireciona para o link do programa
-      this.$router.push('/program');
-    },
-    navigateToProgram() {
-      this.$router.push('/program');
-    },
-    startCountdown() {
-      const counters = document.querySelectorAll('.stat-number');
-      counters.forEach(counter => {
-        const target = +counter.getAttribute('data-target');
-        const duration = 1500; // 3 segundos
-        const step = target / (duration / 30); // Calcula o incremento por tick (30 ms)
-        const targetDigits = target.toString().length; // Número de dígitos do número final
+  setup() {
+    const carouselTracks = ref([])
+    const isCarouselMounted = ref(false)
 
-        let count = 0;
-        const interval = setInterval(() => {
-          count += step;
-          if (count >= target) {
-            count = target;
-            clearInterval(interval);
-          }
-
-          // Formata o número com zeros à esquerda, garantindo o mesmo número de dígitos
-          counter.textContent = `${Math.round(count).toString().padStart(targetDigits, '0')}+`;
-        }, 30);
-      });
-    },
-
-    startCarousels() {
-      // Carrossel Superior (movimento para a direita)
-      const rowLeft = document.querySelector('.banner-section .carousel-row');
-      const imagesLeft = rowLeft.querySelectorAll('.carousel-image');
-
-      // Função para duplicar as imagens para efeito infinito
-      const duplicateImagesForInfiniteLoopLeft = () => {
-        const images = Array.from(imagesLeft); // Converte NodeList em Array
-        images.forEach(image => {
-          const clone = image.cloneNode(true);
-          rowLeft.appendChild(clone); // Adiciona as imagens clonadas no final
-        });
-      };
-
-      // Inicializa as imagens duplicadas antes do movimento
-      duplicateImagesForInfiniteLoopLeft();
-
-      const totalWidthLeft = rowLeft.scrollWidth;
-      let currentMarginLeft = 0;
-
-      // Função que move o carrossel para a direita
-      const moveCarouselLeft = () => {
-        currentMarginLeft += 1; // Movimentação suave para a direita
-        rowLeft.style.transform = `translateX(${currentMarginLeft}px)`;
-
-        // Quando o carrossel chegar ao fim, reposiciona as imagens invisivelmente
-        if (currentMarginLeft >= totalWidthLeft / 2) {
-          currentMarginLeft = 0; // Reinicia o carrossel no início
+    const initializeCarousel = () => {
+      try {
+        const tracks = document.querySelectorAll('.carousel-track')
+        if (!tracks.length) {
+          console.warn('No carousel tracks found')
+          return
         }
 
-        // Solicita a próxima animação de forma suave
-        requestAnimationFrame(moveCarouselLeft);
-      };
+        tracks.forEach(track => {
+          track.addEventListener('animationend', () => {
+            requestAnimationFrame(() => {
+              track.style.animation = 'none'
+              track.offsetHeight // Trigger reflow
+              track.style.animation = null
+            })
+          })
+        })
 
-      // Inicia o movimento do carrossel
-      requestAnimationFrame(moveCarouselLeft);
+        isCarouselMounted.value = true
+      } catch (error) {
+        console.error('Error initializing carousel:', error)
+      }
+    }
 
-      // Carrossel Inferior (movimento para a esquerda)
-      const rowRight = document.querySelector('.banner-section-right .carousel-row');
-      const imagesRight = rowRight.querySelectorAll('.carousel-image');
+    onMounted(() => {
+      // Wait for next tick to ensure DOM is ready
+      setTimeout(initializeCarousel, 0)
+    })
 
-      // Função para duplicar as imagens para efeito infinito
-      const duplicateImagesForInfiniteLoopRight = () => {
-        const images = Array.from(imagesRight); // Converte NodeList em Array
-        images.forEach(image => {
-          const clone = image.cloneNode(true);
-          rowRight.appendChild(clone); // Adiciona as imagens clonadas no final
-        });
-      };
-
-      // Inicializa as imagens duplicadas antes do movimento
-      duplicateImagesForInfiniteLoopRight();
-
-      const totalWidthRight = rowRight.scrollWidth;
-      let currentMarginRight = 0;
-
-      // Função que move o carrossel para a esquerda
-      const moveCarouselRight = () => {
-        currentMarginRight -= 1; // Movimentação suave para a esquerda
-        rowRight.style.transform = `translateX(${currentMarginRight}px)`;
-
-        // Quando o carrossel chegar ao fim, reposiciona as imagens invisivelmente
-        if (Math.abs(currentMarginRight) >= totalWidthRight / 2) {
-          currentMarginRight = 0; // Reinicia o carrossel no início
-        }
-
-        // Solicita a próxima animação de forma suave
-        requestAnimationFrame(moveCarouselRight);
-      };
-
-      // Inicia o movimento do carrossel
-      requestAnimationFrame(moveCarouselRight);
-    },
-  },
+    return {
+      isCarouselMounted,
+      carouselTracks
+    }
+  }
 }
-
 </script>
 
 <style scoped>
@@ -272,46 +211,67 @@ export default {
   background: var(--gray500);
 }
 
-/* Carousel Sections */
 .banner-section,
 .banner-section-reverse {
   margin-top: 96px;
   overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.banner-section-reverse {
+  margin-top: 32px;
+}
+
+.carousel-container {
+  overflow: hidden;
+  width: 100%;
   position: relative;
 }
 
 .carousel-track {
   display: flex;
   gap: 16px;
-  animation: scroll 20s linear infinite;
-  width: fit-content;
+  width: max-content;
+  will-change: transform;
+}
+
+.banner-section .carousel-track {
+  animation: scroll 40s linear infinite;
+  transform: translateX(0);
 }
 
 .banner-section-reverse .carousel-track {
-  animation: scroll-reverse 20s linear infinite;
-}
-
-@keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-@keyframes scroll-reverse {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
-}
-
-/* Make sure the carousel container has overflow hidden */
-.carousel-container {
-  overflow: hidden;
-  width: 100%;
+  animation: scroll-reverse 40s linear infinite;
+  transform: translateX(calc(-50% + 0px));
 }
 
 .carousel-image {
-  width: 275px;
-  height: 375px;
-  border-radius: 10px;
+  height: 425px;
+  width: 300px;
   object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(calc(-50%));
+  }
+}
+
+@keyframes scroll-reverse {
+  0% {
+    transform: translateX(calc(-50%));
+  }
+
+  100% {
+    transform: translateX(0);
+  }
 }
 
 /* Content Section */
@@ -358,5 +318,4 @@ export default {
   background: var(--gray400);
   border-color: var(--gray400);
 }
-
 </style>

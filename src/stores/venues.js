@@ -6,13 +6,33 @@ export const useVenuesStore = defineStore('venues', {
       {
       id: "1",
       name:"KitKatClub",
-      desc:"dededededede",
+      desc:"Köpenicker Straße 76, 10179 Berlin",
+      bio:"The KitKatClub is a legendary Berlin venue celebrated for its bold, open-minded atmosphere and unforgettable electronic music events. Known for embracing individuality and freedom, it has become an iconic hotspot in the city's vibrant nightlife scene.",
+      mainImg: "https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      carouselImages: [
+        "https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "https://images.pexels.com/photos/1763067/pexels-photo-1763067.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "https://images.pexels.com/photos/1763067/pexels-photo-1763067.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      ],
+      mapImage : "https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     },
 
     {
       id: "2",
       name:"Eskada",
-      desc:"ehhhhhhhhhhhhhhh",
+      desc:"Köpenicker Straße 76, 10179 Berlin",
+      bio:"The KitKatClub is a legendary Berlin venue celebrated for its bold, open-minded atmosphere and unforgettable electronic music events. Known for embracing individuality and freedom, it has become an iconic hotspot in the city's vibrant nightlife scene.",
+      mainImg: "https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      carouselImages: [
+        "https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "https://images.pexels.com/photos/1763067/pexels-photo-1763067.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "https://images.pexels.com/photos/1763067/pexels-photo-1763067.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      ],
+      mapImage : "https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     }
   ] 
   }),
@@ -20,7 +40,10 @@ export const useVenuesStore = defineStore('venues', {
   getters: {
     getVenueById: (state) => (id) => {
       return state.venues.find(venue => venue.id === id);
-    }
+    },
+    getAllVenues: (state) => {
+      return state.venues;
+    },
   },
 
   actions: {

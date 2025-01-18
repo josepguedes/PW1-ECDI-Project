@@ -12,7 +12,7 @@
     </section>
 
     <section class="stats-section" aria-label="Festival Statistics">
-      <div class="stat-container">
+      <div class="stats-container">
         <div class="stat-group">
           <div class="stat-number" data-target="100">0</div>
           <div class="stat-label">Artists</div>
@@ -37,39 +37,51 @@
 
     <section class="banner-section" aria-label="Festival Banner">
       <div class="carousel-container">
-        <div class="carousel-row">
-          <!-- Carrossel com as imagens do festival -->
-          <img src="../assets/images/4.jpg" alt="Festival image 1" class="carousel-image" />
-          <img src="../assets/images/4.jpg" alt="Festival image 2" class="carousel-image" />
-          <img src="../assets/images/4.jpg" alt="Festival image 3" class="carousel-image" />
-          <img src="../assets/images/4.jpg" alt="Festival image 4" class="carousel-image" />
-          <img src="../assets/images/4.jpg" alt="Festival image 5" class="carousel-image" />
-          <img src="../assets/images/4.jpg" alt="Festival image 6" class="carousel-image" />
+        <div class="carousel-track">
+          <!-- First set -->
+          <img src="../assets/images/1.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/2.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/3.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/4.jpg" alt="Festival image" class="carousel-image" />
+          <!-- Second set -->
+          <img src="../assets/images/1.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/2.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/3.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/4.jpg" alt="Festival image" class="carousel-image" />
+          <!-- Third set for smoother transition -->
+          <img src="../assets/images/1.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/2.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/3.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/4.jpg" alt="Festival image" class="carousel-image" />
         </div>
       </div>
     </section>
 
-    <section class="banner-section-right" aria-label="Festival Banner Right">
+    <section class="banner-section-reverse" aria-label="Festival Banner Reverse">
       <div class="carousel-container">
-        <div class="carousel-row">
-          <!-- Carrossel do lado direito com as mesmas imagens -->
-          <img src="../assets/images/4.jpg" alt="Festival image 1" class="carousel-image" />
-          <img src="../assets/images/4.jpg" alt="Festival image 2" class="carousel-image" />
-          <img src="../assets/images/4.jpg" alt="Festival image 3" class="carousel-image" />
-          <img src="../assets/images/4.jpg" alt="Festival image 4" class="carousel-image" />
-          <img src="../assets/images/4.jpg" alt="Festival image 5" class="carousel-image" />
-          <img src="../assets/images/4.jpg" alt="Festival image 6" class="carousel-image" />
+        <div class="carousel-track">
+          <!-- First set -->
+          <img src="../assets/images/1.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/2.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/3.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/4.jpg" alt="Festival image" class="carousel-image" />
+          <!-- Second set -->
+          <img src="../assets/images/1.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/2.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/3.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/4.jpg" alt="Festival image" class="carousel-image" />
+          <!-- Third set for smoother transition -->
+          <img src="../assets/images/1.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/2.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/3.jpg" alt="Festival image" class="carousel-image" />
+          <img src="../assets/images/4.jpg" alt="Festival image" class="carousel-image" />
         </div>
       </div>
     </section>
+
 
     <section class="content-section" aria-label="Festival Details">
-      <img
-        src="../assets/images/5.jpg"
-        alt="Festival experience"
-        class="content-image"
-        loading="lazy"
-      />
+      <img src="../assets/images/5.jpg" alt="Festival experience" class="content-image" loading="lazy" />
       <div class="content-wrapper">
         <p class="content-description">
           Hypnøtica is envisioned as an immersive and transformative festival
@@ -78,238 +90,195 @@
           Spanning three electrifying days and nights, the festival is hosted
           across Berlin's iconic venues, featuring over 100 performances.
         </p>
-        <button 
-  class="explore-button" 
-  aria-label="Explore the Hypnøtica Program" 
-  tabindex="0"
-  @click="navigateToProgram">
-  Explore the Hypnøtica Program
-</button>
+        <button class="explore-button" aria-label="Explore the Hypnøtica Program" tabindex="0"
+          @click="navigateToProgram">
+          Explore the Hypnøtica Program
+        </button>
       </div>
     </section>
   </main>
 </template>
 
 <script>
+import { ref, onMounted } from 'vue'
+
 export default {
-  mounted() {
-    this.startCountdown();
-    this.startCarousels();
-  },
-  methods: {
-    goToProgram() {
-      // Redireciona para o link do programa
-      this.$router.push('/program');
-    },
-    navigateToProgram() {
-      this.$router.push('/program');
-    },
-    startCountdown() {
-      const counters = document.querySelectorAll('.stat-number');
-      counters.forEach(counter => {
-        const target = +counter.getAttribute('data-target');
-        const duration = 1500; // 3 segundos
-        const step = target / (duration / 30); // Calcula o incremento por tick (30 ms)
-        const targetDigits = target.toString().length; // Número de dígitos do número final
+  setup() {
+    const carouselTracks = ref([])
+    const isCarouselMounted = ref(false)
 
-        let count = 0;
-        const interval = setInterval(() => {
-          count += step;
-          if (count >= target) {
-            count = target;
-            clearInterval(interval);
-          }
-
-          // Formata o número com zeros à esquerda, garantindo o mesmo número de dígitos
-          counter.textContent = `${Math.round(count).toString().padStart(targetDigits, '0')}+`;
-        }, 30);
-      });
-    },
-
-    startCarousels() {
-      // Carrossel Superior (movimento para a direita)
-      const rowLeft = document.querySelector('.banner-section .carousel-row');
-      const imagesLeft = rowLeft.querySelectorAll('.carousel-image');
-
-      // Função para duplicar as imagens para efeito infinito
-      const duplicateImagesForInfiniteLoopLeft = () => {
-        const images = Array.from(imagesLeft); // Converte NodeList em Array
-        images.forEach(image => {
-          const clone = image.cloneNode(true);
-          rowLeft.appendChild(clone); // Adiciona as imagens clonadas no final
-        });
-      };
-
-      // Inicializa as imagens duplicadas antes do movimento
-      duplicateImagesForInfiniteLoopLeft();
-
-      const totalWidthLeft = rowLeft.scrollWidth;
-      let currentMarginLeft = 0;
-
-      // Função que move o carrossel para a direita
-      const moveCarouselLeft = () => {
-        currentMarginLeft += 1; // Movimentação suave para a direita
-        rowLeft.style.transform = `translateX(${currentMarginLeft}px)`;
-
-        // Quando o carrossel chegar ao fim, reposiciona as imagens invisivelmente
-        if (currentMarginLeft >= totalWidthLeft / 2) {
-          currentMarginLeft = 0; // Reinicia o carrossel no início
+    const initializeCarousel = () => {
+      try {
+        const tracks = document.querySelectorAll('.carousel-track')
+        if (!tracks.length) {
+          console.warn('No carousel tracks found')
+          return
         }
 
-        // Solicita a próxima animação de forma suave
-        requestAnimationFrame(moveCarouselLeft);
-      };
+        tracks.forEach(track => {
+          track.addEventListener('animationend', () => {
+            requestAnimationFrame(() => {
+              track.style.animation = 'none'
+              track.offsetHeight // Trigger reflow
+              track.style.animation = null
+            })
+          })
+        })
 
-      // Inicia o movimento do carrossel
-      requestAnimationFrame(moveCarouselLeft);
+        isCarouselMounted.value = true
+      } catch (error) {
+        console.error('Error initializing carousel:', error)
+      }
+    }
 
-      // Carrossel Inferior (movimento para a esquerda)
-      const rowRight = document.querySelector('.banner-section-right .carousel-row');
-      const imagesRight = rowRight.querySelectorAll('.carousel-image');
+    onMounted(() => {
+      // Wait for next tick to ensure DOM is ready
+      setTimeout(initializeCarousel, 0)
+    })
 
-      // Função para duplicar as imagens para efeito infinito
-      const duplicateImagesForInfiniteLoopRight = () => {
-        const images = Array.from(imagesRight); // Converte NodeList em Array
-        images.forEach(image => {
-          const clone = image.cloneNode(true);
-          rowRight.appendChild(clone); // Adiciona as imagens clonadas no final
-        });
-      };
-
-      // Inicializa as imagens duplicadas antes do movimento
-      duplicateImagesForInfiniteLoopRight();
-
-      const totalWidthRight = rowRight.scrollWidth;
-      let currentMarginRight = 0;
-
-      // Função que move o carrossel para a esquerda
-      const moveCarouselRight = () => {
-        currentMarginRight -= 1; // Movimentação suave para a esquerda
-        rowRight.style.transform = `translateX(${currentMarginRight}px)`;
-
-        // Quando o carrossel chegar ao fim, reposiciona as imagens invisivelmente
-        if (Math.abs(currentMarginRight) >= totalWidthRight / 2) {
-          currentMarginRight = 0; // Reinicia o carrossel no início
-        }
-
-        // Solicita a próxima animação de forma suave
-        requestAnimationFrame(moveCarouselRight);
-      };
-
-      // Inicia o movimento do carrossel
-      requestAnimationFrame(moveCarouselRight);
-    },
-  },
+    return {
+      isCarouselMounted,
+      carouselTracks
+    }
+  }
 }
-
 </script>
 
-
 <style scoped>
+/* Page Layout */
 .about-us-page {
   display: flex;
   flex-direction: column;
   overflow: hidden;
   margin-top: 100px;
+  background: var(--mainBlack);
 }
 
+/* Hero Section */
 .about-us-title {
-  font-size: 120px;
+  color: var(--mainWhite);
   text-align: center;
-  color: var(--Main-White, #fafafa);
+  font: 120px Aspekta800, sans-serif;
   letter-spacing: 2px;
-  font-weight: 800;
   margin: 0;
   padding-top: 50px;
 }
 
 .festival-description {
-  color: var(--Gray-100, #bec7ce);
+  color: var(--gray100);
   text-align: center;
   letter-spacing: 1.6px;
   margin: 24px auto 0;
-  width: 948px;
-  font: 300 32px Aspekta, sans-serif;
+  max-width: 948px;
+  font: 32px Aspekta300, sans-serif;
 }
 
-.stats-section {
-  margin: 128px auto 0;
-  width: 100%;
-  max-width: 1312px;
-}
-
-.stat-container {
+/* Stats Section */
+.stats-container {
   display: flex;
-  justify-content: space-between;
-  padding: 2px 1px;
-  font-family: Aspekta, sans-serif;
-  text-align: center;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  padding: 32px;
 }
 
 .stat-group {
   display: flex;
   flex-direction: column;
-  color: var(--Main-White, #fafafa);
-}
-
-.stat-number {
-  font: 500 90px Aspekta, sans-serif;
-  letter-spacing: 3.6px;
-}
-
-.stat-label {
-  font: 400 32px Aspekta, sans-serif;
-  letter-spacing: 1.6px;
-  padding: 7px 0;
+  align-items: center;
+  gap: 8px;
 }
 
 .stat-divider {
-  width: 1px;
-  height: 161px;
-  background-color: #fafafa;
-  border: 1px solid #fafafa;
+  width: 2px;
+  height: 64px;
+  background-color: var(--gray400);
 }
 
-.banner-section {
-  margin-top: 192px;
-  display: flex;
-  justify-content: center;
+.stat-number {
+  font: 64px Aspekta600, sans-serif;
+  color: var(--mainWhite);
 }
 
-.banner-section-right {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
+.stat-label {
+  font: 24px Aspekta400, sans-serif;
+  color: var(--gray100);
+}
+
+.stat-divider {
+  width: 2px;
+  height: 64px;
+  background: var(--gray500);
+}
+
+.banner-section,
+.banner-section-reverse {
+  margin-top: 96px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.banner-section-reverse {
+  margin-top: 32px;
 }
 
 .carousel-container {
-  display: flex;
   overflow: hidden;
-  width: 100%; /* Ajusta para o tamanho da tela */
+  width: 100%;
+  position: relative;
 }
 
-.carousel-row {
+.carousel-track {
   display: flex;
-  transition: transform 0.1s ease-in-out; /* Animação suave */
-  will-change: transform; /* Para otimização de performance */
+  gap: 16px;
+  width: max-content;
+  will-change: transform;
 }
 
+.banner-section .carousel-track {
+  animation: scroll 40s linear infinite;
+  transform: translateX(0);
+}
+
+.banner-section-reverse .carousel-track {
+  animation: scroll-reverse 40s linear infinite;
+  transform: translateX(calc(-50% + 0px));
+}
 
 .carousel-image {
-  width: 275px; /* Largura reduzida para deixar a imagem mais alta */
-  height: 375px; /* Altura maior, para que as imagens fiquem mais altas do que largas */
-  margin-right: 32px; /* Espaçamento de 32px entre as imagens */
-  border-radius: 10px;
-  object-fit: cover; /* Faz com que a imagem cubra o espaço sem distorcer */
+  height: 425px;
+  width: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
 }
 
-.carousel-row img:last-child {
-  margin-right: 0; /* Remove o espaçamento do último item */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(calc(-50%));
+  }
 }
 
+@keyframes scroll-reverse {
+  0% {
+    transform: translateX(calc(-50%));
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Content Section */
 .content-section {
   display: flex;
-  gap: 48px;
+  align-items: center;
+  gap: 128px;
   margin: 192px 48px 98px;
 }
 
@@ -317,7 +286,7 @@ export default {
   width: 541px;
   border-radius: 10px;
   aspect-ratio: 0.86;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .content-wrapper {
@@ -327,8 +296,8 @@ export default {
 }
 
 .content-description {
-  color: var(--Gray-100, #bec7ce);
-  font: 300 32px Aspekta, sans-serif;
+  color: var(--gray100);
+  font: 32px Aspekta300, sans-serif;
   letter-spacing: 1.6px;
 }
 
@@ -337,24 +306,16 @@ export default {
   margin-top: 48px;
   padding: 12px 24px;
   border-radius: 12px;
-  border: 1px solid var(--Main-White, #fafafa); /* Borda branca */
-  background-color: transparent; /* Sem cor de fundo inicialmente */
-  color: var(--Main-White, #fafafa);
-  font: 500 20px Aspekta, sans-serif;
+  border: 1px solid var(--mainWhite);
+  background: transparent;
+  color: var(--mainWhite);
+  font: 20px Aspekta500, sans-serif;
   cursor: pointer;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-.explore-button:hover,
-.explore-button:focus {
-  background-color: var(--Gray-400, #6b737a); /* Fundo ao passar o mouse */
-  border-color: var(--Gray-400, #6b737a); /* Mudar a borda também ao passar o mouse */
-  outline: none;
+.explore-button:hover {
+  background: var(--gray400);
+  border-color: var(--gray400);
 }
-
-.explore-button:focus-visible {
-  outline: 2px solid var(--Main-White, #fafafa); /* Borda branca ao focar */
-  outline-offset: 2px;
-}
-
 </style>

@@ -1,18 +1,21 @@
 <template>
   <main class="artist-profile">
     <section class="hero-section" aria-label="Artist Hero Section">
-      <img loading="lazy" :src="artistInfo.mainImg" class="hero-background" alt="Charlotte de Witte performing live" />
-      <div class="artist-header">
-        <h1 class="artist-name">{{ artistInfo.name }}</h1>
-
-        <!-- Botão de Like com ícone Heart (Agora alinhado ao título) -->
-        <button @click="toggleLike" aria-label="Like/Dislike" class="like-button">
-          <Heart :class="{ liked: isLiked }" class="heart-icon" />
-        </button>
+      <img loading="lazy" :src="artistInfo.mainImg" class="hero-background" alt="Artist performing live" />
+      <div class="text-overlay">
+        <div class="name-container">
+          <h1 class="artist-name">{{ artistInfo.name }}</h1>
+          <button @click="toggleLike" aria-label="Like/Dislike" class="like-button">
+            <Heart :class="{ liked: isLiked }" class="heart-icon" />
+          </button>
+        </div>
       </div>
+    </section>
 
-      <!-- Redes sociais no fundo da imagem -->
-      <div class="social-links" role="navigation" aria-label="Social Media Links">
+    <section class="artist-bio" aria-label="Artist Biography">
+      <div class="bio-container">
+        <p class="bio-text">{{ artistInfo.bio }}</p>
+        <div class="social-links" role="navigation" aria-label="Social Media Links">
         <a :href="artistInfo?.socials?.youtube" target="_blank" rel="noopener noreferrer" v-if="artistInfo?.socials?.youtube">
           <img loading="lazy"
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/831c81c938349091e2146876e0645d3586d86fb03def6537bb794ee0ff7a7b94?placeholderIfAbsent=true&apiKey=f7dd8e77dcfe4504b1da5d2d682eab2f"
@@ -29,10 +32,7 @@
             class="social-icon" alt="Instagram" />
         </a>
       </div>
-    </section>
-
-    <section class="artist-bio" aria-label="Artist Biography">
-      <p class="bio-text">{{ artistInfo.bio }}</p>
+      </div>
       <img loading="lazy" :src="artistInfo.secondaryImg" class="artist-image" alt="Portrait of Charlotte de Witte" />
     </section>
 
@@ -175,8 +175,17 @@ export default {
 
 .hero-section {
   position: relative;
-  min-height: 700px;
-  padding: 48px 48px;
+  height: 700px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.text-overlay {
+  width: 100%;
+  padding: 20px;
+  margin: 20px;
+  position: relative; /* Add this */
+  z-index: 2; /* Add this to appear above background */
 }
 
 .hero-background {
@@ -185,6 +194,21 @@ export default {
   height: 100%;
   width: 100%;
   object-fit: cover;
+}
+
+.hero-background::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.8) 100%);
+  z-index: 1;
+}
+
+.name-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
 }
 
 .artist-header {
@@ -198,11 +222,10 @@ export default {
 }
 
 .artist-name {
-  color: var(--Main-White, #fafafa);
-  text-transform: uppercase;
-  letter-spacing: 2.56px;
+  color: var(--Main-White);
   font: 64px Aspekta800, sans-serif;
-  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-right: 20px; /* Add space between name and like button */
 }
 
 .verified-badge {
@@ -214,21 +237,9 @@ export default {
   background: transparent;
   border: none;
   cursor: pointer;
-  color: inherit;
-  /* Mantém a cor herdada do elemento pai */
-  transition: transform 0.3s ease, color 0.3s ease;
-  /* Transição suave para cor e escala */
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
   padding: 15px;
-  /* Aumentando o espaço ao redor do ícone */
-  position: absolute;
-  /* Posicionamento absoluto dentro da seção */
-  top: 0;
-  /* Colocado no topo da seção */
-  right: 48px;
-  /* Afastado um pouco da borda direita */
+  display: inline-flex;
+  align-items: center;
 }
 
 .heart-icon {
@@ -258,16 +269,6 @@ export default {
   /* Aumenta o ícone um pouco ao passar o mouse */
 }
 
-.social-links {
-  position: absolute;
-  bottom: 48px;
-  /* 48px de margem de baixo */
-  left: 48px;
-  /* 48px de margem da esquerda */
-  display: flex;
-  gap: 16px;
-}
-
 .social-icon {
   width: 75px;
   object-fit: contain;
@@ -279,6 +280,21 @@ export default {
 .social-icon:hover {
   filter: brightness(.8);
   /* Aumenta o brilho, criando o efeito de cor mais clara */
+}
+
+.bio-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+}
+
+.social-links {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-start; /* Change to flex-start */
+  padding-left: 20px; /* Add some padding from the left */
+  margin-top: 20px; /* Add some space from the name */
 }
 
 .artist-bio {

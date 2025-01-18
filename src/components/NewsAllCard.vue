@@ -20,7 +20,7 @@ import { MoveUpRight } from 'lucide-vue-next';  // Importando o ícone
 
 <script>
 export default {
-  name: 'NewsCard',
+  name: 'NewsAllCard',
   components: {
     MoveUpRight,
   },
@@ -106,12 +106,12 @@ export default {
 .news-date {
   position: relative;
   border-radius: 8px;
-  background-color: rgba(250, 250, 250, 0.3);
+  background-color: var(--gray200);
   color: var(--Main-Black, #010306);
   text-align: center;
   padding: 4px 8px;
-  font: 400 8px Aspekta, sans-serif;
-  margin-left: 8px;
+  font: 10px Aspekta400, sans-serif;
+  margin-left: 5px;
   min-height: 16px;
   z-index: 1;
   opacity: 0;
@@ -162,25 +162,22 @@ export default {
   margin-top: 32px;
   width: 100%;
   flex-direction: column;
-  font-family: Aspekta, sans-serif;
 }
 
 .news-heading {
   color: var(--Main-White);
-  font-size: 32px;
-  font-weight: 500;
-  line-height: 40px; /* Reduzindo o espaçamento entre as linhas */
+  font: 500 32px Aspekta500, sans-serif;
+  line-height: 40px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2; /* Limita o texto a 2 linhas */
+  -webkit-line-clamp: 2;
 }
 
 .news-description {
-  color: var(--Gray-200, #a2aab1);
-  font-size: 20px;
-  font-weight: 400;
+  color: var(--gray200);
+  font: 400 20px Aspekta200, sans-serif;
   margin-top: 24px;
   overflow: hidden;
   text-overflow: ellipsis;

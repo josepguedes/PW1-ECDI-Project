@@ -5,31 +5,145 @@ export const useArtistsStore = defineStore('artists', {
   state: () => ({
     artists: [
       {
-      id: "1",  // ID do artista
-      name: "Charlotte de Witte",  // Nome do artista
-      bio: "Charlotte de Witte is a globally renowned DJ and producer hailing from Belgium, celebrated for her dark, powerful, and hypnotic approach to techno. Rising to fame in the mid-2010s, she quickly established herself as one of the most influential figures in the electronic music scene. Known for her relentless energy behind the decks, Charlotte has become a headliner at major festivals such as Tomorrowland, Awakenings, and Ultra Music Festival.",
-      mainImg: "https://xlr8r.com/wp-content/uploads/2019/06/screen-shot-2018-02-15-at-95724-am.png",  // URL da imagem principal
-      secondaryImg: "https://cdn.wegow.com/media/artists/charlotte-de-witte/charlotte-de-witte-1674054503.5452025.1242x2208.jpg",  // URL da imagem secundária
-      socials: {  // Redes sociais
-        youtube: "https://youtube.com/@charlottedewittemusic",
-        spotify: "https://open.spotify.com/intl-pt/artist/1lJhME1ZpzsEa5M0wW6Mso?si=aD3d2UhkREubmruGyM_Qlw",
-        instagram: "https://www.instagram.com/charlottedewittemusic"
-      }
-    },
+        id: "1",  // ID do artista
+        name: "Charlotte de Witte",  // Nome do artista
+        bio: "Charlotte de Witte is a globally renowned DJ and producer hailing from Belgium, celebrated for her dark, powerful, and hypnotic approach to techno. Rising to fame in the mid-2010s, she quickly established herself as one of the most influential figures in the electronic music scene. Known for her relentless energy behind the decks, Charlotte has become a headliner at major festivals such as Tomorrowland, Awakenings, and Ultra Music Festival.",
+        simpleDescription: "Charlotte de Witte is a globally renowned DJ and producer hailing from Belgium",
+        mainImg: "https://xlr8r.com/wp-content/uploads/2019/06/screen-shot-2018-02-15-at-95724-am.png",  // URL da imagem principal
+        secondaryImg: "https://cdn.wegow.com/media/artists/charlotte-de-witte/charlotte-de-witte-1674054503.5452025.1242x2208.jpg",  // URL da imagem secundária
+        socials: {  // Redes sociais
+          youtube: "https://youtube.com/@charlottedewittemusic",
+          spotify: "https://open.spotify.com/intl-pt/artist/1lJhME1ZpzsEa5M0wW6Mso?si=aD3d2UhkREubmruGyM_Qlw",
+          instagram: "https://www.instagram.com/charlottedewittemusic"
+        }
+      },
 
-    {
-      id: "2",  // ID do artista
-      name: "Eduardo Sousa",  // Nome do artista
-      bio: "Teste teste",
-      mainImg: "https://xlr8r.com/wp-content/uploads/2019/06/screen-shot-2018-02-15-at-95724-am.png",  // URL da imagem principal
-      secondaryImg: "https://cdn.wegow.com/media/artists/charlotte-de-witte/charlotte-de-witte-1674054503.5452025.1242x2208.jpg",  // URL da imagem secundária
-      socials: {  // Redes sociais
-        youtube: "https://youtube.com/@charlottedewittemusic",
-        spotify: "https://open.spotify.com/intl-pt/artist/1lJhME1ZpzsEa5M0wW6Mso?si=aD3d2UhkREubmruGyM_Qlw",
-        instagram: "https://www.instagram.com/charlottedewittemusic"
+      {
+        id: "2",  // ID do artista
+        name: "Eduardo Sousa",  // Nome do artista
+        bio: "Teste teste",
+        simpleDescription: "Eduardo Sousa is a globally renowned DJ and producer hailing from Belgium",
+        mainImg: "https://xlr8r.com/wp-content/uploads/2019/06/screen-shot-2018-02-15-at-95724-am.png",  // URL da imagem principal
+        secondaryImg: "https://cdn.wegow.com/media/artists/charlotte-de-witte/charlotte-de-witte-1674054503.5452025.1242x2208.jpg",  // URL da imagem secundária
+        socials: {  // Redes sociais
+          youtube: "https://youtube.com/@charlottedewittemusic",
+          spotify: "https://open.spotify.com/intl-pt/artist/1lJhME1ZpzsEa5M0wW6Mso?si=aD3d2UhkREubmruGyM_Qlw",
+          instagram: "https://www.instagram.com/charlottedewittemusic"
+        }
+      },
+
+      {
+        id: "3",  // ID do artista
+        name: "Artista 3",  // Nome do artista
+        bio: "Descrição do Artista 3",
+        simpleDescription: "Artista 3 é um DJ e produtor renomado.",
+        mainImg: "https://xlr8r.com/wp-content/uploads/2019/06/screen-shot-2018-02-15-at-95724-am.png",  // URL da imagem principal
+        secondaryImg: "https://cdn.wegow.com/media/artists/charlotte-de-witte/charlotte-de-witte-1674054503.5452025.1242x2208.jpg",  // URL da imagem secundária
+        socials: {  // Redes sociais
+          youtube: "https://youtube.com/@charlottedewittemusic",
+          spotify: "https://open.spotify.com/intl-pt/artist/1lJhME1ZpzsEa5M0wW6Mso?si=aD3d2UhkREubmruGyM_Qlw",
+          instagram: "https://www.instagram.com/charlottedewittemusic"
+        }
+      },
+
+      {
+        id: "4",  // ID do artista
+        name: "Artista 4",  // Nome do artista
+        bio: "Descrição do Artista 4",
+        simpleDescription: "Artista 4 é um DJ e produtor renomado.",
+        mainImg: "https://xlr8r.com/wp-content/uploads/2019/06/screen-shot-2018-02-15-at-95724-am.png",  // URL da imagem principal
+        secondaryImg: "https://cdn.wegow.com/media/artists/charlotte-de-witte/charlotte-de-witte-1674054503.5452025.1242x2208.jpg",  // URL da imagem secundária
+        socials: {  // Redes sociais
+          youtube: "https://youtube.com/@charlottedewittemusic",
+          spotify: "https://open.spotify.com/intl-pt/artist/1lJhME1ZpzsEa5M0wW6Mso?si=aD3d2UhkREubmruGyM_Qlw",
+          instagram: "https://www.instagram.com/charlottedewittemusic"
+        }
+      },
+
+      {
+        id: "5",  // ID do artista
+        name: "Artista 5",  // Nome do artista
+        bio: "Descrição do Artista 5",
+        simpleDescription: "Artista 5 é um DJ e produtor renomado.",
+        mainImg: "https://xlr8r.com/wp-content/uploads/2019/06/screen-shot-2018-02-15-at-95724-am.png",  // URL da imagem principal
+        secondaryImg: "https://cdn.wegow.com/media/artists/charlotte-de-witte/charlotte-de-witte-1674054503.5452025.1242x2208.jpg",  // URL da imagem secundária
+        socials: {  // Redes sociais
+          youtube: "https://youtube.com/@charlottedewittemusic",
+          spotify: "https://open.spotify.com/intl-pt/artist/1lJhME1ZpzsEa5M0wW6Mso?si=aD3d2UhkREubmruGyM_Qlw",
+          instagram: "https://www.instagram.com/charlottedewittemusic"
+        }
+      },
+
+      {
+        id: "6",  // ID do artista
+        name: "Artista 6",  // Nome do artista
+        bio: "Descrição do Artista 6",
+        simpleDescription: "Artista 6 é um DJ e produtor renomado.",
+        mainImg: "https://xlr8r.com/wp-content/uploads/2019/06/screen-shot-2018-02-15-at-95724-am.png",  // URL da imagem principal
+        secondaryImg: "https://cdn.wegow.com/media/artists/charlotte-de-witte/charlotte-de-witte-1674054503.5452025.1242x2208.jpg",  // URL da imagem secundária
+        socials: {  // Redes sociais
+          youtube: "https://youtube.com/@charlottedewittemusic",
+          spotify: "https://open.spotify.com/intl-pt/artist/1lJhME1ZpzsEa5M0wW6Mso?si=aD3d2UhkREubmruGyM_Qlw",
+          instagram: "https://www.instagram.com/charlottedewittemusic"
+        }
+      },
+
+      {
+        id: "7",  // ID do artista
+        name: "Artista 7",  // Nome do artista
+        bio: "Descrição do Artista 7",
+        simpleDescription: "Artista 7 é um DJ e produtor renomado.",
+        mainImg: "https://xlr8r.com/wp-content/uploads/2019/06/screen-shot-2018-02-15-at-95724-am.png",  // URL da imagem principal
+        secondaryImg: "https://cdn.wegow.com/media/artists/charlotte-de-witte/charlotte-de-witte-1674054503.5452025.1242x2208.jpg",  // URL da imagem secundária
+        socials: {  // Redes sociais
+          youtube: "https://youtube.com/@charlottedewittemusic",
+          spotify: "https://open.spotify.com/intl-pt/artist/1lJhME1ZpzsEa5M0wW6Mso?si=aD3d2UhkREubmruGyM_Qlw",
+          instagram: "https://www.instagram.com/charlottedewittemusic"
+        }
+      },
+
+      {
+        id: "8",  // ID do artista
+        name: "Artista 8",  // Nome do artista
+        bio: "Descrição do Artista 8",
+        simpleDescription: "Artista 8 é um DJ e produtor renomado.",
+        mainImg: "https://xlr8r.com/wp-content/uploads/2019/06/screen-shot-2018-02-15-at-95724-am.png",  // URL da imagem principal
+        secondaryImg: "https://cdn.wegow.com/media/artists/charlotte-de-witte/charlotte-de-witte-1674054503.5452025.1242x2208.jpg",  // URL da imagem secundária
+        socials: {  // Redes sociais
+          youtube: "https://youtube.com/@charlottedewittemusic",
+          spotify: "https://open.spotify.com/intl-pt/artist/1lJhME1ZpzsEa5M0wW6Mso?si=aD3d2UhkREubmruGyM_Qlw",
+          instagram: "https://www.instagram.com/charlottedewittemusic"
+        }
+      },
+
+      {
+        id: "9",  // ID do artista
+        name: "Artista 9",  // Nome do artista
+        bio: "Descrição do Artista 9",
+        simpleDescription: "Artista 9 é um DJ e produtor renomado.",
+        mainImg: "https://xlr8r.com/wp-content/uploads/2019/06/screen-shot-2018-02-15-at-95724-am.png",  // URL da imagem principal
+        secondaryImg: "https://cdn.wegow.com/media/artists/charlotte-de-witte/charlotte-de-witte-1674054503.5452025.1242x2208.jpg",  // URL da imagem secundária
+        socials: {  // Redes sociais
+          youtube: "https://youtube.com/@charlottedewittemusic",
+          spotify: "https://open.spotify.com/intl-pt/artist/1lJhME1ZpzsEa5M0wW6Mso?si=aD3d2UhkREubmruGyM_Qlw",
+          instagram: "https://www.instagram.com/charlottedewittemusic"
+        }
+      },
+
+      {
+        id: "10",  // ID do artista
+        name: "Artista 10",  // Nome do artista
+        bio: "Descrição do Artista 10",
+        simpleDescription: "Artista 10 é um DJ e produtor renomado.",
+        mainImg: "https://xlr8r.com/wp-content/uploads/2019/06/screen-shot-2018-02-15-at-95724-am.png",  // URL da imagem principal
+        secondaryImg: "https://cdn.wegow.com/media/artists/charlotte-de-witte/charlotte-de-witte-1674054503.5452025.1242x2208.jpg",  // URL da imagem secundária
+        socials: {  // Redes sociais
+          youtube: "https://youtube.com/@charlottedewittemusic",
+          spotify: "https://open.spotify.com/intl-pt/artist/1lJhME1ZpzsEa5M0wW6Mso?si=aD3d2UhkREubmruGyM_Qlw",
+          instagram: "https://www.instagram.com/charlottedewittemusic"
+        }
       }
-    }
-  ],
+    ],
     accessToken: "",  // Armazenar o token de acesso aqui
   }),
 

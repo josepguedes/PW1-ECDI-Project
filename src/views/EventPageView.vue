@@ -2,30 +2,16 @@
   <main class="event-profile" v-if="event && !loading">
     <!-- Hero Section -->
     <section class="hero-section">
-      <img
-        :src="event.mainImg"
-        alt="Main Event Image"
-        class="hero-background"
-      />
+      <img :src="event.mainImg" alt="Main Event Image" class="hero-background" />
       <div class="text-overlay">
         <h1 class="event-name">{{ event.name }}</h1>
-        <h2 class="event-subtitle">{{ event.desc }}</h2>
+        <h2 class="event-subtitle">{{ formattedDescription }}</h2>
       </div>
     </section>
 
     <!-- Tickets Section -->
     <section class="buy-tickets">
       <button class="btn-primary">Get Tickets</button>
-    </section>
-
-    <!-- Biography Section -->
-    <section class="event-bio">
-      <p class="bio-text">{{ event.bio }}</p>
-      <img
-        :src="event.bioImg"
-        alt="Event Image"
-        class="event-image"
-      />
     </section>
 
     <!-- Event Photos Section -->
@@ -50,44 +36,71 @@
 
 <script>
 import { useEventStore } from "@/stores/events";
+import { useVenuesStore } from "@/stores/venues";
 import Carousel from "../components/Carousel.vue";
 import Slider from "../components/EventArtistSlider.vue";
 
 export default {
   name: "EventProfile",
-
   components: {
     Carousel,
     Slider,
   },
-
   data() {
     return {
-      event: null, // Evento será armazenado aqui após ser carregado
+      event: null,
       loading: true,
       error: null,
+      venuesStore: null,
+      eventStore: null,
     };
+  },
+
+  created() {
+    this.eventStore = useEventStore();
+    this.venuesStore = useVenuesStore();
+    this.fetchEvent(); // Move from mounted to created
+  },
+
+  computed: {
+    formattedDescription() {
+      if (!this.event) return '';
+
+      const date = new Date(this.event.date);
+      const month = date.toLocaleString('default', { month: 'long' });
+      const fullDate = date.toLocaleDateString('en-US', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric'
+      });
+
+      const venueName = this.venuesStore.getVenueById(this.event.venueId)?.name || 'Unknown Venue';
+
+      return `${fullDate} | ${venueName} | ${this.event.location}`;
+    }
   },
 
   methods: {
     async fetchEvent() {
-      const eventStore = useEventStore();
       try {
         this.loading = true;
-        this.error = null;
-        const eventId = this.$route.params.eventId; // Pega o ID do evento da URL
+        const eventId = this.$route.params.eventId; // Changed from id to eventId
+        console.log('Route params:', this.$route.params); // Debug router params
+        console.log('Fetching event with ID:', eventId);
 
-        // Buscar o evento com o ID na store
-        const fetchedEvent = eventStore.getEventById(eventId);
+        const event = this.eventStore.getEventById(eventId);
+        console.log('Events in store:', this.eventStore.events); // Debug events in store
+        console.log('Found event:', event);
 
-        if (!fetchedEvent) {
-          this.error = "Evento não encontrado!";
-        } else {
-          // Se o evento for encontrado, armazene na variável `event`
-          this.event = fetchedEvent;
+        if (!event) {
+          this.error = 'Event not found';
+          return;
         }
-      } catch (err) {
-        this.error = "Falha ao carregar evento: " + err.message;
+
+        this.event = event;
+      } catch (error) {
+        console.error('Error fetching event:', error);
+        this.error = 'Failed to load event';
       } finally {
         this.loading = false;
       }
@@ -95,9 +108,8 @@ export default {
   },
 
   mounted() {
-    // Carregar o evento assim que o componente for montado
     this.fetchEvent();
-  },
+  }
 };
 </script>
 
@@ -217,5 +229,4 @@ export default {
   margin-bottom: 24px;
   margin-top: 96px;
 }
-
 </style>

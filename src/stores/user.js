@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { useNotificationsStore } from './notifications';
 
 export const useUsersStore = defineStore('users', {
 
@@ -77,6 +78,9 @@ export const useUsersStore = defineStore('users', {
         throw new Error('Já existe um utilizador com esse nome ou email');
       }
 
+
+
+      const notificationsStore = useNotificationsStore();  // Acessar a store de notificações
       const newUser = {
         name: name,
         email: email,
@@ -86,8 +90,9 @@ export const useUsersStore = defineStore('users', {
         favoriteArtists: [],
         favoriteVenues: [],
         calendar: [],
-        notificationPref: [] 
+        notificationPref: [notificationsStore.preferences]
       };
+      
 
       this.users.push(newUser);
     },

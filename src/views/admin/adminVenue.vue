@@ -7,7 +7,8 @@ export default {
             name: "",
             address: "",
             bio: "",
-            images: []
+            images: [],
+            venueStore: useVenuesStore()
         }
     },
     methods: {
@@ -33,6 +34,9 @@ export default {
             } catch (error) {
                 alert(error.message);
             }
+        },
+        deleteVenue(venueId){
+            this.venueStore.removeVenue(venueId);
         }
     }
 }
@@ -48,15 +52,51 @@ export default {
         <input type="file" @change="handleImagesSelect" accept="image/*" multiple />
         <button type="submit" class="btn-primary">Add venue</button>
     </form>
+    <h2>All Venues:</h2><br>
+    <div class="venues-container">
+        <div v-for="venue in venueStore.venues" class="venue-card">
+            <p class="card-title">{{ venue.name }}</p>
+            <img :src="venue.mainImg" alt="venue image" class="venue-image" />
+            <button class="btn-primary w-100" @click="deleteVenue(venue.id)">Delete</button>
+        </div>
+    </div>
 </template>
 
 <style scoped>
 .container{
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    padding: 24px;
-    width: 600px;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	padding: 24px;
+	width: 600px;
+}
+
+.card-title{
+  font-family: Aspekta500;
+  font-size: 24px;
+}
+
+.venues-container{
+	display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(312px, 1fr));
+	gap: 32px;
+}
+
+.venue-card{
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+  padding: 24px;
+  background-color: var(--mainBlack);
+  border: 1px solid var(--gray200);
+  border-radius: 16px;
+}
+
+.venue-image{
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  object-fit: cover;
 }
 
 </style>

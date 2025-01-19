@@ -129,10 +129,6 @@ export default {
 
 <style scoped>
 
-.w-100{
-  width: 100%;
-}
-
 .card-title{
   font-family: Aspekta500;
   font-size: 24px;

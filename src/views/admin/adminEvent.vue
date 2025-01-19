@@ -40,14 +40,15 @@ export default {
                 "Melodic Techno",
                 "Tech House",
                 "Experimental",
-                ]
+                ],
         }
     },
     setup() {
     const artistStore = useArtistsStore();
     const venueStore = useVenuesStore();
+    const eventStore = useEventStore();
 
-    return { artistStore, venueStore };
+    return { artistStore, venueStore, eventStore };
   },
     methods: {
         handleImagesSelect(event) {
@@ -72,7 +73,12 @@ export default {
             } catch (error) {
                 alert(error.message);
             }
-        }
+        },
+				deleteEvent(eventId){
+
+					const eventStore = useEventStore();
+					eventStore.removeEvent(eventId);
+				}
     }
 }
 </script>
@@ -111,24 +117,65 @@ export default {
         <input type="file" @change="handleImagesSelect" accept="image/*" multiple />
         <button type="submit" class="btn-primary">Add Event</button>
     </form>
+    <h2>All Events:</h2><br>
+    <div class="events-container">
+        <div v-for="event in eventStore.events" class="event-card">
+            <p class="card-title">{{ event.name }}</p>
+            <img :src="event.mainImg" alt="Event image" class="event-image" />
+            <button class="btn-primary w-100" @click="deleteEvent(event.id)">Delete</button>
+        </div>
+    </div>
 </template>
 
 <style scoped>
+
+.w-100{
+  width: 100%;
+}
+
+.card-title{
+  font-family: Aspekta500;
+  font-size: 24px;
+}
+
 .container{
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    padding: 24px;
-    width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+  width: 600px;
 }
 
 .dateInput{
-    padding: 12px;
+  padding: 12px;
 }
 
 .select{
-    padding: 8px;
-    height: 200px;
+  padding: 8px;
+  height: 200px;
+}
+
+.events-container{
+	display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(312px, 1fr));
+	gap: 32px;
+}
+
+.event-card{
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+  padding: 24px;
+  background-color: var(--mainBlack);
+  border: 1px solid var(--gray200);
+  border-radius: 16px;
+}
+
+.event-image{
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  object-fit: cover;
 }
 
 </style>

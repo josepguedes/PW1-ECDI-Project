@@ -57,7 +57,5 @@ export const useNotificationsStore = defineStore('notifications', {
       }
     },
   },
-
-  
   persist: true,
 });

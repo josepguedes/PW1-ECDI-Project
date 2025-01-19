@@ -64,5 +64,6 @@ export const useVenuesStore = defineStore('venues', {
         this.venues[index] = updatedVenue;
       }
     },
-  }
+  },
+  persist: true,
 });

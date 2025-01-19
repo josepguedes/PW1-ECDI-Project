@@ -223,19 +223,20 @@ export const useArtistsStore = defineStore('artists', {
     },
 
     // Adiciona um novo artista
-    addArtist(id, name, bio, mainImg, secondaryImg, youtube, spotify, instagram) {
+    async addArtist(name, bio, images, youtube, spotify, instagram) {
       const artistExists = this.artists.some(artist => artist.name === name);
 
       if (artistExists) {
         throw new Error('Já existe um artista com esse nome');
       }
 
+
       const newArtist = {
-        id: id,
+        id: this.artists.length,
         name: name,
         bio: bio, 
-        mainImg: mainImg,
-        secondaryImg: secondaryImg,
+        mainImg: images[0],
+        secondaryImg: images[1],
         socials: {
           youtube: youtube,
           spotify: spotify,
@@ -274,5 +275,6 @@ export const useArtistsStore = defineStore('artists', {
         }
       };
     }
-  }
+  },
+  persist: true,
 });

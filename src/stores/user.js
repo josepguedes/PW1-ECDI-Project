@@ -69,7 +69,7 @@ export const useUsersStore = defineStore('users', {
       fr.readAsDataURL(file)
     },
 
-    addUser(name, email, password, profImg) {
+    addUser(name, email, password) {
       const userExists = this.users.some(
         user => user.email === email || user.name === name
       );
@@ -159,5 +159,5 @@ export const useUsersStore = defineStore('users', {
       }
     }
   },
-  persist: true, // Persistir os dados
+  persist: true,
 });

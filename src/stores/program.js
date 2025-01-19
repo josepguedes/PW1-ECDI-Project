@@ -102,4 +102,5 @@ export const useProgramStore = defineStore('program', {
       }));
     },
   },
+  persist: true,
 });

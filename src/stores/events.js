@@ -78,5 +78,6 @@ export const useEventStore = defineStore('event', {
       }
       this.events[eventIndex] = { ...this.events[eventIndex], ...updatedEvent };
     },
-  }
+  },
+  persist: true,
 });

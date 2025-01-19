@@ -30,6 +30,10 @@ import AccountVolunteerDashboardPage from '@/views/account/VolunteerDashboardPag
 import AccountNotificationsPage from '@/views/account/NotificationsPageView.vue';
 import AccountPasswordPage from '@/views/account/PasswordPageView.vue';
 import AccountFavoritesArtistsPage from '@/views/account/FavoritesArtistsPageView.vue';
+import adminArtist from '@/views/admin/adminArtist.vue';
+import adminVenue from '@/views/admin/adminVenue.vue';
+import adminEvent from '@/views/admin/adminEvent.vue';
+import adminDashboard from '@/views/admin/adminDashboard.vue';
 
 // Definição de rotas
 const routes = [
@@ -180,6 +184,30 @@ const routes = [
     component: AccountFavoritesArtistsPage,
     meta: { requiresAuth: true }
   },
+  { 
+    path: '/admin/adminDashboard', 
+    name: 'adminDashboard', 
+    component: adminDashboard,
+    meta: { requiresAdmin: true }
+  },
+  { 
+    path: '/admin/adminArtist', 
+    name: 'adminArtist', 
+    component: adminArtist,
+    meta: { requiresAdmin: true }
+  },
+  { 
+    path: '/admin/adminVenue', 
+    name: 'adminVenue', 
+    component: adminVenue,
+    meta: { requiresAdmin: true }
+  },
+  { 
+    path: '/admin/adminEvent', 
+    name: 'adminEvent', 
+    component: adminEvent,
+    meta: { requiresAdmin: true }
+  }
 ];
 
 // Configuração do router

@@ -48,7 +48,7 @@ export const useVenuesStore = defineStore('venues', {
 
   actions: {
     // Adiciona um novo local
-    async addVenue(name,bio,address,images) {
+    addVenue(name,bio,address,images) {
       const venueExists = this.venues.some(venue => venue.name === name);
 
       if (venueExists) {

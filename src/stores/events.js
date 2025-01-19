@@ -55,7 +55,7 @@ export const useEventStore = defineStore('event', {
   },
 
   actions: {
-    async addEvent(name,bio,artistsIds,date,time,venueId,genres,images) {
+    addEvent(name,bio,artistsIds,date,timeStart,timeEnd,venueId,genres,images) {
       const eventExists = this.events.some(event => event.name === name);
 
       if (eventExists) {
@@ -73,11 +73,13 @@ export const useEventStore = defineStore('event', {
         bio: bio, 
         artistsIds: artistsIds,
         date: date,
-        time: time,
+        timeStart: timeStart,
+        timeEnd: timeEnd,
         venueId: venueId,
         genres: genres,
         mainImg: images[0],
-        carouselImages: [images[1], images[2], images[3], images[4], images[5]],
+        bioImg: images[1],
+        carouselImages: [images[2], images[3], images[4], images[5], images[6]],
       };
 
       this.events.push(newEvent);

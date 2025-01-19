@@ -223,7 +223,7 @@ export const useArtistsStore = defineStore('artists', {
     },
 
     // Adiciona um novo artista
-    async addArtist(name, bio, images, youtube, spotify, instagram) {
+    addArtist(name, bio, images, youtube, spotify, instagram) {
       const artistExists = this.artists.some(artist => artist.name === name);
 
       if (artistExists) {

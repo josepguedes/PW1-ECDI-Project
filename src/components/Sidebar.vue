@@ -56,6 +56,15 @@
                         <div class="separator">
                             <div class="separator-line"></div>
                         </div>
+                        <RouterLink to="/account/favorites" class="nav-link"
+                            :class="{ active: $route.path === '/account/favorites', 'custom-style-favorites': $route.path === '/account/favorites' }">
+                            Favorite
+                        </RouterLink>
+                    </div>
+                    <div class="nav-item">
+                        <div class="separator">
+                            <div class="separator-line"></div>
+                        </div>
                         <RouterLink to="/account/password" class="nav-link"
                             :class="{ active: $route.path === '/account/password', 'custom-style-password': $route.path === '/account/password' }">
                             Password
@@ -157,7 +166,8 @@ export default {
     min-width: 240px;
     flex: 1;
     padding: 6px 8px;
-    font: 20px Aspekta400;
+    font-size: 20px;
+    font-family: Aspekta400;
     color: var(--Gray-100, #bec7ce);
     cursor: pointer;
 }

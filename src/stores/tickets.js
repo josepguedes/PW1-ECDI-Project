@@ -79,6 +79,5 @@ export const useTicketsStore = defineStore('tickets', {
       this.tickets[ticketIndex] = { ...this.tickets[ticketIndex], ...updatedTicket };
     }
   },
-
   persist: true,
 });

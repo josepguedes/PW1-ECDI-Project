@@ -278,4 +278,5 @@ export const useNewsStore = defineStore('news', {
       this.news[newsIndex] = { ...this.news[newsIndex], ...updatedNews };
     },
   },
+  persist: true,
 });

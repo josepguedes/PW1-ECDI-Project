@@ -7,7 +7,7 @@ export const useUsersStore = defineStore('users', {
   state: () => ({
     authenticatedUser: null,
     users: [
-      { name: "admin", password: "123"},
+      { name: "admin", email: "admin@gmail.com", password: "123"},
       { name: "xavi", email: "example@gmail.com", password: "321", profImg: '/src/assets/images/1.jpg', tickets: [], favoriteArtists: [], favoriteVenues: [], calendar: [], notificationPref: [] },
     ],
   }),
@@ -70,7 +70,7 @@ export const useUsersStore = defineStore('users', {
       fr.readAsDataURL(file)
     },
 
-    addUser(name, email, password, profImg) {
+    addUser(name, email, password) {
       const userExists = this.users.some(
         user => user.email === email || user.name === name
       );
@@ -160,5 +160,5 @@ export const useUsersStore = defineStore('users', {
       }
     }
   },
-  persist: true, // Persistir os dados
+  persist: true,
 });

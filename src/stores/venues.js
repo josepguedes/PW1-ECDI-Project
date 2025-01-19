@@ -48,8 +48,28 @@ export const useVenuesStore = defineStore('venues', {
 
   actions: {
     // Adiciona um novo local
-    addVenue(venue) {
-      this.venues.push(venue);
+    addVenue(name,bio,address,images) {
+      const venueExists = this.venues.some(venue => venue.name === name);
+
+      if (venueExists) {
+        throw new Error('Já existe um local com esse nome');
+      }
+
+      let newId;
+      do {
+        newId = Math.floor(Math.random() * 1000) + 1;
+      } while (this.venues.some(venue => venue.id === newId));
+
+      const newVenue = {
+        id: newId,
+        name: name,
+        desc : address,
+        bio: bio, 
+        mainImg: images[0],
+        carouselImages: [images[1], images[2], images[3], images[4], images[5]],
+      };
+
+      this.venues.push(newVenue);
     },
 
     // Remove um local pelo ID
@@ -64,5 +84,6 @@ export const useVenuesStore = defineStore('venues', {
         this.venues[index] = updatedVenue;
       }
     },
-  }
+  },
+  persist: true,
 });

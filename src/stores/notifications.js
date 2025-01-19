@@ -109,8 +109,7 @@ export const useNotificationsStore = defineStore('notifications', {
         usersStore.authenticatedUser.notificationPref.push({ type, enabled });
       }
     },
-  
-    // Filtrar as notificações com base nas preferências
+        // Filtrar as notificações com base nas preferências
     getFilteredNotifications() {
       const usersStore = useUsersStore();
       const preferences = usersStore.authenticatedUser?.notificationPref || [];
@@ -119,9 +118,7 @@ export const useNotificationsStore = defineStore('notifications', {
         const userPref = preferences.find(pref => pref.type === notification.type);
         return userPref?.enabled ?? true;
       });
-    },
-
-    
-  persist: true
+    }
   },
+  persist: true,
 });

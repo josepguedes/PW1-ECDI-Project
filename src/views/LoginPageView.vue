@@ -54,8 +54,12 @@ export default {
                 
                 await this.usersStore.login(this.email, this.password);
 
-
-                this.router.push("/");
+                if(this.usersStore.authenticatedUser.name == "admin"){
+                    this.router.push("/admin/adminDashboard");
+                }
+                else{
+                    this.router.push("/account/dashboard");
+                }
             } catch (error) {
                 this.errorMessage = error.message;
             }

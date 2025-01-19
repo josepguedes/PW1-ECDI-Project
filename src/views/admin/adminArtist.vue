@@ -28,10 +28,10 @@ export default {
         },
         async handleSubmit() {
             const artistsStore = useArtistsStore();
-            console.log("Submitting artist:", this.name, this.bio, this.images, this.youtube, this.spotify, this.instagram);
+            
             try {
                 await artistsStore.addArtist(this.name, this.bio, this.images, this.youtube, this.spotify, this.instagram);
-                console.log("Artist added successfully");
+                alert("Artist added successfully");
             } catch (error) {
                 alert(error.message);
             }

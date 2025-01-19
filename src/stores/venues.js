@@ -48,8 +48,24 @@ export const useVenuesStore = defineStore('venues', {
 
   actions: {
     // Adiciona um novo local
-    addVenue(venue) {
-      this.venues.push(venue);
+    async addVenue(name,bio,address,images) {
+      const venueExists = this.venues.some(venue => venue.name === name);
+
+      if (venueExists) {
+        throw new Error('Já existe um local com esse nome');
+      }
+
+
+      const newVenue = {
+        id: this.venues.length,
+        name: name,
+        desc : address,
+        bio: bio, 
+        mainImg: images[0],
+        carouselImages: [images[1], images[2], images[3], images[4], images[5]],
+      };
+
+      this.venues.push(newVenue);
     },
 
     // Remove um local pelo ID

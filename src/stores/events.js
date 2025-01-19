@@ -11,7 +11,6 @@ export const useEventStore = defineStore('event', {
         date: "2025-01-13",
         time: "20:00-05:00",
         venueId: "1",
-        location: "Berlin",
         genres: "Techno",
         mainImg: "https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         bioImg: "https://images.pexels.com/photos/1540406/pexels-photo-1540406.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -31,7 +30,6 @@ export const useEventStore = defineStore('event', {
         date: "2025-01-14",
         time: "23:30-09:00",
         venueId: "2",
-        location: "Germany",
         genres: "Techno",
         mainImg: "https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         bioImg: "https://images.pexels.com/photos/1540406/pexels-photo-1540406.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -57,11 +55,31 @@ export const useEventStore = defineStore('event', {
   },
 
   actions: {
-    addEvent(newEvent) {
-      const eventExists = this.events.some(event => event.id === newEvent.id);
+    async addEvent(name,bio,artistsIds,date,time,venueId,genres,images) {
+      const eventExists = this.events.some(event => event.name === name);
+
       if (eventExists) {
-        throw new Error('Já existe um evento com esse ID');
+        throw new Error('Já existe um evento com esse nome');
       }
+
+      let newId;
+      do {
+        newId = Math.floor(Math.random() * 1000) + 1;
+      } while (this.events.some(event => event.id === newId));
+
+      const newEvent = {
+        id: newId,
+        name: name,
+        bio: bio, 
+        artistsIds: artistsIds,
+        date: date,
+        time: time,
+        venueId: venueId,
+        genres: genres,
+        mainImg: images[0],
+        carouselImages: [images[1], images[2], images[3], images[4], images[5]],
+      };
+
       this.events.push(newEvent);
     },
     removeEvent(eventId) {

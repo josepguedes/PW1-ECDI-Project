@@ -230,9 +230,14 @@ export const useArtistsStore = defineStore('artists', {
         throw new Error('Já existe um artista com esse nome');
       }
 
+      let newId;
+      do {
+        newId = Math.floor(Math.random() * 1000) + 1;
+      } while (this.artists.some(artist => artist.id === newId));
+
 
       const newArtist = {
-        id: this.artists.length,
+        id: newId,
         name: name,
         bio: bio, 
         mainImg: images[0],

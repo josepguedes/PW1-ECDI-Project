@@ -55,9 +55,13 @@ export const useVenuesStore = defineStore('venues', {
         throw new Error('Já existe um local com esse nome');
       }
 
+      let newId;
+      do {
+        newId = Math.floor(Math.random() * 1000) + 1;
+      } while (this.venues.some(venue => venue.id === newId));
 
       const newVenue = {
-        id: this.venues.length,
+        id: newId,
         name: name,
         desc : address,
         bio: bio, 

@@ -74,11 +74,10 @@ export default {
                 alert(error.message);
             }
         },
-				deleteEvent(eventId){
-
-					const eventStore = useEventStore();
-					eventStore.removeEvent(eventId);
-				}
+		deleteEvent(eventId){
+            const eventStore = useEventStore();
+			eventStore.removeEvent(eventId);
+		}
     }
 }
 </script>

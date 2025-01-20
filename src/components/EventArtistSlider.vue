@@ -124,7 +124,7 @@ export default {
 .artist-image {
   width: 100%;
   height: 220px; /* Altura fixa para o espaço da imagem */
-  object-fit:contain; /* Faz com que a imagem ocupe todo o espaço disponível */
+  object-fit: cover; /* Faz com que a imagem ocupe todo o espaço disponível */
   border-radius: 50%;
 }
 

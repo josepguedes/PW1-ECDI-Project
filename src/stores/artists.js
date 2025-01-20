@@ -150,7 +150,7 @@ export const useArtistsStore = defineStore('artists', {
   getters: {
     // Retorna um artista pelo ID
     getArtistById: (state) => (id) => {
-      return state.artists.find(artist => artist.id === id);
+      return state.artists.find(artist => artist.id == id);
     }
   },
 

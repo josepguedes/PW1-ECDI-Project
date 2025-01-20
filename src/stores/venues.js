@@ -39,7 +39,7 @@ export const useVenuesStore = defineStore('venues', {
 
   getters: {
     getVenueById: (state) => (id) => {
-      return state.venues.find(venue => venue.id === id);
+      return state.venues.find(venue => venue.id == id);
     },
     getAllVenues: (state) => {
       return state.venues;

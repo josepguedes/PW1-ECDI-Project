@@ -10,7 +10,7 @@ export default {
             spotify: "",
             instagram: "",
             images: [],
-						artistsStore: useArtistsStore()
+			artistsStore: useArtistsStore()
         }
     },
     methods: {
@@ -37,9 +37,9 @@ export default {
                 alert(error.message);
             }
         },
-				deleteArtist(artistId){
-					this.artistsStore.removeArtist(artistId);
-				}
+		deleteArtist(artistId){
+			this.artistsStore.removeArtist(artistId);
+		}
     }
 }
 </script>

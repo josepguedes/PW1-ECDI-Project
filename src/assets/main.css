@@ -182,5 +182,13 @@ a{
   border-bottom: 1px solid var(--mainWhite); 
 }
 
+/*text*/
 
+.outline-title{
+  font-size: 172px;
+  font-family: Aspekta600;
+  color: transparent;
+  -webkit-text-stroke: 3px var(--gray200);
+  text-align: center;
+}
 

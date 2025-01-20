@@ -54,15 +54,6 @@ export default {
   margin-bottom: 100px;
 }
 
-.outline-title {
-  font-size: 200px;
-  font-family: Aspekta800, sans-serif;
-  color: transparent;
-  -webkit-text-stroke: 2px var(--gray200);
-  margin: 48px 0;
-  text-align: center;
-}
-
 .event-list {
   display: flex;
   flex-direction: column;

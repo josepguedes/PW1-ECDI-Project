@@ -32,7 +32,7 @@ const router = useRouter();
   </div>
 </template>
 
-<style>
+<style scoped>
 
 .artists-container{
 	display: flex;

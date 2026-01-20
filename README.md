@@ -185,6 +185,12 @@ src/
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur)
 
+## 👥 Development Team
+
+- **José Guedes** - Full-Stack Developer [40230110@esmad.ipp.pt]
+- **Eduardo Sousa** - Full-Stack Developer [40230115@esmad.ipp.pt]
+- **Xavier Kooijman** - Full-Stack Developer [40220456@esmad.ipp.pt] 
+
 ## 📝 License
 
 This project is developed as part of the PW1 course at Instituto Politécnico do Porto.
